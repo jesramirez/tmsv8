@@ -1,0 +1,22 @@
+<openerp>
+<data>
+
+
+<!-- Inheritance for ir.sequence to assign a Sequence for each Shop -->
+    <record model="ir.ui.view" id="tms_view_shop_form_02">
+        <field name="name">TMS Agreement sale.shop.form</field>
+        <field name="model">sale.shop</field>
+        <field name="type">form</field>
+        <field name="priority">50</field>
+        <field name="inherit_id" ref="tms.tms_view_shop_form"/>
+        <field name="arch" type="xml">
+            <!--<xpath expr="//group[@name='tms']" position="inside" > -->
+		<field name="tms_travel_expenses_seq" position="after">
+                    <field name="tms_agreement_seq"/>
+		</field>
+            <!-- </xpath> -->
+        </field>
+    </record>
+
+</data>
+</openerp>

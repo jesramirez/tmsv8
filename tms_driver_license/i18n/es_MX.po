@@ -1,0 +1,235 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* tms_driver_license
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-06 22:54+0000\n"
+"PO-Revision-Date: 2014-08-06 18:09-0600\n"
+"Last-Translator: Israel Cruz Argil <israel.cruz@argil.mx>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_MX\n"
+"X-Generator: Poedit 1.6.7\n"
+
+#. module: tms_driver_license
+#: model:ir.actions.act_window,name:tms_driver_license.hr_employee_expired_license_wizard_action
+#: model:ir.ui.menu,name:tms_driver_license.menu_tms_driver_expired_license
+msgid "Driver Licenses by Exp.Date"
+msgstr "Licencias por Expirar"
+
+#. module: tms_driver_license
+#: model:email.template,subject:tms_driver_license.email_template_hr_employee_expired_license
+msgid "Driver licenses expired or to expire"
+msgstr "Licencias por expirar o expiradas"
+
+#. module: tms_driver_license
+#: view:hr.employee.expired_license:0
+msgid "Get expired license driver"
+msgstr "Obtener licencias expiradas"
+
+#. module: tms_driver_license
+#: report:addons/tms_driver_license/report/hr_employee_expired_license_html.mako:19
+msgid "Records:"
+msgstr "Registros:"
+
+#. module: tms_driver_license
+#: view:hr.employee.expired_license:0
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: tms_driver_license
+#: field:hr.employee,tms_driver_license_id:0
+msgid "License ID"
+msgstr "Número Licencia"
+
+#. module: tms_driver_license
+#: model:ir.model,name:tms_driver_license.model_hr_employee
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: tms_driver_license
+#: selection:hr.employee.expired_license,include:0
+msgid "All Drivers (Internal & External)"
+msgstr "Todos (Internos y Permisionarios)"
+
+#. module: tms_driver_license
+#: field:hr.employee.expired_license,include:0
+msgid "Include"
+msgstr "Incluir"
+
+#. module: tms_driver_license
+#: code:addons/tms_driver_license/hr_employee.py:165
+#, python-format
+msgid "There are no Driver Licenses expired or to expire on this date"
+msgstr "No hay Licencias expiradas o por expirar a esta fecha"
+
+#. module: tms_driver_license
+#: field:hr.employee,tms_driver_license_days_to_expire:0
+msgid "Days to expire"
+msgstr "Días para expirar"
+
+#. module: tms_driver_license
+#: field:hr.employee,tms_driver_license_type:0
+msgid "License Type"
+msgstr "Tipo Licencia"
+
+#. module: tms_driver_license
+#: report:addons/tms_driver_license/report/hr_employee_expired_license_html.mako:33
+#: field:hr.employee,tms_driver_license_expiration:0
+msgid "License Expiration"
+msgstr "Vigencia Licencia"
+
+#. module: tms_driver_license
+#: field:hr.employee.expired_license,date:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: tms_driver_license
+#: model:email.template,body_html:tms_driver_license.email_template_hr_employee_expired_license
+msgid ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hello,</p>\n"
+"\n"
+"    <p>Attached you will find the list of Driver's License expired or about "
+"to expire</p>\n"
+"\n"
+"    <p>Kind Regards</p>\n"
+"\n"
+"    <p>================</p>\n"
+"    <p>This mail was sent automatically from OpenERP, please DO NOT RESPOND "
+"it.</p>\n"
+"\n"
+"</div>\n"
+"            "
+msgstr ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hola,</p>\n"
+"\n"
+"    <p>Adjunto al presente está el Reporte con la lista de Licencias "
+"expiradas o por expirar</p>\n"
+"\n"
+"    <p>Saludos</p>\n"
+"\n"
+"    <p>================</p>\n"
+"    <p>Este correo fue enviado mediante un robot desde OpenERP, por favor NO "
+"RESPONDA ESTE MENSAJE.</p>\n"
+"\n"
+"</div>\n"
+"            "
+
+#. module: tms_driver_license
+#: model:ir.actions.report.xml,name:tms_driver_license.hr_employee_report_webkit
+msgid "Driver License to expire and expired"
+msgstr "Licencias expiradas/por expirar"
+
+#. module: tms_driver_license
+#: code:addons/tms_driver_license/tms_travel.py:50
+#, python-format
+msgid ""
+"You can not Dispatch this Travel because (%s) %s Driver's License Validity "
+"(%s)is expired or about to expire in next %s day(s)"
+msgstr ""
+"No es posible Despachar este Viaje para el Operador (%s) %s porque la "
+"Licencia ha expirado o está por expirar (%s) en los próximos %s día(s)"
+
+#. module: tms_driver_license
+#: field:hr.employee,tms_driver_additional_certifications:0
+msgid "Certifications"
+msgstr "Otros permisos"
+
+#. module: tms_driver_license
+#: report:addons/tms_driver_license/report/hr_employee_expired_license_html.mako:13
+msgid "Driver's License to expire or expired before"
+msgstr "Licencias por expirar/expiradas antes del "
+
+#. module: tms_driver_license
+#: report:addons/tms_driver_license/report/hr_employee_expired_license_html.mako:30
+msgid "Name"
+msgstr "Nombre"
+
+#. module: tms_driver_license
+#: report:addons/tms_driver_license/report/hr_employee_expired_license_html.mako:36
+msgid "Days to expire (from today)"
+msgstr "Días para expirar (a partir de hoy)"
+
+#. module: tms_driver_license
+#: view:hr.employee.expired_license:0
+msgid "Please select date"
+msgstr "Por favor, seleccione una fecha"
+
+#. module: tms_driver_license
+#: model:ir.model,name:tms_driver_license.model_hr_employee_expired_license
+msgid "Wizard to get Driver's Licenses about to expire"
+msgstr "Asistente para obtener las Licencias que están por expirar"
+
+#. module: tms_driver_license
+#: report:addons/tms_driver_license/report/hr_employee_expired_license_html.mako:27
+msgid "ID"
+msgstr "ID"
+
+#. module: tms_driver_license
+#: selection:hr.employee.expired_license,include:0
+msgid "External Drivers only"
+msgstr "Solo Permisionarios"
+
+#. module: tms_driver_license
+#: selection:hr.employee.expired_license,include:0
+msgid "Internal Drivers only"
+msgstr "Operadores propios"
+
+#. module: tms_driver_license
+#: view:hr.employee.expired_license:0
+msgid "This date has already added Security days defined in parameter."
+msgstr ""
+"Esta fecha tiene agregados los días de Seguridad definidos en los parámetros"
+
+#. module: tms_driver_license
+#: code:addons/tms_driver_license/hr_employee.py:92
+#, python-format
+msgid "Expire_or_to_expire_Driver_Licenses"
+msgstr "Licencias_por_expirar_o_expiradas"
+
+#. module: tms_driver_license
+#: code:addons/tms_driver_license/hr_employee.py:165
+#: code:addons/tms_driver_license/tms_travel.py:48
+#: code:addons/tms_driver_license/tms_travel.py:50
+#, python-format
+msgid "Warning!"
+msgstr "Advertencia!"
+
+#. module: tms_driver_license
+#: view:hr.employee.expired_license:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: tms_driver_license
+#: code:addons/tms_driver_license/tms_travel.py:48
+#, python-format
+msgid ""
+"You can not Dispatch this Travel because (%s) %s Driver's License Validity "
+"(%s) is expired or about to expire in next %s day(s)"
+msgstr ""
+"No es posible Despachar este Viaje para el Operador (%s) %s porque la "
+"Licencia ha expirado o está por expirar (%s) en los próximos %s día(s)"
+
+#. module: tms_driver_license
+#: report:addons/tms_driver_license/report/hr_employee_expired_license_html.mako:39
+msgid "Driver from Supplier"
+msgstr "Operador Permisionario"
+
+#. module: tms_driver_license
+#: view:hr.employee.expired_license:0
+msgid "or"
+msgstr "o"

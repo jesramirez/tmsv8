@@ -1,0 +1,1222 @@
+<openerp>
+<data>
+
+        <menuitem icon="terp-account" id="menu_tms" name="Freights" sequence="10"
+            web_icon="images/logistics.png"
+            web_icon_hover="images/logistics-hover.png"/>
+        <menuitem id="menu_tms_travels" name="Freights" parent="menu_tms" sequence="10"/>            
+        <menuitem id="menu_tms_config" name="Configuration" parent="menu_tms" sequence="99"/>
+    
+    
+        <menuitem id="menu_tms_office_form" sequence="1"
+            action="action_tms_office"  name="Offices"
+            parent="menu_tms_config" groups="tms.group_tms_manager"/> 
+    
+        <menuitem id="menu_tms_config_unit" name="Units" parent="menu_tms_config" sequence="3"/>
+        <menuitem id="menu_tms_config_routes" name="Routes" parent="menu_tms_config" sequence="4"/>
+        <menuitem id="menu_tms_config_waybill" name="Waybill" parent="menu_tms_config" sequence="6"/>
+        <menuitem id="menu_tms_config_product" name="Products" parent="menu_tms_config" sequence="5"/>
+        <menuitem id="menu_tms_config_customers" name="Customers" parent="menu_tms_config" sequence="1"/>
+        <menuitem id="menu_tms_partner_categories_in_form"
+            action="base.action_partner_category_form"  name="Partner Categories"
+            parent="menu_tms_config_customers" groups="base.group_no_one"/>
+        <menuitem id="menu_tms_account_customer" name="Customers"
+            parent="menu_tms_config_customers"
+            action="base.action_partner_customer_form" sequence="15"/>    
+    
+    
+        <menuitem id="menu_tms_config_suppliers" name="Suppliers" parent="menu_tms_config" sequence="2"/>
+        <menuitem id="menu_tm_partner_categories_in_form"
+            action="base.action_partner_category_form"  name="Partner Categories"
+            parent="menu_tms_config_suppliers" groups="base.group_no_one"/>
+    
+        <menuitem id="menu_tms_procurement_management_supplier_name" name="Suppliers"
+            parent="menu_tms_config_suppliers"
+            action="base.action_partner_supplier_form" sequence="15"/>
+    
+        <menuitem id="menu_tms_config_drivers" name="Drivers" parent="menu_tms_config" sequence="2"/>
+    
+        <menuitem name="Products by Category" id="menu_tms_product_by_category_stock_form" action="product.product_category_action"
+            parent="menu_tms_config_product" sequence="0"/>
+
+############################################################################################################################
+### Cambios en la acción para agregar Choferes ###
+        <record id="tms_open_view_employee_list_my" model="ir.actions.act_window">
+            <field name="name">Drivers</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('tms_category','=','driver')]</field>            
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="hr.view_employee_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new driver.
+              </p><p>
+                With just a quick glance on the OpenERP driver screen, you
+                can easily find all the information you need for each person;
+                contact data, job position, availability, etc.
+              </p>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_tms_open_view_employee_list_my" name="Drivers"
+                  parent="menu_tms_config_drivers"
+                  action="tms_open_view_employee_list_my"  sequence="3" />
+        <menuitem id="menu_tms_view_employee_category_form" name="Employee Category"
+                  action="hr.open_view_categ_form" 
+                    parent="menu_tms_config_drivers" sequence="1" groups="base.group_no_one"/>
+
+############################################################################################################################
+### Cambios en la vista de Product ###
+    
+
+        <record id="tms_product_normal_action" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_id" ref="product.product_template_tree_view"/> 
+            <field name="search_view_id" ref="tms_product_template_search_form_view"/>
+            <field name="domain">[('tms_category','in',('transportable','freight','move','insurance','highway_tolls','other','real_expense','madeup_expense','salary','salary_retention','salary_discount','negative_balance','fuel','indirect_expense'))]</field>
+           <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to define a new Freight related product.
+              </p><p>
+                You can define products for everything related to Freight Management.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="tms_product_normal_action" id="menu_tms_config_product_product" parent="menu_tms_config_product" sequence="1"/>
+
+        <menuitem
+            action="product.product_category_action_form" id="menu_tms_config_product_product_category"
+            parent="menu_tms_config_product" sequence="2"/>
+
+
+	    <menuitem action="fleet.fleet_vehicle_odometer_act" parent="menu_tms_travels" id="tms_fleet_vehicle_odometer_menu" groups="fleet.group_fleet_user" sequence="90"/>
+
+<!-- 
+##############################
+TMS.UNIT.CATEGORY 
+##############################
+-->
+<!-- SEARCH View for tms.unit.category (Types, Brands, Models, Motor Type for Transportation Units) --> 
+	<record model="ir.ui.view" id="view_tms_unit_category_search">
+        <field name="name">tms.unit.category.search</field>
+        <field name="model">tms.unit.category</field>
+		<field name="type">search</field>
+		<field name="arch" type="xml">
+            <search string="Unit Master Data">
+                <filter string="View"        icon="terp-accessories-archiver" domain="[('type','=','view')]"/>
+                <filter string="Unit Type"   icon="terp-accessories-archiver" domain="[('type','=','unit_type')]"/>
+                <filter string="Motor Brand" icon="terp-accessories-archiver" domain="[('type','=','brand')]"/>
+                <filter string="Motor Model" icon="terp-accessories-archiver" domain="[('type','=','motor')]"/>
+                <filter string="Extra Data"  icon="terp-accessories-archiver" domain="[('type','=','extra_data')]"/>
+                <filter string="Expiry"      icon="terp-accessories-archiver" domain="[('type','=','expiry')]"/>
+                <filter string="Unit Status" icon="terp-accessories-archiver" domain="[('type','=','unit_status')]"/>
+                <filter string="Active Cause" icon="terp-accessories-archiver" domain="[('type','=','active_cause')]"/>
+                <filter string="Red Tape"    icon="terp-accessories-archiver" domain="[('type','=','red_tape')]"/>
+                <group  expand='0' string='Group by...'> 
+                    <filter string="Category"  icon="terp-accessories-archiver" domain="[]" context="{'group_by' : 'type'}"/>
+                </group>
+		    </search>
+		</field>
+	</record>
+
+<!-- TREE View for tms.unit.category (Types, Brands, Models, Motor Type for Transportation Units) --> 
+	<record model="ir.ui.view" id="view_tms_unit_category_tree">
+        <field name="name">tms.unit.category.tree</field>
+        <field name="model">tms.unit.category</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+            <tree string="Unit Master Data" colors="green:type in ('unit_type');blue:type in ('brand');black:type in ('model');red:type in ('extra_data');">
+                <field name="company_id" />
+                <field name="name" />
+		        <field name="complete_name" />
+		        <field name="type"/>
+                <field name="notes"/>
+		    </tree>
+		</field>
+	</record>
+
+<!-- FORM View for tms.unit.category (Types, Brands, Models, Motor Type for Transportation Units) -->
+    
+        <record id="view_tms_unit_category_form" model="ir.ui.view">
+            <field name="name">tms.unit.category.form</field>
+            <field name="model">tms.unit.category</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Unit Categories" version="7.0">
+                    <sheet>
+                        <h1>
+                            <!--<label string="Name" /> -->
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+			<group col="4" colspan="4">
+                            <field name="type" select="1"/>
+		  	    <field name="parent_id" />
+                            <field name="active" select="1"/>
+                            <field name="sequence" />
+                            <field name="mandatory" attrs="{'invisible':[('type','!=','expiry')]}"/>
+                            <newline/>
+                            <group attrs="{'invisible':[('type','!=','motor')]}" colspan="2">
+                                <field name="fuel_efficiency_drive_unit"/>
+                                <newline/>
+                                <field name="fuel_efficiency_1trailer"/>
+                                <newline/>
+                                <field name="fuel_efficiency_2trailer"/>
+                            </group>
+                            <newline/>
+                            <field name="notes" colspan="4"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+<!-- Action for tms.unit.category (Types, Brands, Models, Motor Type for Transportation Units) -->
+    <record model="ir.actions.act_window" id="open_view_tms_unit_category_form">
+        <field name="name">TMS Unit Categories</field>
+        <field name="res_model">tms.unit.category</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!-- Menu for tms.unit.category (Types, Brands, Models, Motor Type for Transportation Units) -->
+    <menuitem name="Vehicles Related Catalogs" 
+              parent="menu_tms_config_unit" 
+              id="menu_tms_config_unit_category_form" 
+              action="open_view_tms_unit_category_form"
+	      sequence="20"/>
+
+<!-- 
+##############################
+FLEET.VEHICLE - (former TMS.UNIT)
+##############################
+-->
+
+        <record model="ir.ui.view" id="fleet_vehicle_search_inherit_tms">
+            <field name="name">fleet.vehicle.tms.search</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">search</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_search"/>
+            <field name="arch" type="xml">
+                <filter name="alert_true" position="before">
+                    <field name="employee_id" />
+                </filter>
+                <filter name="alert_true" position="after">
+                   <filter string="Motorized Units" icon="terp-accessories-archiver" domain="[('fleet_type','=','tractor')]" name="motorized_unit"/>
+                   <filter string="Trailers" icon="terp-accessories-archiver" domain="[('fleet_type','=','trailer')]" name="trailer"/>
+                   <filter string="Dolly's" icon="terp-accessories-archiver" domain="[('fleet_type','=','dolly')]" name="dolly"/>
+                   <filter string="Others" icon="terp-accessories-archiver" domain="[('fleet_type','=','other')]" name="other"/>
+                   <group  expand='0' string='Group by...'> 
+                       <filter string='Fleet Unit Type' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'fleet_type'}" />
+                       <filter string='Unit Type' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'unit_type_id'}" />
+                       <filter string='Model' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'model_id'}" />
+                       <filter string='Motor' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'unit_motor_id'}" />
+                   </group>
+                </filter>
+            </field>
+        </record>
+
+
+
+        <record id="fleet_vehicle_form_inherit_tms" model="ir.ui.view">
+            <field name="name">fleet.vehicle.tms.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_form"/>
+            <field name="arch" type="xml">
+                <div class="oe_title" position="replace">
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+                        <label for="model_id" class="oe_edit_only"/>
+                        <h2>
+                            <field name="model_id" class="oe_inline" on_change="on_change_model(model_id)"/>
+                        </h2>
+                    </div>
+                </div>
+
+                <group col="2" string="General Properties" position="replace" >
+                </group>
+
+                <group col="2" position="replace" >
+
+                    <group col="4">
+                        <field name="tag_ids" widget="many2many_tags" colspan="4"/>
+                        <field name="fleet_type"/>
+                        <field name="office_id" />
+			            <field name="supplier_unit"/>
+			            <field name="supplier_id" attrs="{'required':[('supplier_unit','=',True)], 'invisible':[('supplier_unit','=',False)]}"/>
+                        <field name="license_plate" />
+                        <field name="active" readonly="1"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="General Properties">
+                            <group col="2" string="General Properties">
+                                <group >
+                                   <field name="driver_id" />
+                                    <field name="location" />
+                                    <newline />
+                                    <field name="latitude" />
+                                    <field name="longitude" />
+                                    <field name="vin_sn" />
+                                    <field name="company_id" groups="base.group_multi_company"/>
+                                </group>
+                                <group>
+                                  <field name="odometer_uom" class="oe_inline"/>
+                                    <label for="odometer" />
+                                    <div>
+                                        <field name="odometer" class="oe_inline" readonly="1"/>
+                                        <field name="odometer_unit" class="oe_inline" attrs="{'invisible':[('odometer_uom','!=','distance')]}"/>                                        
+                    					<newline />
+                                    </div>
+                                    <label for="active_odometer_id" />
+                                    <div>
+                                        <field name="active_odometer_id" class="oe_inline" readonly="1"/>
+                                        <newline />
+                                    </div>
+                 		             <field name="current_odometer_read" readonly="1"/>
+                                     <field name="avg_odometer_uom_per_day" />
+                                    <field name="acquisition_date" />
+                                    <field name="car_value" />
+                                </group>
+                            </group>
+                            <group col="2">
+                                <group string="Additional Properties">
+                                    <field name="seats" />
+                                    <field name="doors" />
+                                    <field name="color" />
+                                </group>
+                                <group string="Engine Options">
+                                    <field name="transmission" />
+                                    <field name="fuel_type" />
+                                    <field name="co2" />
+                                    <field name="horsepower" />
+                                    <field name="horsepower_tax" />
+                                    <field name="power" />
+                                </group>  
+                            </group>
+
+                        </page>
+                        <page string="General Data">
+                            <group col="4">
+                                <field name="year_model" />
+                                <field name="unit_type_id" context="{'default_type':'unit_type'}"/>
+                                <field name="unit_motor_id" context="{'default_type':'motor'}" />
+                                <field name="serial_number" />
+                                <field name="vin" />
+                                <field name="registration" />
+                                <field name="employee_id" context="{'default_tms_category':'driver'}" domain="[('tms_category', '=', 'driver')]"/>
+                                <field name="day_no_circulation"/>
+                                <field name="gps_supplier_id"/>
+                                <field name="gps_id" attrs="{'required':[('gps_supplier_id','!=',False)]}"/>
+
+                            </group>
+                        </page>
+                        <page string="Extra Data">
+                            <group colspan="4" col="4">
+                                <field name="unit_extradata_ids" nolabel="1" widget="one2many_list" >
+                                    <tree string="Extra Data" editable="bottom">
+                                        <field name="extra_data_id" context="{'default_type':'extra_data'}" />
+                                        <field name="extra_value" />
+                                    </tree>
+                                    <form string="Extra Data">
+                                        <group colspan="4">
+                                            <field name="extra_data_id" context="{'default_type':'extra_data'}" />
+                                            <field name="extra_value" />
+                                        </group>
+                                    </form>
+                                </field>
+                                <field name="unit_expiry_ids" nolabel="1" >
+                                    <tree string="Expiry Data" editable="bottom">
+                                        <field name="expiry_id" context="{'default_type':'expiry'}" />
+                                        <field name="extra_value" on_change="on_change_extra_value(extra_value)"/>
+                                        <field name="name" invisible="1"/>
+                                    </tree>
+                                    <form string="Extra Data">
+                                        <group colspan="4">
+                                            <field name="expiry_id" context="{'default_type':'expiry'}" />
+                                            <field name="extra_value" />
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+		        <page string="More Images...">
+                            <field name="unit_photo_ids" nolabel="1" >
+			        <tree string="Unit Photos">
+				        <field name="name"/>
+			        </tree>
+			        <form string="Unit Photos">
+                                    <group colspan="4">
+				            <separator string="Image Description" colspan="4"/>
+				            <field name="name" colspan="4" nolabel="1"/>
+				            <field name="photo" widget='image' nolabel="1" colspan="4"/>
+                                    </group>
+			        </form>
+		            </field>
+                        </page>
+<!--                        <page string="Active/Inactive History">
+                            <field name="unit_active_history_ids" nolabel="1" /> 
+                        </page>
+                        <page string="Red Tapes">
+                            <field name="unit_red_tape_ids" nolabel="1" /> 
+                        </page>
+-->                        <page string="Notes">
+                            <field name="notes" nolabel="1" />
+                        </page>
+                    </notebook> 
+                </group>
+            </field>
+        </record>
+
+
+        <record id="fleet_vehicle_tree_inherit_tms" model="ir.ui.view">
+            <field name="name">fleet.vehicle.tms.tree</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_tree"/>
+            <field name="arch" type="xml">
+                <field name="model_id" position="replace"></field>
+                <field name="acquisition_date" position="replace"></field>
+                <field name="license_plate" position="before">
+                        <field name="name"/>
+                        <field name="model_id" />
+                </field>
+                <field name="license_plate" position="after">
+                    <field name="fleet_type" invisible="1"/>
+                    <field name="unit_type_id" invisible="1"/>
+                    <field name="unit_motor_id" invisible="1"/>
+        	        <field name="employee_id" string="TMS Driver" invisible="1"/>
+                </field>
+
+
+            </field>
+        </record>
+
+<!-- Action for fleet.vehicle (Transportation Units) -->
+    <record model="ir.actions.act_window" id="open_view_tms_unit_form">
+        <field name="name">Vehicles - TMS</field>
+        <field name="res_model">fleet.vehicle</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!-- Menu for fleet.vehicle (Transportation Units) -->
+    <menuitem name="Vehicles" 
+              parent="menu_tms_config_unit" 
+              id="menu_tms_config_unit_form" 
+              action="open_view_tms_unit_form"
+	      sequence="21"/>
+
+<!-- 
+##############################
+TMS.UNIT.KIT
+##############################
+-->
+<!-- SEARCH View for tms.unit.kit (Vehicle Kits) --> 
+        <record id="view_tms_unit_kit_search" model="ir.ui.view">
+            <field name="name">tms.unit.kit.search</field>
+            <field name="model">tms.unit.kit</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Units Kits">
+                   <field name="name"/>
+                   <field name="active" />
+                   <field name="unit_id" />
+                   <field name="trailer1_id" />
+                   <field name="dolly_id" />
+                   <field name="trailer2_id" />
+		   <newline />
+                   <field name="employee_id" />
+                   <field name="date_start" />
+                   <field name="date_end" />
+                   <newline/>
+                   <group  expand='0' string='Group by...'> <!--groups="base.group_extended" -->
+                       <filter string='Unit' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'unit_id'}" />
+                       <filter string='Unit Type' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'unit_type'}" />
+                       <separator orientation="vertical"/>                                                                
+                       <filter string='Driver' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'employee_id'}" />
+                   </group>
+                </search>
+            </field>
+        </record>
+
+<!-- TREE View for tms.unit.kit (Transportation Units Kits) --> 
+	<record model="ir.ui.view" id="view_tms_unit_kit_tree">
+        <field name="name">tms.unit.kit.tree</field>
+        <field name="model">tms.unit.kit</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+            <tree string="Units Kits">
+			<field name="name"/>			
+			<field name="unit_id" />
+			<field name="unit_type" />
+			<field name="trailer1_id" />
+			<field name="trailer1_type" />
+			<field name="dolly_id" />
+			<field name="dolly_type" />
+			<field name="trailer2_id" />
+			<field name="trailer2_type" />
+			<field name="employee_id" />
+			<field name="date_start" />
+			<field name="date_end" />
+			<field name="active" />
+		    </tree>
+		</field>
+	</record>
+
+<!-- FORM View for tms.unit.kit (Transportation Units Kits) -->
+
+        <record id="view_tms_unit_kit_form" model="ir.ui.view">
+            <field name="name">tms.unit.kit.form</field>
+            <field name="model">tms.unit.kit</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Units Kits" version="7.0">
+                    <sheet>
+                        <h1>
+                            <label string="Kit Name"/>
+                            <field name="name" class="oe_inline"/>
+                        </h1>
+					    <group col="4" colspan="4">
+                            <separator string="Kit Framework" colspan="4"/> 
+						    <field name="unit_id" domain="[('fleet_type', '=', 'tractor')]"/>
+						    <field name="unit_type" readonly="1"/>
+		                    <field name="trailer1_id" domain="[('id','!=',trailer2_id), ('fleet_type','=','trailer')]" attrs="{'required':['|', ('dolly_id','!=',False),('trailer2_id','!=',False)]}"/>
+						    <field name="trailer1_type" readonly="1" />
+		                    <field name="dolly_id"  domain="[('fleet_type','=','dolly')]" attrs="{'required':[('trailer2_id','!=',False)]}"/>
+						    <field name="dolly_type" readonly="1" />
+		                    <field name="trailer2_id" domain="[('id','!=',trailer1_id), ('fleet_type','=','trailer')]" attrs="{'required':[('dolly_id','!=',False)]}"/>
+						    <field name="trailer2_type" readonly="1" />
+						    <field name="employee_id" colspan="2"/>
+						    <newline />
+                            <separator string="Validity" colspan="4"/>
+						    <field name="date_start" />
+						    <field name="date_end"/>
+						    <field name="active" on_change="on_change_active(active)"/>
+					    </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread" placeholder="Share a message..."/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+<!-- Action for tms.unit (Transportation Units Kits) -->
+    <record model="ir.actions.act_window" id="open_view_tms_unit_kit_form">
+        <field name="name">TMS Units Kits</field>
+        <field name="res_model">tms.unit.kit</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_active': ''}</field>
+    </record>
+
+<!-- Menu for tms.unit (Transportation Units Kits) -->
+    <menuitem name="Units Kits" 
+              parent="menu_tms_config_unit" 
+              id="menu_tms_config_unit_kit_form" 
+              action="open_view_tms_unit_kit_form"
+		sequence="22"/>
+
+<!-- 
+##############################
+TMS.PLACE
+##############################
+-->
+<!-- TREE View for tms.place --> 
+	<record model="ir.ui.view" id="view_tms_place_tree">
+        <field name="name">tms.place.tree</field>
+        <field name="model">tms.place</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+            <tree string="Places">
+                <field name="complete_name" />
+<!--		        <field name="state_id" /> -->
+		        <field name="country_id" />
+                <field name="latitude"/>
+                <field name="longitude"/>
+                <field name="company_id" />
+		    </tree>
+		</field>
+	</record>
+
+<!-- FORM View for tms.place -->
+    
+        <record id="view_tms_place_form" model="ir.ui.view">
+            <field name="name">tms.place.form</field>
+            <field name="model">tms.place</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Places" version="7.0">
+                    <header>
+                        <button name="button_get_coords" string="Get Coords from Google" type="object" icon="STOCK_EXECUTE"/>
+                        <button name="button_open_google" string="View in Google Maps" type="object" icon="STOCK_EXECUTE"/>
+                    </header>
+                    <group col="4">
+                        <field name="name" select="1" />
+                        <field name="company_id" select="1"/> 
+                        <field name="state_id" select="1" />
+                        <field name="country_id" readonly="1" />
+                        <field name="latitude"/>
+                        <field name="longitude" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+<!-- Action for tms.place -->
+    <record model="ir.actions.act_window" id="open_view_tms_place_form">
+        <field name="name">TMS Places</field>
+        <field name="res_model">tms.place</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!-- Menu for tms.place -->
+    <menuitem name="Places" sequence="1"
+              parent="menu_tms_config_routes" 
+              id="menu_tms_config_route_place_form" 
+              action="open_view_tms_place_form"/>
+
+<!-- 
+##############################
+TMS.ROUTE
+##############################
+-->
+
+<!-- SEARCH View for tms.route  --> 
+        <record id="view_tms_route_search" model="ir.ui.view">
+          <field name="name">tms.route.search</field>
+          <field name="model">tms.route</field>
+          <field name="type">search</field>
+          <field name="arch" type="xml">
+            <search string="Routes">
+              <field name="name"/>
+              <field name="company_id" />
+              <field name="departure_id"/>
+              <field name="arrival_id"/>
+              <field name="tms_route_tollstation_ids" />
+              <field name="active" />
+              <newline/>
+              <group  expand='0' string='Group by...'>
+                <filter string='Departure' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'departure_id'}" />
+                <separator orientation="vertical"/>                                                                
+                <filter string='Arrival' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'arrival_id'}" />
+                <separator orientation="vertical"/>                                                                
+                <filter string='Fuel Eff. by Unit' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'fuel_efficiency_drive_unit'}" />
+                <separator orientation="vertical"/>                                                                
+                <filter string='Fuel Eff. 1 Trailer' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'fuel_efficiency_1trailer'}" />
+                <separator orientation="vertical"/>                                                                
+                <filter string='Fuel Eff. 2 Trailer' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'fuel_efficiency_2trailer'}" />
+              </group>
+            </search>
+          </field>
+        </record>
+
+<!-- TREE View for tms.route --> 
+	<record model="ir.ui.view" id="view_tms_route_tree">
+          <field name="name">tms.route.tree</field>
+          <field name="model">tms.route</field>
+	  <field name="type">tree</field>
+	  <field name="arch" type="xml">
+            <tree string="Routes">
+              <field name="name" />
+	      <field name="departure_id" />
+              <field name="arrival_id" />
+	      <field name="distance"/>
+              <field name="travel_time" widget="float_time"/>
+              <field name="company_id" />
+	    </tree>
+	  </field>
+	</record>
+
+<!-- FORM View for tms.route -->
+        <record id="view_tms_route_form" model="ir.ui.view">
+          <field name="name">tms.route.form</field>
+          <field name="model">tms.route</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+            <form string="Routes" version="7.0">
+              <header>
+                <button name="button_get_route_info" string="Get Route Info from Google" type="object" icon="STOCK_EXECUTE"/>
+                <button name="button_open_google" string="View in Google Maps" type="object" icon="STOCK_EXECUTE"/>
+              </header>
+              <sheet>
+		<group col="4" colspan="4">
+                  <h1>
+                    <field name="name" colspan="4"/>
+                  </h1>
+		</group>
+		<group col="4" colspan="4">
+                  <field name="departure_id" />
+                  <field name="arrival_id" />
+                  <field name="distance" />
+                  <field name="travel_time" widget="float_time"/>
+                  <field name="active" />
+                  <field name="company_id" />
+                </group>
+                <notebook colspan="4">
+                  <page string="Intermediate Places">
+                    <separator string="Places in this route" colspan="4" />
+                    <field name="places_ids" nolabel="1" colspan="4">
+                      <tree string="Intermediate places in this route" editable="bottom">
+                        <field name="sequence"/>
+                        <field name="place_id" />
+                        <field name="state_id" />
+                        <field name="country_id" />
+                      </tree>
+                    </field>
+                  </page>
+                  <page string="Fuel Efficiency Expected">
+                    <field name="route_fuelefficiency_ids" nolabel="1" >
+                      <tree string="Route Fuel Efficiency Expected" editable="bottom">
+                        <field name="motor_id" widget="selection" domain="[('type','=','motor')]"/>
+                        <field name="type" />
+                        <field name="performance" />
+                      </tree>
+                      <form string="Route Fuel Efficiency Expected">
+                        <field name="motor_id" widget="selection" domain="[('type','=','motor')]"/>
+                        <field name="type" />
+                        <field name="performance" />
+                      </form>
+                    </field>
+                  </page>
+                  <page string="Toll Stations">
+                    <field name="tms_route_tollstation_ids"  nolabel="1"/>
+                  </page>
+                  <page string="Factor Driver">
+                    <separator string="Driver Salary Factors" colspan="4"/>
+                    <field name="expense_driver_factor" 
+                           context="{'default_route_id': active_id,'default_category':'driver'}" 
+                           domain="[('category','=','driver')]"
+                           colspan="4" nolabel="1"/>
+                  </page>
+		  
+                  <page string="Notes">
+                    <field name="notes" nolabel="1"/>                            
+                  </page>
+                </notebook>
+              </sheet>
+              <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread" placeholder="Share a message..."/>
+              </div>
+            </form>
+          </field>
+        </record>
+
+<!-- Action for tms.route -->
+    <record model="ir.actions.act_window" id="open_view_tms_route_form">
+        <field name="name">TMS Routes</field>
+        <field name="res_model">tms.route</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!-- Menu for tms.route -->
+    <menuitem name="Routes" sequence="10"
+              parent="menu_tms_config_routes" 
+              id="menu_tms_config_route_form" 
+              action="open_view_tms_route_form"/>
+
+<!-- 
+##############################
+TMS.ROUTE.TOLLSTATION
+##############################
+-->
+<!-- TREE View for tms.route.tollstation --> 
+	<record model="ir.ui.view" id="view_tms_route_tollstation_tree">
+          <field name="name">tms.route.tollstation.tree</field>
+          <field name="model">tms.route.tollstation</field>
+	  <field name="type">tree</field>
+	  <field name="arch" type="xml">
+            <tree string="Toll Stations">
+              <field name="name" />
+	      <field name="place_id" />
+              <field name="partner_id" />
+	      <field name="credit"/>
+              <field name="active"/>
+              <field name="company_id" />
+	    </tree>
+	  </field>
+	</record>
+
+<!-- FORM View for tms.route.tollstation -->
+        <record id="view_tms_route_tollstation_form" model="ir.ui.view">
+          <field name="name">tms.route.tollstation.form</field>
+          <field name="model">tms.route.tollstation</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+            <form string="Toll Stations">
+                <group colspan="4" col="4">
+                  <field name="name" select="1"/>
+                  <field name="place_id" select="1"/>
+                  <field name="partner_id" select="1"/>
+                  <field name="credit" select="1"/>
+                  <field name="active" select="1"/>
+                  <field name="company_id" />
+                  <notebook colspan="4">
+                    <page string="Costs per axis">
+                      <field name="tms_route_tollstation_costperaxis_ids" nolabel="1"> 
+                        <tree string="" editable="top">
+                          <field name="unit_type_id" />
+                          <field name="axis" />
+                          <field name="cost_credit" />
+                          <field name="cost_cash" />
+                        </tree>
+                        <form string="">
+                          <field name="unit_type_id" />
+                          <field name="axis" />
+                          <field name="cost_credit" />
+                          <field name="cost_cash" />
+                        </form>
+                      </field>
+                    </page>
+                    <page string="Routes with this Toll Station">
+                      <group>
+                        <field name="tms_route_ids" nolabel="1" />
+                      </group>
+                    </page>
+                  </notebook>
+                </group>
+            </form>
+          </field>
+        </record>
+
+<!-- Action for tms.route.tollstation -->
+    <record model="ir.actions.act_window" id="open_view_tms_route_tollstation_form">
+        <field name="name">TMS Toll Stations</field>
+        <field name="res_model">tms.route.tollstation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!-- Menu for tms.place -->
+    <menuitem name="Toll Stations" sequence="2"
+              parent="menu_tms_config_routes" 
+              id="menu_tms_config_route_tollstation_form" 
+              action="open_view_tms_route_tollstation_form"/>
+
+
+<!-- 
+##############################
+TMS.UNIT.ACTIVE_HISTORY
+##############################
+-->
+<!-- SEARCH View for tms.unit.active_history --> 
+        <record id="view_tms_unit_active_history_search" model="ir.ui.view">
+            <field name="name">tms.unit.active_history.search</field>
+            <field name="model">tms.unit.active_history</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Unit Active/Inactive History">
+                   <filter string="Motorized Units" icon="terp-accessories-archiver" domain="[('unit_id.fleet_type','=','tractor')]"/>
+                   <filter string="Trailers" icon="terp-accessories-archiver" domain="[('unit_id.fleet_type','=','trailer')]"/>
+                   <filter string="Dolly's" icon="terp-accessories-archiver" domain="[('unit_id.fleet_type','=','dolly')]"/>
+                   <filter string="Others" icon="terp-accessories-archiver" domain="[('unit_id.fleet_type','=','other')]"/>
+                   <separator orientation="vertical"/>
+                   <field name="unit_id"/>
+                   <field name="date" />
+                   <field name="state_cause_id" />
+                   <field name="prev_state" />
+                   <field name="new_state" />
+                   <newline/>
+                   <group  expand='0' string='More filters...'> 
+                   <field name="confirmed_by"/>
+                   <field name="name" />
+                   </group>
+                   <newline/>
+                   <group  expand='0' string='Group by...'> 
+                       <filter string='Unit' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'unit_id'}" />
+                       <filter string='Unit Type' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'unit_type_id'}" />
+                       <separator orientation="vertical"/>                                                                
+                       <filter string='Cause' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'state_cause_id'}" />
+                       <separator orientation="vertical"/>
+                       <filter string='Date' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'date'}" />
+                       <separator orientation="vertical"/>
+                       <filter string='Previous State' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'prev_state'}" />
+                       <filter string='New State' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'new_state'}" />
+                   </group>
+                </search>
+            </field>
+        </record>
+
+<!-- TREE View for tms.unit.active_history --> 
+	<record model="ir.ui.view" id="view_tms_unit_active_history_tree">
+        <field name="name">tms.unit.active_history.tree</field>
+        <field name="model">tms.unit.active_history</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+            <tree string="Units Active/Inactive History" colors="gray:state=='cancel';red:state=='draft';">
+                <field name="state"/>
+                <field name="date"/>
+                <field name="unit_id" />
+                <field name="unit_type_id" invisible="1"/>
+                <field name="prev_state" />
+                <field name="new_state" />
+                <field name="state_cause_id" />
+                <field name="name" />
+                <field name="create_uid" />
+                <field name="confirmed_by" />
+		    </tree>
+		</field>
+	</record>
+
+<!-- FORM View for tms.unit.active_history -->
+
+        <record id="view_tms_unit_active_history_form" model="ir.ui.view">
+            <field name="name">tms.unit.active_history.form</field>
+            <field name="model">tms.unit.active_history</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Units Active/Inactive History" version="7.0">
+                    <header>
+                        <button name="action_cancel" states="draft" string="Cancel" type="object"/>
+                        <button name="action_confirm" states="draft" string="Confirm" type="object" icon="gtk-goto-last" class="oe_highlight" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label string="Activation / Inactivation Record"/>
+                        </h1>
+                        <group col="4">
+                            <field name="date"/>
+                            <newline />
+                            <field name="unit_id" on_change="on_change_unit_id(unit_id)"/>
+                            <field name="unit_type_id"/>
+                            <field name="prev_state"/>
+                            <field name="new_state"/>
+                            <field name="state_cause_id" context="{'default_type':'active_cause'}" on_change="on_change_state_cause_id(state_cause_id)"/>
+                            <newline />
+                            <field name="name" colspan="4"/>
+                        </group>
+                        <notebook colspan="6">
+                            <page string="Notes">
+                                <field name="notes" nolabel="1" />
+                            </page>
+                            <page string="Log">
+                                <group col="4">
+                                    <field name="create_uid" readonly="1" />
+                                    <field name="create_date" readonly="1" />
+                                    <field name="confirmed_by" readonly="1" />
+                                    <field name="date_confirmed" readonly="1" />
+                                    <field name="cancelled_by" readonly="1" />
+                                    <field name="date_cancelled" readonly="1" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread" placeholder="Share a message..."/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+<!-- Action for tms.unit.active_history -->
+    <record model="ir.actions.act_window" id="open_view_tms_unit_active_history_form">
+        <field name="name">Active/Inactivate Units</field>
+        <field name="res_model">tms.unit.active_history</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!-- Menu for tms.unit.active_history -->
+    <menuitem name="Activate/Inactivate Units" 
+              parent="menu_tms_config_unit" 
+              id="menu_tms_config_unit_active_history_form" 
+              action="open_view_tms_unit_active_history_form"
+		sequence="23"/>
+
+<!-- 
+##############################
+TMS.UNIT.red_tape
+##############################
+-->
+<!-- SEARCH View for tms.unit.red_tape --> 
+        <record id="view_tms_unit_red_tape_search" model="ir.ui.view">
+            <field name="name">tms.unit.red_tape.search</field>
+            <field name="model">tms.unit.red_tape</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Unit Red Tapes">
+                   <filter string="Motorized Units" icon="terp-accessories-archiver" domain="[('unit_id.fleet_type','=','tractor')]"/>
+                   <filter string="Trailers" icon="terp-accessories-archiver" domain="[('unit_id.fleet_type','=','trailer')]"/>
+                   <filter string="Dolly's" icon="terp-accessories-archiver" domain="[('unit_id.fleet_type','=','dolly')]"/>
+                   <filter string="Others" icon="terp-accessories-archiver" domain="[('unit_id.fleet_type','=','other')]"/>
+                   <separator orientation="vertical"/>
+                   <field name="unit_id"/>
+                   <field name="date" />
+                   <field name="red_tape_id" />
+                   <field name="name" />
+                   <newline/>
+                   <group  expand='0' string='Group by...'>
+                       <filter string='State' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'state'}" />
+                       <filter string='Unit' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'unit_id'}" />
+                       <filter string='Unit Type' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'unit_type_id'}" />
+                       <separator orientation="vertical"/>                                                                
+                       <filter string='Red Tape' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'red_tape_id'}" />
+                       <separator orientation="vertical"/>
+                       <filter string='Date' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'date'}" />
+                   </group>
+                </search>
+            </field>
+        </record>
+
+<!-- TREE View for tms.unit.red_tape --> 
+	<record model="ir.ui.view" id="view_tms_unit_red_tape_tree">
+          <field name="name">tms.unit.red_tape.tree</field>
+          <field name="model">tms.unit.red_tape</field>
+	  <field name="type">tree</field>
+	  <field name="arch" type="xml">
+            <tree string="Unit Red Tapes" colors="gray:state=='cancel';red:state=='draft';">
+              <field name="state"/>
+              <field name="date"/>
+              <field name="unit_id" />
+              <field name="unit_type_id" invisible="1"/>
+              <field name="red_tape_id" />
+              <field name="partner_id" />
+              <field name="amount" sum="Amount"/>
+              <field name="amount_paid" sum="Amount Paid"/>
+	    </tree>
+	  </field>
+	</record>
+
+<!-- FORM View for tms.unit.active_history -->
+
+        <record id="view_tms_unit_red_tape_form" model="ir.ui.view">
+            <field name="name">tms.unit.red_tape.form</field>
+            <field name="model">tms.unit.red_tape</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Units Red Tapes" version="7.0">
+                    <header>
+                        <button name="action_cancel" states="draft,pending,progress" string="Cancel" type="object"/>
+			<button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" icon="gtk-convert"/>
+                        <button name="action_pending" states="draft" string="Pending" type="object" icon="terp-gtk-media-pause" class="oe_highlight" />
+                        <button name="action_progress" states="pending" string="Progress" type="object" icon="gtk-go-forward" class="oe_highlight" />
+                        <button name="action_done" states="progress" string="Done" type="object" icon="gtk-goto-last" class="oe_highlight" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,pending,progress,done"/>
+                    </header>
+                    <sheet>
+		      <group col="4" colspan="4">
+                        <h1>
+                          <label string="Vehicle:"/>
+                          <field name="unit_id" class="oe_inline"/>
+                          <label string="Red Tape:"/>
+			  <field name="red_tape_id" context="{'default_type':'red_tape'}" on_change="on_change_red_tape_id(red_tape_id)" class="oe_inline"/>
+                        </h1>
+		      </group>
+                        <group col="4">
+                            <field name="date"/>
+                            <field name="partner_id"/>
+                            <field name="unit_type_id"/>
+                            <newline />
+                            <field name="name" colspan="4"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="amount"/>
+                            <field name="amount_paid"/>
+                        </group>
+                        <notebook colspan="6">
+                            <page string="Notes">
+                                <field name="notes" nolabel="1" />
+                            </page>
+                            <page string="Log">
+                                <group col="4">
+                                    <field name="create_uid" readonly="1" />
+                                    <field name="create_date" readonly="1" />
+                                    <field name="pending_by" readonly="1" />
+                                    <field name="date_pending" readonly="1" />
+                                    <field name="progress_by" readonly="1" />
+                                    <field name="date_progress" readonly="1" />
+                                    <field name="done_by" readonly="1" />
+                                    <field name="date_done" readonly="1" />
+                                    <field name="cancelled_by" readonly="1" />
+                                    <field name="date_cancelled" readonly="1" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread" placeholder="Share a message..."/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+<!-- Action for tms.unit.red_tape -->
+    <record model="ir.actions.act_window" id="open_view_tms_unit_red_tape_form">
+        <field name="name">Vehicle Red Tape</field>
+        <field name="res_model">tms.unit.red_tape</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!-- Menu for tms.unit.red_tape -->
+    <menuitem name="Vehicle Red Tape" 
+              parent="menu_tms_config_unit" 
+              id="menu_tms_config_unit_red_tape_form" 
+              action="open_view_tms_unit_red_tape_form"
+		sequence="24"/>
+
+<!-- Take some config menu from Fleet module -->
+        <menuitem action="fleet.fleet_vehicle_model_act" parent="menu_tms_config_unit" id="tms_fleet_vehicle_model_menu" sequence="10"/>
+        <menuitem action="fleet.fleet_vehicle_model_brand_act" parent="menu_tms_config_unit" id="tms_fleet_vehicle_model_brand_menu" sequence="11"/>
+        <menuitem action="fleet.fleet_vehicle_state_act" parent="menu_tms_config_unit" id="tms_fleet_vehicle_state_menu" groups="fleet.group_fleet_manager" sequence="12"/>
+
+<!-- 
+##############################
+fleet.vehicle.odometer.device
+##############################
+-->
+<!-- SEARCH View for fleet.vehicle.odometer.device --> 
+        <record id="view_fleet_vehicle_odometer_device_search" model="ir.ui.view">
+            <field name="name">fleet.vehicle.odometer.device.search</field>
+            <field name="model">fleet.vehicle.odometer.device</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Vehicle Odometer Device">
+                   <field name="vehicle_id" />
+                   <field name="name" />
+                   <filter string="Active" icon="terp-accessories-archiver" domain="[('state' , '=' , 'active')]" />
+                   <filter string="Inactive" icon="terp-accessories-archiver" domain="[('state' , '=' , 'inactive')]" />
+                   <filter string="Draft" icon="terp-accessories-archiver" domain="[('state' , '=' , 'draft')]" />
+                   <filter string="Cancel" icon="terp-accessories-archiver" domain="[('state' , '=' , 'cancel')]" />
+                   <group  expand='0' string='Group by...'>
+                       <filter string='State' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'state'}" />
+                       <filter string='Vehicle' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'vehicle_id'}" />
+                       <separator orientation="vertical"/>
+                       <filter string='Date' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'date'}" />
+                   </group>
+                </search>
+            </field>
+        </record>
+
+<!-- TREE View for fleet.vehicle.odometer.device --> 
+	<record model="ir.ui.view" id="view_fleet_vehicle_odometer_device_tree">
+        <field name="name">fleet.vehicle.odometer.device.tree</field>
+        <field name="model">fleet.vehicle.odometer.device</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+		    <tree string="Vehicle Odometer Device" colors="gray:state=='cancel';red:state=='draft';gray:state=='inactive';blue:state=='active';">
+		        <field name="state"/>
+		        <field name="date"/>
+		        <field name="date_start"/>
+		        <field name="date_end"/>
+		        <field name="name"/>
+		        <field name="vehicle_id" />
+		        <field name="accumulated_start"/>
+		        <field name="odometer_start" />
+		        <field name="odometer_end" />
+		        <field name="replacement_of"/>
+		    </tree>
+		</field>
+	</record>
+
+<!-- FORM View for fleet.vehicle.odometer.device -->
+
+        <record id="view_fleet_vehicle_odometer_device_form" model="ir.ui.view">
+            <field name="name">fleet.vehicle.odometer.device.form</field>
+            <field name="model">fleet.vehicle.odometer.device</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Vehicle Odometer Device" version="7.0">
+                    <header>
+                        <button name="action_cancel" states="draft" string="Cancel" type="object"/>
+                        <button name="action_activate" states="draft" string="Activate" type="object" icon="gtk-go-forward" class="oe_highlight" />
+                        <button name="action_inactivate" states="active" string="Inactivate" type="object" icon="gtk-goto-last" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,active,inactive"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label string="Odometer History"/>
+                        </h1>
+                        <group col="4">
+                            <field name="name" colspan="4"/>
+                            <field name="vehicle_id"  on_change="on_change_vehicle_id(vehicle_id, date_start)"/>
+                            <field name="date"/>
+                            <field name="date_start" />
+                            <field name="date_end" />
+                            <field name="replacement_of" invisible="1"/>
+                            <field name="accumulated_start" invisible="1" />
+                            <field name="odometer_start" />
+                            <field name="odometer_end" />
+			    <separator string="Odometer Readings" colspan="4" />
+                            <field name="odometer_reading_ids" nolabel="1" colspan="4"/>
+			</group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread" placeholder="Share a message..."/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+       <record id="view_fleet_vehicle_odometer_device" model="ir.ui.view">
+            <field name="name">fleet.vehicle.odometer.device.gantt</field>
+            <field name="model">fleet.vehicle.odometer.device</field>
+            <field name="arch" type="xml">
+                <gantt date_start="date_start" date_stop="date_end" string="Odometer History" default_group_by="vehicle_id" color="vehicle_id">
+                </gantt>
+            </field>
+        </record>
+
+<!-- Action for fleet.vehicle.odometer.device -->
+    <record model="ir.actions.act_window" id="open_view_fleet_vehicle_odometer_device_form">
+        <field name="name">Vehicle Odometer Device</field>
+        <field name="res_model">fleet.vehicle.odometer.device</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,gantt</field>
+    </record>
+
+<!-- Menu for fleet.vehicle.odometer.device -->
+    <menuitem name="Vehicle Odometer Device" 
+              parent="menu_tms_config_unit" 
+              id="menu_tms_config_fleet_vehicle_odometer_device_form" 
+              action="open_view_fleet_vehicle_odometer_device_form"
+		sequence="24"/>
+
+
+<!-- #######################################
+FLEET.VEHICLE.ODOMETER
+###################################### -->
+        <record id="fleet_vehicle_odometer_inherit_tms" model="ir.ui.view">
+            <field name="name">fleet.vehicle.odometer.tree.tms</field>
+            <field name="model">fleet.vehicle.odometer</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_tree"/>
+            <field name="arch" type="xml">
+                <field name="vehicle_id" position="after">
+                    <field name="odometer_id" />
+                    <field name="last_odometer" invisible="1"/>
+                    <field name="current_odometer"  on_change="on_change_current_odometer(vehicle_id,last_odometer, current_odometer)"/>
+                    <field name="distance"   on_change="on_change_distance(vehicle_id, last_odometer, distance)"/>
+                </field>
+		<field name="unit" position="after">
+		  <field name="tms_expense_id" readonly="1" />  
+		  <field name="tms_travel_id" readonly="1"/>  
+		</field>
+            </field>
+        </record>
+
+
+</data>
+</openerp>
+
+

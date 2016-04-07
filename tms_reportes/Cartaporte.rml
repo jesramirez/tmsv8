@@ -1,0 +1,782 @@
+<?xml version="1.0"?>
+<document filename="test.pdf">
+  <template pageSize="(936.0,612.0)" title="Test" author="Martin Simon" allowSplitting="20">
+    <pageTemplate id="first">
+      <frame id="first" x1="48.0" y1="34.0" width="843" height="547"/>
+    </pageTemplate>
+  </template>
+  <stylesheet>
+    <blockTableStyle id="Standard_Outline">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla1">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla2">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla3">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,1" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="1,1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,1" stop="2,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="3,1" stop="3,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,2" stop="0,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="1,2" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,2" stop="2,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="3,2" stop="3,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,3" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,3" stop="2,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="3,3" stop="3,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla4">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="7,0" stop="7,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla6">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla7">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="4,0" stop="4,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="5,0" stop="5,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="5,0" stop="5,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="5,0" stop="5,0"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,1" stop="1,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,1" stop="2,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="3,1" stop="3,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="4,1" stop="4,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="4,-1" stop="4,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="5,1" stop="5,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="5,1" stop="5,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="5,-1" stop="5,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla8">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="3,0" stop="3,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla9">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="5,0" stop="5,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="5,0" stop="5,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla14">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#000000" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="4,-1" stop="4,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla11">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="9,0" stop="9,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla12">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="3,-1" stop="3,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#000000" start="4,0" stop="4,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla13">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla5">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Tabla10">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <initialize>
+      <paraStyle name="all" alignment="justify"/>
+    </initialize>
+    <paraStyle name="P1" fontName="Helvetica-Bold" fontSize="8.0" leading="10" alignment="CENTER" textColor="#000000"/>
+    <paraStyle name="P2" fontName="Helvetica-Bold" fontSize="8.0" leading="10" alignment="JUSTIFY" textColor="#000000"/>
+    <paraStyle name="P3" fontName="Helvetica" fontSize="8.0" leading="10" alignment="JUSTIFY" textColor="#000000"/>
+    <paraStyle name="P4" fontName="Helvetica" fontSize="8.0" leading="10" alignment="JUSTIFY" textColor="#000000"/>
+    <paraStyle name="P5" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER" textColor="#000000"/>
+    <paraStyle name="P6" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P7" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P8" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P9" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P10" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P11" fontName="Helvetica" fontSize="10.0" leading="13"/>
+    <paraStyle name="P12" fontName="Helvetica" fontSize="10.0" leading="13"/>
+    <paraStyle name="P13" fontName="Helvetica" fontSize="10.0" leading="13"/>
+    <paraStyle name="P14" fontName="Helvetica" fontSize="10.0" leading="13"/>
+    <paraStyle name="P15" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P16" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P17" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P18" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P19" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P20" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P21" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P22" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P23" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P24" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P25" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P26" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P27" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P28" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P29" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P30" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P31" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P32" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P33" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P34" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P35" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P36" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P37" fontName="Helvetica" fontSize="8.0" leading="10" alignment="LEFT"/>
+    <paraStyle name="P38" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P39" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P40" fontName="Helvetica" fontSize="8.0" leading="10" alignment="CENTER"/>
+    <paraStyle name="P41" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P42" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P43" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P44" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P45" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P46" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P47" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P48" fontName="Helvetica" fontSize="8.0" leading="10" alignment="JUSTIFY"/>
+    <paraStyle name="P49" fontName="Helvetica" fontSize="10.0" leading="13" alignment="JUSTIFY"/>
+    <paraStyle name="P50" fontName="Helvetica" fontSize="10.0" leading="13" alignment="JUSTIFY"/>
+    <paraStyle name="P51" fontName="Helvetica" fontSize="10.0" leading="13" alignment="JUSTIFY"/>
+    <paraStyle name="P52" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P53" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P54" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="P55" fontName="Helvetica" fontSize="8.0" leading="10"/>
+    <paraStyle name="Standard" fontName="Helvetica"/>
+    <paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+    <paraStyle name="Text_20_body" fontName="Helvetica" spaceBefore="0.0" spaceAfter="7.0"/>
+    <paraStyle name="List" fontName="Helvetica" spaceBefore="0.0" spaceAfter="7.0"/>
+    <paraStyle name="Caption" fontName="Helvetica" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="Index" fontName="Helvetica"/>
+    <paraStyle name="Table_20_Contents" fontName="Helvetica"/>
+    <paraStyle name="Table_20_Heading" fontName="Helvetica" alignment="CENTER"/>
+    <images/>
+  </stylesheet>
+  <story>
+    <para style="P10">[[ repeatIn(objects,'o') ]]</para>
+    <blockTable colWidths="170.0,426.0,248.0" style="Tabla1">
+      <tr>
+        <td>
+          
+        </td>
+        <td>
+          <para style="P18">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P19">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P15">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P18">[[o.shop_id.company_id.name]]</para>
+        </td>
+        <td>
+          <para style="P19">CARTA PORTE TRASLADO</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P15">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P18">DIVISION TRANSPORTES DE CARGA</para>
+        </td>
+        <td>
+          <para style="P20">[[o.name]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P17">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P21"> <font face="Helvetica">[[o.shop_id.company_id.street]][[o.shop_id.company_id.l10n_mx_street3]] [[o.shop_id.company_id.l10n_mx_street4]]</font></para>
+        </td>
+        <td>
+          <para style="P19">FECHADE EMISION</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P22">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P23"><font face="Helvetica">[[o.shop_id.company_id.street2]] [[o.shop_id.company_id.zip]] [[o.shop_id.company_id.city]], [[o.shop_id.company_id.state_id.name]] [[o.shop_id.company_id.country_id.name>]]</font></para>
+        </td>
+        <td>
+          <para style="P24">[[o.date_order]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P15">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P25">[[o.shop_id.company_id.vat]]</para>
+        </td>
+        <td>
+          <para style="P19">PERSONA MORAL DE REGIMEN SIMPLIFICADO</para>
+          <para style="P19">CONFORME A LA LEY DE I.S.R.</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P15">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P19">SERVICIO PUBLICO FEDERAL</para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P6">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="843.0" style="Tabla2">
+      <tr>
+        <td>
+          <para style="P27">LUGAR Y FECHA DE EXPEDICION: <font face="Helvetica">[[o.shop_id.company_id.city]], [[o.shop_id.company_id.state_id.name]] [[o.date_order]]</font></para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P6">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="91.0,329.0,85.0,338.0" style="Tabla3">
+      <tr>
+        <td>
+          <para style="P27">Remitente:</para>
+        </td>
+        <td>
+          <para style="P26">[[o.departure_address_id.name]]</para>
+        </td>
+        <td>
+          <para style="P27">Destinatario:</para>
+        </td>
+        <td>
+          <para style="P28">[[o.arrival_address_id.name]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P27">RFC:</para>
+        </td>
+        <td>
+          <para style="P26">[[o.departure_address_id.vat]]</para>
+        </td>
+        <td>
+          <para style="P27">RFC:</para>
+        </td>
+        <td>
+          <para style="P28">[[o.arrival_address_id.vat]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P27">Dirección:</para>
+        </td>
+        <td>
+          <para style="P26">[[o.departure_address_id.street]]</para>
+        </td>
+        <td>
+          <para style="P27">Dirección:</para>
+        </td>
+        <td>
+          <para style="P28">[[o.arrival_address_id.street]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P27">Colonia:</para>
+        </td>
+        <td>
+          <para style="P26">[[o.departure_address_id.street2]]</para>
+        </td>
+        <td>
+          <para style="P27">Colonia:</para>
+        </td>
+        <td>
+          <para style="P28">[[o.arrival_address_id.street2]]</para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P6">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="91.0,142.0,113.0,74.0,85.0,153.0,107.0,77.0" style="Tabla4">
+      <tr>
+        <td>
+          <para style="P27">Ciudad y Edo:</para>
+        </td>
+        <td>
+          <para style="P26"><font face="Helvetica">[[o.departure_address_id.city]],[[o.departure_address_id.state_id.name]]</font></para>
+        </td>
+        <td>
+          <para style="P27">Tel:<font face="Helvetica">[[o.departure_address_id.phone]]</font></para>
+        </td>
+        <td>
+          <para style="P27">C.P. <font face="Helvetica">[[o.departure_address_id.zip]]</font></para>
+        </td>
+        <td>
+          <para style="P27">Ciudad y Edo:</para>
+        </td>
+        <td>
+          <para style="P28"><font face="Helvetica">[[o.arrival_address_id.city]],[[o.arrival_address_id.state_id.name]]</font></para>
+        </td>
+        <td>
+          <para style="P27">Tel:<font face="Helvetica">[[o.arrival_address_id.phone]]</font></para>
+        </td>
+        <td>
+          <para style="P27">C.P <font face="Helvetica">[[o.arrival_address_id.zip]]</font></para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P8">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="212.0,208.0,424.0" style="Tabla6">
+      <tr>
+        <td>
+          <para style="P29">Cuota por tonelada:<font face="Helvetica">[[repeantIn(o.waybill_customer_factor,'y')]][[y.factor]]</font></para>
+        </td>
+        <td>
+          <para style="P30">Valor Declarado:<font face="Helvetica">[[repeatIn(o.waybill_line,'x')]][[x.price_unit]]</font></para>
+        </td>
+        <td>
+          <para style="P30">Condiciones de pago:<font face="Helvetica">[[o.agreement_id.payment_term.name]]</font></para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P6">
+      <font color="white"> </font>
+    </para>
+    <para style="P6">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="140.0,140.0,140.0,140.0,140.0,141.0" style="Tabla7">
+      <tr>
+        <td>
+          <para style="P31">CANTIDAD</para>
+        </td>
+        <td>
+          <para style="P32">QUE EL REMITENTE DICE CONTIENEN</para>
+        </td>
+        <td>
+          <para style="P32">PESO TONS.</para>
+        </td>
+        <td>
+          <para style="P32">VOLUMEN</para>
+        </td>
+        <td>
+          <para style="P32">CONCEPTO</para>
+        </td>
+        <td>
+          <para style="P32">IMPORTE</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P33">[[x.product_uom_qty]]</para>
+        </td>
+        <td>
+          <para style="P33"><font face="Helvetica">[[repeatIn(o.waybill_shipped_product,'p')]][[p.product_id.name]]</font></para>
+        </td>
+        <td>
+          <para style="P34"><font face="Helvetica">[[p.product_uom_qty]]</font></para>
+        </td>
+        <td>
+          <para style="P34">[[p.product_uom.category_id.name]]</para>
+        </td>
+        <td>
+          <para style="P35">[[repeatIn(o.waybill_line,'w')]] [[w.product_id.name]]</para>
+          <para style="P36">
+            <font color="white"> </font>
+          </para>
+          <para style="P36">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P37">$[[w.price_total]] </para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P6">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="90.0,471.0,142.0,140.0" style="Tabla8">
+      <tr>
+        <td>
+          <para style="P39">Pedimento:</para>
+        </td>
+        <td>
+          <para style="P42">[[o.name]]</para>
+        </td>
+        <td>
+          <para style="P39">Subtotal</para>
+        </td>
+        <td>
+          <para style="P39">$<font face="Helvetica">[[o.amount_untaxed]]</font></para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P9">
+      <font color="white"> </font>
+    </para>
+    <para style="P43">
+      <font color="white"> </font>
+    </para>
+    <para style="P9">
+      <font color="white"> </font>
+    </para>
+    <para style="P9">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="91.0,190.0,28.0,253.0,141.0,140.0" style="Tabla9">
+      <tr>
+        <td>
+          <para style="P39">Ruta:</para>
+        </td>
+        <td>
+          <para style="P44"><font face="Helvetica">[[repeatIn(o.travel_ids,'v')]][[v.route_id.departure_id.name]]</font></para>
+        </td>
+        <td>
+          <para style="P40">A:</para>
+        </td>
+        <td>
+          <para style="P45"><font face="Helvetica">[[v.route_id.arrival_id.name]]</font></para>
+        </td>
+        <td>
+          <para style="P38">[[repeatIn(o.tax_line,'t')]][[t.name]]</para>
+        </td>
+        <td>
+          <para style="P39">$<font face="Helvetica">[[t.tax_amount]]</font></para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P6">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="73.0,295.0,193.0,142.0,140.0" style="Tabla14">
+      <tr>
+        <td>
+          <para style="P46">Operador:</para>
+        </td>
+        <td>
+          <para style="P47">[[v.employee_id.name]]</para>
+        </td>
+        <td>
+          <para style="P15">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P39">TOTAL:</para>
+        </td>
+        <td>
+          <para style="P41">$ <font face="Helvetica">[[o.amount_total]]</font></para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P6">
+      <font color="white"> </font>
+    </para>
+    <para style="P11">
+      <font color="white"> </font>
+    </para>
+    <para style="P11">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="80.0,67.0,60.0,43.0,63.0,75.0,54.0,67.0,51.0,142.0,139.0" style="Tabla11">
+      <tr>
+        <td>
+          <para style="P39">Carro:</para>
+        </td>
+        <td>
+          <para style="P53">[[v.unit_id.name]]</para>
+        </td>
+        <td>
+          <para style="P39">Placas:</para>
+        </td>
+        <td>
+          <para style="P53">[[v.unit_id.license_plate]]</para>
+        </td>
+        <td>
+          <para style="P39">Remolque:</para>
+        </td>
+        <td>
+          <para style="P53">[[v.trailer1_id.name]]</para>
+        </td>
+        <td>
+          <para style="P39">Placas:</para>
+        </td>
+        <td>
+          <para style="P53">[[v.trailer_id.license_plate]]</para>
+        </td>
+        <td>
+          <para style="P12">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P12">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P12">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P11">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="91.0,193.0,42.0,236.0,144.0,137.0" style="Tabla12">
+      <tr>
+        <td>
+          <para style="P39">Obs.</para>
+        </td>
+        <td>
+          <para style="P55">[[p.notes]]</para>
+        </td>
+        <td>
+          <para style="P39">Inst.</para>
+        </td>
+        <td>
+          <para style="P42">[[o.name]]</para>
+        </td>
+        <td>
+          <para style="P13">
+            <font color="white"> </font>
+          </para>
+        </td>
+        <td>
+          <para style="P13">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P11">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="843.0" style="Tabla13">
+      <tr>
+        <td>
+          <para style="P15">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P15">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P15">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P15">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P5">CONTRATO DE PRESTACIÓN DE SERVICIOS QUE AMPARA ESTA CARTA DE PORTE</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P3">PRIMERA.- Para los efectos del presente contrato de tranporte se denomina "porteador" al transportista y "Remitente" al usuario que contrate el servicio.</para>
+          <para style="P3">SEGUNDA.- El "Remitente" es reponsable de que la información proporcionada al "Porteador" sea veraz y que la documentación que entregue para efectis del transporte sea la correcta.</para>
+          <para style="P3">TERCERA.- El "Remitente debe declara al "Porteador" el tipo de mercancía o efectos de que se trate, peso, medidas y/o número de la carga que entrega para su transporte y, en su caso, el valor de la misma. La carga que se entregue a granel será pesada por el "Porteador" en el primer punto donde haya báscula apropiada o, en su defecto, aforada en metros cúbicos con la conformidad del "Remitente.</para>
+          <para style="P3">CUARTA.- Para efectos del transporte, el "Remitente" deberá entregar al "Porteador" los documentos que las leyes y reglamentos exijan para llevar a cabo el servicio, en caso de no cumplirse con estos requisitos el "Porteador está obligado a rehusar el transporte de mercancías.</para>
+          <para style="P3">QUINTA,. Si por sospecha de falsedad en la declaracíon del contenido de un bulto el "Porteador" deseare proceder a su reconocmiento, podrá hacerlo ante testigos y con asistencia del "Remitente" o del consignatario. Si este último no concurriere, se solicitará la presencia de un inspector de la Secretaría de Comunicaciones y Transportes, y se levantará el acta correspondiente. El "Porteador" tendrá en todo caso la obligación de dejar los bultos en el esstado en que se encontraban antes del conocimiento.</para>
+          <para style="P3">SEXTA- El "Porteador" deberá recoger y entregar la carga precisamente en los domicilios que señale el "Remitente", ajustándose a los términos y condiciones convenidos. El "Porteador" solo está obligado a llevar la carga al domicilio del consignatario para su entrega una sola vez. Si ésta no fuera recibida, se dejará aviso de que la mercancía queda a disposición del interesado en las bodegas que indique el "Porteador".</para>
+          <para style="P3">SEPTIMA.- Si la carga no fuere retirada dentro de los 30 días siguientes a aquél en que hubiere sido puesta a disposición del consignatario, el "Porteador" podría solicitar la venta en pública subasta con arreglo a lo que dispone el Código de Comercio</para>
+          <para style="P3">OCTAVA.- El "Porteador" y el "Remitente" negociarán libremente el precio del servicio, tomando en cuenta su tipo, característica de los embarques, volumen, regularidad, clase de carga y sistema de pago</para>
+          <para style="P3">NOVENA.- Si el "Remitente" desea que el "Porteador"asuma la responsabilidad por el valor de las mercancías o efecto que él declare hy que cubra toda clase de riesgos, inclusive los derivados de caso fortuito o de fuerza mayor, las partes deberán convenir un cargo adicional, equivalente al valor de la prima del seguro que se contrate, el cual se deberá expresar en la carta de porte.</para>
+          <para style="P3">DECIMA.- Cuando el importe de flete no incluya el cargo adicional, la responsabilidad del "Porteador" queda expresamente limitada a la cantidad equivalente a 15 días de salario mínimo vigente en el Distrito Federal por tonelada o cuando se trate de embarques cuyo peso sea mayor de 200kg. Pero menor de 1000kg; y a 4 días de salario mínimopor remewwsa cuando se trate de embarques con peso hasta 200kg.</para>
+          <para style="P3">DECIMA PRIMERA.- El precio del transporte deberá pagarse en origen, salvo convenio entre las partes de pago en destino. Cuando el transporte se hubiere concertado "Flete por Cobrar", la entrega de las mercancías o efectos se hará contra el pago del felte y el "Porteador" tendrá derecho a retenerlos mientras no se le cubrqa el precio convenido.</para>
+          <para style="P3">DECIMA SEGUNDA.- Si al momento de la entrega resultare algún faltante o avería, el consignatario deberá hacerla constar en ese acto en la carta de porte y formular su reclamación por escrito al "Porteador", dentro de las 24 horas siguientes</para>
+          <para style="P3">DECIMA TERCERA.- El "Porteador" queda eximido de la obligación de recibir mercanciás o efectos para su transporte, en los siguientes casos:</para>
+          <para style="P3">a) Cuando se trate de carga que por su naturaleza, peso, volumen, embalaje, defectuoso o cualquier otra circusntancia no pueda transportarse sin destruirse o sin causar daño a los demás artículos o el material rodante, salvo que la empresa de que se trate tenga el equipo adecuado.</para>
+          <para style="P3">b) Las mercancías cuyo transporte haya sido prohibido por disposiciones legales o reglamentarias. Cuando tales disposiciones no prohíban precisamente el transporte de determinadas mercancías, pero sí ordenen la presentación de ciertos documentos para que puedan ser transportadas, el "Remitente" estará obligado a entregar al "Porteador" los documentos correspondientes.</para>
+          <para style="P3">DECIMA CUARTA.- Los casos no previstos en las presentes condiciones y las quejas derivadas de su aplicación se someterán por la vía administrativa a la Secretaría de Comunicaciones y Transportes</para>
+          <para style="P3">DECIMA QUINTA.- Para el caso de que el "Remitente" contrate carro por entero, este aceptará la responsabilidad solidaria para que el "Porteador" mediante la figura de la corresponsabilidad QUE CONTEMPLA EL ARTICULO 10 DEL REGLAMENTO SOBRE EL PESO, DIMESIONES Y CAPACIDAD DE LOS VEHICULOS DE AUTOTRANSPORTE que transitan en los caminos y puentes de jurisdicción federal, por lo que el "Remitente" queda oblicago a verificar que la carga y el vehículo que la transporta, cumplan con el peso y dimensiones máximas extablecidas en la Norma NOM-012-SCT-2-2008</para>
+          <para style="P4">Para el caso de incumplimiento e inobservancia a las dispociones que regulan el peso y dimensiones, por parte del "Remitente", este será corresponsable de las infracciones y multas de la Secretaría de Comunicaciones y Transportes</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P3">DEBO(EMOS) Y PAGARE (MOS) INCONDICIONALMENTE A LA ORDEN DE TRANSPORTES BELCHEZ, S.A. DE C.V. Y/O NELSON ARTURO BELCHEZ GONZALEZ EN LA CIUDAD DE VERACRUZ, VER, EL ________________ DE _________________ DEL_______________________ LA CANTIDAD DE _______________________________________________. LA FALTA DEL PAGO PUNTUAL DE ESTE PAGARE CAUSARA INTERESES MORATORIOS AL % DESDE LA FECHA DE SU ACEPTACION A LA DE SU COBRO.</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P15">
+            <font color="white"> </font>
+          </para>
+          <para style="P15">
+            <font color="white"> </font>
+          </para>
+          <para style="P1">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P6">
+      <font color="white"> </font>
+    </para>
+    <para style="P6">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="843.0" style="Tabla5">
+      <tr>
+        <td>
+          <para style="P1">______________________________________________</para>
+          <para style="P1">Nombre y Firma de quien Recibe</para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P7">
+      <font color="white"> </font>
+    </para>
+    <para style="P2">
+      <font color="white"> </font>
+    </para>
+    <para style="P2">
+      <font color="white"> </font>
+    </para>
+    <blockTable colWidths="281.0,281.0,281.0" style="Tabla10">
+      <tr>
+        <td>
+          <para style="P14">[[repeatIn(<font face="Helvetica">o</font>.travel_ids,'v')]][[v.route_id.departure_id.<font face="Helvetica">name</font>]]</para>
+        </td>
+        <td>
+          <para style="P49">[[v.route_id.arrival_id.<font face="Helvetica">name</font>]]</para>
+        </td>
+        <td>
+          <para style="P50">[[v.employee_id.name]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P49">[[v.unit_id.name]]</para>
+        </td>
+        <td>
+          <para style="P49">[[v.unit_id.license_plate]]</para>
+        </td>
+        <td>
+          <para style="P49">[[v.unit_id.license_plate]]</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P49">[[v.trailer1_id.name]]</para>
+        </td>
+        <td>
+          <para style="P51">[[o.name]]</para>
+        </td>
+        <td>
+          <para style="P48">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P2">
+      <font color="white"> </font>
+    </para>
+  </story>
+</document>
+

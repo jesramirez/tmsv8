@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data><!-- noupdate="1">-->
+
+
+	<!-- Block Vehicle from use when Service Order is Open -->
+	<record model="ir.config_parameter" id="tms_restrict_travel_distpatch_if_vehicle_has_open_service_order">               
+      <field name="key">tms_restrict_travel_distpatch_if_vehicle_has_open_service_order</field> 
+      <field name="value">1</field>              
+    </record>
+
+	<!-- Block creating new Service Order for Vehicle if there is already a Service Order in Draft / Open State -->
+	<record model="ir.config_parameter" id="tms_maint_restrict_more_than_one_service_order_in_draft_open">               
+      <field name="key">tms_maint_restrict_more_than_one_service_order_in_draft_open</field> 
+      <field name="value">1</field>              
+    </record>
+        
+	<!-- Block creating new Service Order for Vehicle if there is already a Service Order in Release State -->
+	<record model="ir.config_parameter" id="tms_maint_restrict_more_than_one_service_order_in_released_state">               
+      <field name="key">tms_maint_restrict_more_than_one_service_order_in_released_state</field> 
+      <field name="value">1</field>              
+    </record>
+
+
+</data>
+</openerp>

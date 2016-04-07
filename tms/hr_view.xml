@@ -1,0 +1,69 @@
+<openerp>
+<data>
+
+
+<!-- Agregamos el campo <<tms_category>> al formulario de Empleados para saber si la persona es usada 
+    como Operador de unidad (Viajes) o como Mecanico (Mantenimiento)
+-->
+        <record model="ir.ui.view" id="view_employee_form_tms">
+            <field name="name">Employee - TMS</field>
+            <field name="model">hr.employee</field>
+            <field name="type">form</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="replace">
+                    <field name="user_id" on_change="onchange_user(user_id)" string="Related User" attrs="{'required':[('tms_category','=','mechanic')]}"/>
+                </field>
+                <notebook position="inside">
+                    <page string="TMS">
+                        <group>
+						    <field name="tms_category" />
+                            <field name="office_id" />
+						    <field name="tms_advance_account_id" attrs="{'required':[('tms_category','=','driver'),('tms_supplier_driver','=', False)],'invisible':['|',('tms_category','!=','driver'),('tms_supplier_driver','=', True)]  }"/>
+                            <field name="tms_expense_negative_balance_account_id" attrs="{'required':[('tms_category','=','driver'),('tms_supplier_driver','=', False)],'invisible':['|',('tms_category','!=','driver'),('tms_supplier_driver','=', True)]  }"/>
+						    <field name="tms_supplier_driver" attrs="{'invisible':[('tms_category','!=','driver')]  }"/>
+						    <field name="tms_supplier_id" attrs="{'required':[('tms_supplier_driver','=',True)],'invisible':[('tms_supplier_driver','!=',True)]  }"/>
+                        </group>
+                        <div attrs="{'invisible':[('tms_category','!=','driver')]}">
+                        <group colspan="4" col="4" >
+                            <separator string="Record Travel Expenses Related" colspan="4" />
+                            <field name="tms_social_security_discount" />
+						    <field name="tms_social_security_prod_id" />
+                            <field name="tms_salary_tax_discount" />
+						    <field name="tms_salary_tax_prod_id" />
+						    <field name="tms_house_rent_discount" />
+                            <newline />
+						    <field name="tms_house_rent_discount_perc" />
+						    <field name="tms_house_rent_prod_id" />
+						    <field name="tms_alimony" />
+                            <field name="tms_alimony_prod_id" />                            
+						    <field name="tms_credit_charge_discount" />
+						    <field name="tms_credit_charge_prod_id" />
+                        </group>
+                        </div>
+					</page>
+                </notebook>
+            </field>
+        </record>
+
+
+
+        <record model="ir.ui.view" id="view_hr_job_form_tms">
+            <field name="name">Jobs - TMS</field>
+            <field name="model">hr.job</field>
+            <field name="type">form</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+                <field name="department_id" position="after">
+                    <field name="tms_global_salary"/>
+                </field>
+            </field>
+        </record>
+
+
+
+</data>
+</openerp>
+

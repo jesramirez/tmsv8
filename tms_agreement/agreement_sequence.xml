@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="seq_type_service_order" model="ir.sequence.type">
+            <field name="name">TMS AGREEMENT</field>
+            <field name="code">tms.agreement</field>
+        </record>
+
+        <record id="seq_service_order" model="ir.sequence">
+            <field name="name">TMS AGREEMENT</field>
+            <field name="code">tms.agreement</field>
+            <field name="prefix">ARGRMNT-</field>
+            <field name="padding">6</field>
+            <field name="number_increment">1</field>
+            <field name="number_next">1</field>
+        </record>
+        
+    </data>
+</openerp>

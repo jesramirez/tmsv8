@@ -1,0 +1,6 @@
+__init__.pyc
+fleet_vehicle.pyc
+hr_employee.pyc
+tms_travel.pyc
+*~
+.DS_Store

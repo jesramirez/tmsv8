@@ -1,0 +1,118 @@
+<openerp>
+<data>
+
+<!-- Add fields to product.product object
+'tms_category'
+-->
+############################################################################################################################
+### Cambios en la vista de Product ###                                                                                                                                                                                                                                   
+                                                                                                          
+
+        <record id="tms_product_template_search_form_view" model="ir.ui.view">
+            <field name="name">tms.product.template.search.form</field>
+            <field name="model">product.template</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+               <filter name="consumable" position="replace">
+                   <filter string="Products" name="stockable" domain="[('type','=','product')]" 
+                           help="Products your store in the inventory"/>
+                </filter>
+                <filter name="filter_to_sell" position="before">
+                    <separator/>
+                    <filter string="Waybill Cargo"
+                             domain="[('tms_category','=','transportable')]"/>
+                    <filter string="Waybill Freight"
+                             domain="[('tms_category','=','freight')]"/>
+                    <filter string="Waybill Invoicing Products"
+                             domain="[('tms_category','in',('freight','move','insurance','highway_tolls','other'))]"/>                    
+                    <filter string="Waybill Related"
+                             domain="[('tms_category','in',('transportable','freight','move','insurance','highway_tolls','other'))]"/>
+                     <filter string="Travel Expense Related" 
+                             domain="[('tms_category','in',('real_expense','salary','salary_retention','salary_discount','negative_balance','fuel','madeup_expense'))]"/>
+                     <filter string="Indirect Expense (Agreements)" domain="[('tms_category','=','indirect_expense')]" name="indirect_expense"/>                    
+                </filter>
+                <field name="pricelist_id" position="after">
+                    <filter string='FMS Type' domain="[]" context="{'group_by' : 'tms_category'}"/>
+                </field>
+            </field>
+        </record>
+
+    
+        <record model="ir.ui.view" id="tms_product_template_tree_view">
+            <field name="name">FMS product.template.tree</field>
+            <field name="model">product.template</field>
+            <field name="type">form</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+              <field name="state" position="before" >
+                <field name="tms_category" />
+              </field>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="tms_product_template_form_view">
+            <field name="name">TMS product.normal.form</field>
+            <field name="model">product.template</field>
+            <field name="type">form</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <separator string="TMS" colspan="2"/>
+                    <field name="tms_category" on_change="onchange_tms_category(tms_category)" />
+                    <field name="tms_default_freight" attrs="{'invisible':[('tms_category','!=','freight')]}"/>
+                    <field name="tms_default_supplier_freight" attrs="{'invisible':[('tms_category','!=','freight')]}"/>
+                    <field name="tms_default_salary" attrs="{'invisible':[('tms_category','!=','salary')]}"/>
+                    <field name="tms_default_fuel_discount" attrs="{'invisible':[('tms_category','!=','salary_discount')]}"/>
+                    <field name="tms_activity_duration" attrs="{'invisible':[('tms_category','!=','maint_activity')], 'required':[('tms_category','=','maint_activity')]}" widget="float_time"/>
+                </field>
+                <notebook position="inside">
+                    <page string="TMS Indirect Expense Accounts" attrs="{'invisible':[('tms_category','!=','indirect_expense')]}" >
+                        <field name="tms_account_ids" nolabel="1" />
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    
+    
+        <record model="ir.ui.view" id="tms_product_template_form_view_acc">
+            <field name="name">TMS product.normal.form2</field>
+            <field name="model">product.template</field>
+            <field name="type">form</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="account.product_template_form_view"/>
+            <field name="arch" type="xml">    
+                <field name="property_account_income" position="after">
+                    <field name="tms_property_account_income"                            
+                           domain="[('type','=','other')]"/> <!-- attrs="{'required':[('tms_category','in',('freight', 'insurance', 'highway_tolls','other'))], 'invisible' : [('tms_category','not in',('freight', 'insurance', 'highway_tolls','other'))]}" -->
+                </field>
+                <field name="property_account_expense" position="after">
+                    <field name="tms_property_account_expense"                            
+                           domain="[('type','=','other')]"/> <!-- attrs="{'required':[('tms_category','in',('fuel'))], 'invisible' : [('tms_category','not in',('fuel'))]}" -->
+                </field>
+                
+            </field>
+    </record>
+
+    
+        <record id="tms_view_category_property_form" model="ir.ui.view">
+            <field name="name">tms.product.category.property.form.inherit</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="account.view_category_property_form"/>
+            <field name="arch" type="xml">
+                <field name="property_stock_journal" position="after">
+                    <separator string="TMS Accounts" colspan="2"/>
+                    <field name="tms_property_account_income_categ"
+                           domain="[('type','=','other')]"/>
+                    <field name="tms_property_account_expense_categ"                            
+                           domain="[('type','=','other')]"/>
+                </field>
+            </field>
+        </record>
+
+
+</data>
+</openerp>

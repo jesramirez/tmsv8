@@ -1,0 +1,233 @@
+<openerp>
+<data>
+
+<!-- 
+##############################
+TMS.FUELVOUCHER
+##############################
+-->
+<!-- SEARCH View for tms.fuelvoucher  --> 
+        <record id="view_tms_fuelvoucher_search" model="ir.ui.view">
+            <field name="name">tms.fuelvoucher.search</field>
+            <field name="model">tms.fuelvoucher</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="TMS Fuel Vouchers">
+                   <filter string="Draft" icon="terp-gtk-media-pause" domain="[('state','=','draft')]"/>
+                   <separator orientation="vertical"/>
+                   <filter string="Approved" icon="terp-gtk-jump-to-ltr" domain="[('state','=','approved')]"/>
+                   <separator orientation="vertical"/>
+                   <filter string="Confirmed" icon="terp-gtk-jump-to-ltr" domain="[('state','=','confirmed')]"/>
+                   <separator orientation="vertical"/>
+                   <filter string="Closed" icon="terp-check" domain="[('state','=','closed')]"/>
+                   <separator orientation="vertical"/>
+                   <filter string="Cancelled" icon="terp-dialog-close" domain="[('state','=','cancel')]"/>
+                   <filter string="Not Cancelled" icon="terp-stock_symbol-selection" domain="[('state','!=','cancel')]"/>
+                   <filter string="Invoiced" icon="terp-stock_symbol-selection" domain="[('invoice_id','!=', False)]"/>
+                   <filter string="Not Invoiced" icon="terp-dialog-close" domain="[('invoice_id','=', False)]"/>
+                   <filter string="Without Travel" icon="terp-dialog-close" domain="[('no_travel','=', 1)]"/>
+                    
+                   <newline/>
+                   <field name="name"/>
+                   <field name="travel_id" />
+                   <field name="unit_id"/>
+                   <field name="employee_id"/>
+                    <field name="date"/>
+                   
+                   <newline/>
+                   <group expand="0" string="More filters...">
+                        <field name="partner_id"/>
+                        <field name="invoice_id" domain="[('type', '=', 'invoice_in')]"/>
+                        <field name="product_id"/>
+                        <field name="operation_id" />
+                   </group>   
+                   <newline/>
+                   <group  expand='0' string='Group by...'>
+                       <filter string='Unit' icon="terp-gdu-smart-failing" domain="[]" context="{'group_by' : 'unit_id'}" />
+                       <filter string='Driver 1' icon="terp-personal" domain="[]" context="{'group_by' : 'employee_id'}" />
+                       <separator orientation="vertical"/>                                                                
+                       <filter string='Partner' icon="terp-personal" domain="[]" context="{'group_by' : 'partner_id'}" />
+                       <filter string='Invoice' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'invoice_name'}" />
+                       <separator orientation="vertical"/>                                                                
+                       <filter string='State' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'state'}" />
+                       <filter string='Operation' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'operation_id'}" />
+                       <filter string='Period' icon="terp-stock_symbol-selection" domain="[]" context="{'group_by' : 'date'}" />
+                   </group>
+                </search>
+            </field>
+        </record>
+
+<!-- TREE View for tms.fuelvoucher --> 
+	<record model="ir.ui.view" id="view_tms_fuelvoucher_tree">
+        <field name="name">tms.fuelvoucher.tree</field>
+        <field name="model">tms.fuelvoucher</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+            <tree string="TMS Fuel Vouchers" colors="gray:state=='cancel';red:state=='draft';green:state=='approved';blue:state=='confirmed';">
+                <field name="name" />
+                <field name="date" />
+                <field name="travel_id" />
+                <field name="unit_id" />
+                <field name="employee_id" />
+                <field name="partner_id" />
+				<field name="price_unit" />
+				<field name="product_uom_qty" sum="Quatity"/>
+				<field name="product_uom" />
+				<field name="price_subtotal" sum="SubTotal"/>
+				<field name="tax_amount" sum="Taxes"/>
+				<field name="special_tax_amount" sum="IEPS"/>
+				<field name="price_total" sum="Total"/>			
+                <field name="invoice_id" invisible="1"/>
+                <field name="invoice_name" />
+                <field name="invoice_paid"/>
+                <field name="office_id" invisible="1"/>
+                <field name="operation_id" invisible="1"/>
+                <field name="state" />
+                <field name="no_travel" invisible="1"/>
+                <button name="action_approve" states="draft" string="Approve" type="object" icon="gtk-go-forward" groups="tms.group_fuelvoucher_approve"/>
+                <button name="action_confirm" states="approved" string="Confirm" type="object" icon="gtk-goto-last" groups="tms.group_fuelvoucher_confirm"/>
+		    </tree>
+		</field>
+	</record>
+
+<!-- FORM View for tms.fuelvoucher -->
+        <record id="view_tms_fuelvoucher_form" model="ir.ui.view">
+            <field name="name">tms.fuelvoucher.form</field>
+            <field name="model">tms.fuelvoucher</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="TMS Fuel Vouchers" version="7.0">
+                    <header>
+                        <button name="action_cancel" states="draft,approved,confirmed" string="Cancel" type="object" icon="gtk-cancel" groups="tms.group_fuelvoucher_cancel"/>
+                        <button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" icon="gtk-convert" groups="tms.group_fuelvoucher_setdraft"/>
+                        <button name="action_approve" states="draft" string="Approve" type="object" icon="gtk-go-forward" class="oe_highlight"  groups="tms.group_fuelvoucher_approve"/>
+                        <button name="action_confirm" states="approved" string="Confirm" type="object" icon="gtk-goto-last" class="oe_highlight"  groups="tms.group_fuelvoucher_confirm"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approved,confirmed,closed"/> 
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label string="TMS Fuel Voucher"/>
+                            <field name="name" class="oe_inline" readonly="1"/>
+                        </h1>
+                        <group colspan="4" col="4">
+                            <field name="employee1_id" invisible="1"/>
+                            <field name="employee2_id" invisible="1"/>
+                            <field name="office_id" attrs="{'required':[('no_travel','=',True)],'readonly':[('no_travel','=',False)]}" />
+                            <field name="date" />
+                            <field name="no_travel" on_change="on_change_no_travel(no_travel)"/>
+                            <newline />
+                            <field name="travel_id" attrs="{'required':[('no_travel','=',False)],'invisible':[('no_travel','=',True)]}"
+                                   domain="[('state','!=','cancel'),('state','!=','closed'), ('supplier_unit', '=', False)]" 
+                                   on_change="on_change_travel_id(travel_id)"/>
+                            <field name="operation_id" domain="[('state','=','process')]" attrs="{'invisible':[('no_travel','=',True)]}"/>
+                            <field name="unit_id" attrs="{'readonly':[('no_travel','=',False)]}"
+                                   domain="[('fleet_type','in',('tractor','other'))]"/>
+                            <field name="employee_id"
+                                   attrs="{'required':True}" 
+                                   on_change="on_change_driver(employee_id,employee1_id, employee2_id)"  />
+                            <separator string=" " colspan="2"/>
+                            <field name="driver_helper" on_change="on_change_driver_helper(driver_helper, employee1_id, employee2_id)" 
+                                   attrs="{'invisible':['|', ('employee2_id','=',False),('travel_id', '=', False)]}" />
+                            <field name="partner_id" 	domain="[('supplier','=',1),('tms_category','=','fuel')]" 
+											         	context="{'default_supplier': 1, 'default_customer': 0, 'default_tms_category': 'fuel'}"/>
+                            <field name="currency_id" />
+	            			<field name="product_id" 	domain="[('purchase_ok', '=', True),('tms_category','=','fuel')]"
+												        context="{'default_tms_category': 'fuel', 'default_type': 'service', 'default_procure_method':'make_to_stock', 'default_supply_method': 'buy'}"
+												        on_change="on_change_product_id(product_id)" colspan="4"/>
+                            <field name="product_uom" invisible="1" />
+                            <group colspan="2">
+
+                                <field name="product_uom_qty" on_change="on_change_amount(product_uom_qty, price_total, tax_amount, product_id)" class="oe_text_right"/>
+                                <field name="price_unit"  readonly="1" class="oe_text_right"/>
+                                <field name="price_subtotal" readonly="1" class="oe_text_right"/>
+                                <field name="tax_amount" on_change="on_change_amount(product_uom_qty, price_total, tax_amount, product_id)" class="oe_text_right"/>
+                                <field name="special_tax_amount" readonly="1" class="oe_text_right"/>
+                                <field name="price_total" on_change="on_change_amount(product_uom_qty, price_total, tax_amount, product_id)" class="oe_text_right"/>
+                            </group>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="Notes">
+                                <group>
+                                    <field name="notes" nolabel="1" />
+                                </group>        
+                            </page>
+                            <page string="Log Info">
+                                <group colspan="4" col="4">
+                                    <field name="create_uid" readonly="1" />
+                                    <field name="create_date" readonly="1" />
+                                    <field name="approved_by" readonly="1" />
+                                    <field name="date_approved" readonly="1" />
+                                    <field name="confirmed_by" readonly="1" />
+                                    <field name="date_confirmed" readonly="1" />
+                                    <field name="closed_by" readonly="1" />
+                                    <field name="date_closed" readonly="1" />
+                                    <field name="cancelled_by" readonly="1" />
+                                    <field name="date_cancelled" readonly="1" />
+                                    <field name="drafted_by" readonly="1" />
+                                    <field name="date_drafted" readonly="1" />
+                                    <separator string="Account Move" colspan="4"/>
+                                    <field name="move_id"/>
+                                    <field name="picking_id"/>
+                                    <field name="expense_id"/>
+                                    <field name="picking_id_cancel"/>
+							        <separator string="Invoice Information" colspan="4"/>
+                                    <field name="invoiced"/>  
+                                    <field name="invoice_id" />
+                                    <field name="invoice_name" />
+                                    <field name="invoice_paid"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread" placeholder="Share a message..."/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+<!-- Action for tms.fuelvoucher -->
+    <record model="ir.actions.act_window" id="open_view_tms_fuelvoucher_form">
+        <field name="name">TMS Fuel Voucher</field>
+        <field name="res_model">tms.fuelvoucher</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!-- Menu for tms.fuelvoucher -->
+    <menuitem name="Fuel Vouchers" sequence="10"
+              parent="menu_tms_travels" 
+              id="menu_tms_fuelvoucher_form" 
+              action="open_view_tms_fuelvoucher_form"/>
+
+
+<!--  Make the invoice-->
+
+	<record id="view_fuelvoucher_invoice" model="ir.ui.view">
+	<field name="name">Crear Facturas</field>
+	<field name="model">tms.fuelvoucher.invoice</field>
+	<field name="type">form</field>
+	<field name="arch" type="xml">
+	<form string="Create Invoice" version="7.0">
+        <separator colspan="4" string="Create Supplier Invoice from selected Fuel Vouchers ?" />
+        <footer>
+			<button name="makeInvoices" string="Confirm" type="object" icon="gtk-ok" />
+            or
+			<button special="cancel" string="Cancel" class="oe_link"/>
+		</footer>
+	</form>
+	</field>
+	</record>
+
+	<act_window name="Create Invoice"		    
+	    res_model="tms.fuelvoucher.invoice"
+	    src_model="tms.fuelvoucher"
+	    view_mode="form"
+	    target="new"
+	key2="client_action_multi"    
+	    id="action_view_fuelvoucher_invoice"/>	
+
+
+</data>
+</openerp>

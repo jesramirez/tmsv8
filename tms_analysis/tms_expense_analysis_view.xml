@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_tms_expense_analysis_tree" model="ir.ui.view">
+          <field name="name">tms.expense.analysis.tree</field>
+          <field name="model">tms.expense.analysis</field>
+          <field name="type">tree</field>
+          <field name="arch" type="xml">
+            <tree string="Travel Expense Analysis" create="false">
+              <field name="office_id" invisible="1" />
+              <field name="name" />
+              <field name="date" />
+              <field name="year" invisible="1" />
+              <field name="month" invisible="1" />
+              <field name="day" invisible="1" />
+              <field name="employee_id" invisible="1"/>
+              <field name="unit_char" invisible="1"/>
+              <field name="currency_id" invisible="1" />
+              <field name="product_id"  invisible="1" />
+              <field name="expense_line_description" />
+              <!--<field name="travel_id"  invisible="1"/>
+              <field name="route_id"  invisible="1"/> -->
+              <field name="operation_id"  invisible="1"/>
+              <!--<field name="travels" invisible="1"/> -->
+              <field name="qty" sum="Qty"/>
+              <field name="price_unit" invisible="1"/>
+              <field name="subtotal" sum="SubTotal"/>
+              <field name="driver_helper"  invisible="1"/>
+              <field name="state" />
+            </tree>
+          </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_tms_expense_analysis_search">
+		  <field name="name">tms.expense.analysis.tree</field>
+		  <field name="model">tms.expense.analysis</field>
+		  <field name="type">search</field>
+		  <field name="priority" eval="5"/>
+		  <field name="arch" type="xml">
+    		<search string="Search Travel Expense Analysis">
+                <field name="state"  />
+                <field name="name" />
+                <field name="date"/>
+                <field name="employee_id"/>
+                <field name="unit_char"/>
+                <field name="product_id"/>
+
+                <filter string="This month" icon="terp-check" domain="[('date','&gt;=', time.strftime('%%Y-%%m-01'))]" name="this_month" />
+                <filter string="Confirmed" icon="terp-check" domain="[('state','=', 'confirmed')] " name="confirmed" />
+                <filter string="Driver Helper" icon="terp-check" domain="[('driver_helper','=', True)] " name="driver_helper" />
+			  <group expand="1" string="Group By...">
+			    <filter string="Name"        icon="terp-partner"                 domain="[]" context="{'group_by':'name'}" name="groupby_name"/>
+			    <filter string="Unit"        icon="terp-stage"                   domain="[]" context="{'group_by':'unit_char'}"/>
+			    <filter string="Driver"      icon="terp-personal"                domain="[]" context="{'group_by':'employee_id'}" name="groupby_driver"/>
+			    <filter string="Product"     icon="terp-accessories-archiver"    domain="[]" context="{'group_by':'product_id'}" name="groupby_product"/>
+                <filter string="State"       icon="terp-accessories-archiver"    domain="[]" context="{'group_by':'state'}" name="groupby_state"/>
+                <filter string="Operation"       icon="terp-accessories-archiver"    domain="[]" context="{'group_by':'operation_id'}" name="groupby_operation"/>
+                <filter string="Office"       icon="terp-accessories-archiver"    domain="[]" context="{'group_by':'office_id'}" name="groupby_shop"/>
+                <filter string="Route"       icon="STOCK_OK" domain="[]" context="{'group_by':'route_id'}"/>
+                <filter string="Day"         icon="terp-go-today"    domain="[]" context="{'group_by':'day'}"     help="Ordered Day of the Waybill" name="groupby_day"/>
+                <filter string="Month"       icon="terp-go-month"    domain="[]" context="{'group_by':'month'}"   help="Ordered Month of the Waybill" name="groupby_month"/>
+                <filter string="Year"        icon="terp-go-year"     domain="[]" context="{'group_by':'year'}"    help="Ordered Year of the Waybill" name="groupby_year"/>
+                <filter string="Driver Helper"  icon="terp-personal" domain="[]" context="{'group_by':'driver_helper'}" name="groupby_driver_helper"/>
+			  </group>
+            </search>
+		  </field>
+	    </record>
+
+        <record id="view_tms_expense_analysis_graph" model="ir.ui.view">
+            <field name="name">tms.expense.analysis.graph</field>
+            <field name="model">tms.expense.analysis</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <graph string="Travel Expenses" type="bar">
+                    <field name="unit_char"/>
+                    <field name="subtotal" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+
+        <record id="action_tms_expense_analysis" model="ir.actions.act_window">
+          <field name="name">Travel Expense Analysis</field>
+          <field name="res_model">tms.expense.analysis</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,graph</field>
+          <field name="context">{"search_default_this_month":True,"search_default_groupby_driver":True,"search_default_groupby_product":True}</field>
+          <field name="view_id" ref="view_tms_expense_analysis_tree"></field>
+          
+        </record>
+        
+        <!-- Menu for tms.expense.analysis -->
+        <menuitem name="Travel Expense Analysis" 
+                  parent="tms.menu_tms_reporting"
+                  id="menu_tms_expense_analysis"
+                  action="action_tms_expense_analysis"
+			      sequence="50"/>
+        
+        
+
+    </data>
+</openerp>

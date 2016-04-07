@@ -1,0 +1,166 @@
+<openerp>
+<data>
+
+<!-- Add field to account.journal object
+'tms_advance_journal'
+-->
+
+        <record id="view_account_journal_form_inherit_tms" model="ir.ui.view">
+            <field name="name">account.journal.form</field>
+            <field name="model">account.journal</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <field name="entry_posted" position="after">
+                    <field name="tms_waybill_journal"  attrs="{'invisible':[('type','!=','general')]  }"/>
+                    <field name="tms_advance_journal"  attrs="{'invisible':[('type','!=','general')]  }"/>
+                    <field name="tms_fuelvoucher_journal"  attrs="{'invisible':[('type','!=','general')]  }"/>
+                    <field name="tms_expense_journal"  attrs="{'invisible':[('type','!=','general')]  }"/>
+                    <field name="tms_supplier_journal"  attrs="{'invisible':[('type','!=','purchase')]  }"/>
+                    <field name="tms_expense_suppliers_journal"  attrs="{'invisible':[('type','!=','purchase')]  }"/>
+                    
+                </field>
+            </field>
+        </record>
+
+
+    <record id="view_account_account_form_inherit_tms" model="ir.ui.view">
+            <field name="name">account.account.form</field>
+            <field name="model">account.account</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <field name="active" position="after">
+                    <field name="tms_vehicle_mandatory"  attrs="{'invisible':[('type','!=','other')]  }"/>
+                    <field name="tms_employee_mandatory"  attrs="{'invisible':[('type','not in',('payable', 'other'))]}"/>
+                    <field name="tms_office_mandatory"  attrs="{'invisible':[('type','not in',('other'))]}"/>
+                </field>
+            </field>
+        </record>
+    
+        <record id="view_invoice_supplier_form_inherit_tms" model="ir.ui.view">
+            <field name="name">account.invoice.form.tms.supplier</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+	           <notebook position="inside">
+                  <page string="Fuel Vouchers" attrs="{'invisible':[('fuelvoucher_ids','=',False)]  }">
+                    <group colspan="4" col="4">
+                        <separator string="Fuel Vouchers" colspan="4" />
+                        <field name="fuelvoucher_ids" nolabel="1" colspan="4" />
+                    </group>
+                   </page>
+	           </notebook>
+            </field>
+        </record>
+
+    
+        <record id="view_invoice_form_inherit_tms" model="ir.ui.view">
+            <field name="name">account.invoice.form.tms</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+	           <notebook position="inside">
+		          <page string="TMS" attrs="{'invisible':[('waybill_ids','=',False)]  }">
+                    <group colspan="4" col="4">
+                        <field name="tms_type"  />
+                        <field name="unit_id" />
+                        <field name="product" />
+                        <field name="waybill_rate" />
+                        <field name="departure_id" />
+                        <field name="arrival_id" />
+                        <field name="invoice_positive_taxes_sum"/>
+                        <field name="invoice_negative_taxes_sum"/>
+                        <newline />
+                        <field name="departure_address_id" context="{'search_default_customer':1, 'show_address': 1}"  options="{&quot;always_reload&quot;: True}"/>
+                        <field name="arrival_address_id"  context="{'search_default_customer':1, 'show_address': 1}"  options="{&quot;always_reload&quot;: True}"/>
+                    </group>
+                    <group colspan="4" col="4">
+                        <separator colspan="4" string="Waybills" />
+                        <field name="waybill_ids" nolabel="1"  colspan="4"/>
+                        
+                        <separator colspan="4" string="Grouped Products from Waybills" />
+                        <field name="waybill_shipped_ids" nolabel="1"  colspan="4">
+                            <tree>
+                                <field name="product_id" />
+                                <field name="quantity" />
+                                <field name="product_uom" />
+                            </tree>
+                        </field>
+                    </group>
+		          </page>
+	           </notebook>
+            </field>
+        </record>
+
+    
+    
+        <record id="view_move_form_tms" model="ir.ui.view">
+            <field name="name">account.move.form.tms</field>
+            <field name="model">account.move</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='reconcile_partial_id']" position="after">
+                    <field name="office_id" />
+                    <field name="vehicle_id" />
+                    <field name="employee_id" />
+                </xpath>
+            </field>
+        </record>
+
+    
+    
+        <record id="view_move_line_form_inherit_tms" model="ir.ui.view">
+            <field name="name">account.move.line.form.tms</field>
+            <field name="model">account.move.line</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_move_line_form"/>
+            <field name="arch" type="xml">
+                <field name="quantity" position="after">
+                    <field name="office_id" />
+                    <field name="vehicle_id" />
+                    <field name="employee_id" />
+                </field>
+            </field>
+        </record>
+    
+    
+        <record id="view_move_line_tree_inherit_tms" model="ir.ui.view">
+            <field name="name">account.move.line.tree.tms</field>
+            <field name="model">account.move.line</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_move_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="before">
+                    <field name="office_id" />
+                    <field name="vehicle_id" />
+                    <field name="employee_id" />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_account_move_line_filter_inherit_tms" model="ir.ui.view">
+            <field name="name">account.move.line.filter.tms</field>
+            <field name="model">account.move.line</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                <field name="period_id" position="after">
+                    <field name="office_id" />
+                    <field name="vehicle_id" />
+                    <field name="employee_id" />
+                </field>
+                <filter string="Period" position="after">
+                    <filter string="Vehicle" icon="terp-partner" domain="[]" context="{'group_by':'vehicle_id'}"/>
+                    <filter string="Employee" icon="terp-partner" domain="[]" context="{'group_by':'employee_id'}"/>
+                    <filter string="Sale Shop" icon="terp-partner" domain="[]" context="{'group_by':'office_id'}"/>
+                </filter>
+            </field>
+        </record>
+    
+    
+</data>
+</openerp>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+############################################################################################################################
+                            ### TREE ###
+    <record model="ir.ui.view" id="tms_maintenance_kiosk_time_tree">
+            <field name="name">tms.time.tree</field>
+            <field name="model">tms.time</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Activity Time Detail">
+                    <field name="event" />
+                    <field name="date_event" />
+		</tree>
+	    </field>
+    </record>
+############################################################################################################################
+    </data>
+</openerp>

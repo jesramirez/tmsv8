@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+
+
+	<!-- Vehicle update distance parameter -->
+	<record model="ir.config_parameter" id="tms_property_update_vehicle_distance">               
+      <field name="key">tms_property_update_vehicle_distance</field> 
+      <field name="value">2
+  1- Update distance from Travels
+  2- Update distance from Travel Expense Record
+  3- Update Manually
+  4- Update from Tyre Revisions
+      </field>              
+    </record>
+
+	<!-- Mexico's Special Parameter for Convenio IMSS-CANACAR
+         Minimum Salary DF (Salario Minimo a usar para el calculo del IMSS)
+    -->
+	<record model="ir.config_parameter" id="tms_property_hr_salario_minimo_df">               
+      <field name="key">tms_property_hr_salario_minimo_df</field> 
+      <field name="value">61.38</field>              
+    </record>
+
+	<!-- Mexico's Special Parameter for Convenio IMSS-CANACAR
+         Minimum Salary (Salario Minimo a usar para el calculo del IMSS)
+    -->
+	<record model="ir.config_parameter" id="tms_property_hr_salario_minimo_zona">               
+      <field name="key">tms_property_hr_salario_minimo_zona</field> 
+      <field name="value">61.38</field>
+    </record>
+
+	<!-- Mexico's Special Parameter for Convenio IMSS-CANACAR
+         (Factor IMSS)
+    -->
+	<record model="ir.config_parameter" id="tms_property_hr_factor_cuota_imss">               
+      <field name="key">tms_property_hr_factor_imss</field> 
+      <field name="value">6.13</field>              
+    </record>
+
+	<!-- Mexico's Special Parameter for Convenio IMSS-CANACAR
+         (Factor Cuota Obrera)
+    -->
+	<record model="ir.config_parameter" id="tms_property_hr_factor_cuota_obrera">               
+      <field name="key">tms_property_hr_factor_cuota_obrera</field> 
+      <field name="value">0.02851</field>              
+    </record>
+
+	<!-- Mexico's Special Parameter for Convenio IMSS-CANACAR
+         (Factor Excedente)
+    -->
+	<record model="ir.config_parameter" id="tms_property_hr_factor_excedente">               
+      <field name="key">tms_property_hr_factor_excedente</field> 
+      <field name="value">0.0</field>              
+    </record>
+
+	<!-- Parameter Flag for Automatic Fuel Discount when Fuel Efficiency Performance is below expected.
+    -->
+	<record model="ir.config_parameter" id="tms_property_discount_for_low_fuel_efficiency_performance">               
+      <field name="key">tms_property_discount_for_low_fuel_efficiency_performance</field> 
+      <field name="value">1</field>              
+    </record>
+
+	<!-- Parameter for Fuel Cost for Automatic Fuel Discount when Fuel Efficiency Performance is below expected.
+    -->
+	<record model="ir.config_parameter" id="tms_property_fuel_cost_for_discount">               
+      <field name="key">tms_property_fuel_cost_for_discount</field> 
+      <field name="value">14.00</field>              
+    </record>
+        
+
+</data>
+</openerp>

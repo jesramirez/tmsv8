@@ -1,0 +1,22 @@
+<openerp>
+<data>
+
+
+<!-- Inheritance for ir.sequence to assign a Sequence for each Shop -->
+    <record model="ir.ui.view" id="tms_view_inherit_form_0">
+        <field name="name">tms.unit.category.inherit</field>
+        <field name="model">tms.unit.category</field>
+        <field name="type">form</field>
+        <field name="priority">50</field>
+        <field name="inherit_id" ref="tms.view_tms_unit_category_form"/>
+        <field name="arch" type="xml">
+            <!--<xpath expr="//group[@name='tms']" position="inside" > -->
+		<field name="active" position="after">
+                    <field name="axis_number"/>
+		</field>
+            <!-- </xpath> -->
+        </field>
+    </record>
+
+</data>
+</openerp>

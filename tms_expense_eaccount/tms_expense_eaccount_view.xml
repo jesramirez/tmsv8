@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <record id="view_tms_expense_line_form_eaccount" model="ir.ui.view">
+            <field name="name">tms.expense.line.form.eaccount</field>
+            <field name="model">tms.expense.line</field>
+            <field name="inherit_id" ref="tms.view_tms_expense_line_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="invoice_date" position="after">
+                    <field name="invoice_xml_file"  attrs="{'invisible':[('is_invoice','=',False)]}" colspan="4"/>
+                    <field name="invoice_pdf_file"  attrs="{'invisible':[('is_invoice','=',False)]}" colspan="4"/>
+                </field>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

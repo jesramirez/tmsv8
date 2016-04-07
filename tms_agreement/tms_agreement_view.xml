@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<!-- ACCION PARA GENERAR LOS VIAJES DESDE EL ACUERDO -->
+<!-- ############################################################################################################ -->
+
+    <act_window name="Asistente para la Generacion de Documentos desde Acuerdos"           
+        res_model="tms.agreement.travel"
+        src_model="tms.agreement"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"    
+        id="action_view_create_travel"/>
+
+    <record id="create_travel_form" model="ir.ui.view">
+    <field name="name">Create Travel</field>
+    <field name="model">tms.agreement.travel</field>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+    <form string="Create Travel" version="7.0">
+
+        <sheet>
+        <separator colspan="4" string="Generar Documentacion a partir del Acuerdo ?" />
+        <group col="4">
+            <field name="shop_id"/>
+            <field name="sequence_waybill_id" context="{'default_tms_waybill_sequence': 1,'default_shop_id': shop_id}" domain="[('shop_id','=',shop_id)]" />
+            <field name="date_start" />
+        </group>
+        <h2>
+        <separator colspan="4" string="Definicion del Viaje para la Carta Porte" /> <newline/>
+        <center>
+        </center>
+        </h2>
+
+        <group colspan="4" col="4">
+            <!-- <field name="asign_travel" /> -->
+            <field name="dispatch_travel" string="Dispatch Travel"/><newline/>
+            <field name="kit_id" on_change="onchange_kit_id(kit_id)" />
+            <newline />
+            <field name="unit_id" required="1"/>
+            <field name="trailer1_id"   domain="[('id','!=',trailer2_id), ('fleet_type','=','trailer')]" context="{'default_fleet_type': 'trailer'}" attrs="{'required':['|', ('dolly_id','!=',False),('trailer2_id','!=',False)]}"/>
+            <field name="dolly_id"  domain="[('fleet_type','=','dolly')]" context="{'default_fleet_type': 'dolly'}" attrs="{'required':[('trailer2_id','!=',False)]}"/>
+            <field name="trailer2_id"   domain="[('id','!=',trailer1_id), ('fleet_type','=','trailer')]" context="{'default_fleet_type': 'trailer'}" attrs="{'required':[('dolly_id','!=',False)]}"/>
+            <field name="employee_id" context="{'default_tms_category': 'driver'}" required="1"/>
+            <field name="employee2_id"  context="{'default_tms_category': 'driver'}"/>
+
+           <!--  <notebook colspan="4">
+                <page string="Travels" attrs="{'invisible':[('asign_travel','!=',True)]}" colspan="4">
+                    <field name="travel_ids">
+                        <tree string="Travels" editable="bottom">
+                            <field name="travel_id" domain="[('state','=','draft')]"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook> -->
+
+        </group>                    
+        <group col="2" colspan="4">
+            <button special="cancel" string="_Cancelar" type="object" icon="gtk-cancel"/>
+            <button name="button_generate_waybill" string="Generar Documentos" colspan="1" type="object" icon="gtk-ok" />
+        </group>
+        </sheet>
+    </form>
+    </field>
+    </record>
+
+
+        <menuitem id="main_tms_agreement" name="Agreement TMS"/>
+
+        <record model="ir.ui.view" id="tms_agreement_kanban">
+            <field name="name">tms.agreement.kanban</field>
+            <field name="model">tms.agreement</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name" />
+                    <field name="image" />
+                    <field name="partner_id" />
+
+                    <field name="partner_order_id"  />
+                    <field name="partner_invoice_id" />
+                    <field name="departure_address_id" />
+                    <field name="arrival_address_id" />
+
+                    <field name="date" />
+                    <field name="description" />
+                    <field name="shop_id" />
+                    <field name="unit_ids" />
+                    <!-- <field name="amount_total" /> -->
+
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_vignette oe_semantic_html_override">
+                                <a type="open" href="#" class="oe_kanban_action oe_kanban_action_a">
+                                    <img t-att-src="kanban_image('tms.agreement', 'image_small', record.id.value)" class="oe_kanban_image"/>
+                                </a>
+                                <div class="oe_kanban_details">
+                                    <h4 class="oe_partner_heading">
+                                        <a type="open">
+                                            <field name="partner_id" />
+                                        </a><br/>
+                                        <a type="open">
+                                            <field name="name"/>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                    <li t-if="record.arrival_address_id.raw_value">D. Llegada: <field name="arrival_address_id"/></li>
+                                    <li t-if="record.partner_invoice_id.raw_value">Facturacion: <field name="partner_invoice_id"/></li>
+                                    <li t-if="record.description.raw_value and record.description.raw_value" >Descripcion: <field name="description"/></li>
+                                    <li t-if="record.shop_id.raw_value">Shop: <field name="shop_id"/></li>
+                                    <li t-if="record.route_id.raw_value">Route: <field name="route_id"/></li>
+                                    <!-- <li t-if="record.state.raw_value">Gain or Loss: $ <field name="amount_total"/></li> -->
+                                    <li t-if="record.date.raw_value and record.date.raw_value">Fecha: <field name="date"/></li>
+                                    <li t-if="record.state.raw_value">State: <field name="state"/></li>
+                                    <button string="Confirmed" name="action_confirmed" states="draft" icon="gtk-go-forward" type="object" class="oe_highlight"/>
+                                    <button string="Cancelled" name="action_cancel" states="confirmed" icon="gtk-cancel" type="object" class="oe_highlight"/> 
+                                    <button string="Done" name="action_done" states="confirmed" icon="gtk-apply" type="object" class="oe_highlight"/> 
+                                    <button string="Reset to Draft" name="action_draft" states="cancel" icon="gtk-convert" type="object" class="oe_highlight"/>
+                                    <!-- <button string="Create Travel" name="unlink_lines_fleet_driver_supplier" states="confirmed" icon="gtk-execute" type="object" /> -->
+                                    <button name="%(action_view_create_travel)d" states="confirmed, done" string="Documentacion" icon="gtk-execute"  type="action" class="oe_highlight"/> 
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <script>
+                            $('.oe_picture').load(function() { if($(this).width() > $(this).height()) { $(this).addClass('oe_employee_picture_wide') } });
+                        </script>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+
+<!--         <record id="view_tms_agreement_calendar" model="ir.ui.view">
+            <field name="name">tms.agreement.calendar</field>
+            <field name="model">tms.agreement</field>
+            <field name="arch" type="xml">
+                <calendar string="Customers" color="partner_id" date_start="date_start">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="shop_id"/>
+                    <field name="route_id"/>
+                    <field name="departure_id"/>
+                    <field name="arrival_id"/>
+                    <field name="unit_ids"/>
+                    <field name="state"/> 
+                    <field name="amount_total" sum="Gain Total"/>
+                </calendar>
+            </field>
+        </record> -->
+
+       <record id="view_tms_agreement_gantt" model="ir.ui.view">
+            <field name="name">tms.agreement.gantt</field>
+            <field name="model">tms.agreement</field>
+            <field name="arch" type="xml">
+                <gantt date_start="date_start" date_stop="date_end" string="Agreement" default_group_by="partner_id" color="partner_id">
+                </gantt>
+            </field>
+        </record>
+
+<!--         <record model="ir.ui.view" id="view_tms_agreement_graph">
+            <field name="name">tms.agreement.graph</field>
+            <field name="model">tms.agreement</field>
+            <field name="arch" type="xml">
+                <graph string="Agreements" type="bar">
+                    <field name="partner_id"/>
+                    <field name="amount_total"/>
+                </graph>
+            </field> 
+        </record>-->
+
+    <record model="ir.ui.view" id="tms_agreement_tree">
+            <field name="name">tms.agreement.tree</field>
+            <field name="model">tms.agreement</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="agreement" colors="gray:state=='draft';green:state=='confirmed';blue:state=='done';red:state=='cancel';">
+                    <field name="name"/>
+                    <field name="version"/>
+                    <field name="partner_id"/>
+
+                    <field name="partner_order_id"  />
+                    <field name="partner_invoice_id" />
+                    <field name="departure_address_id" />
+                    <field name="arrival_address_id" />
+
+                    <field name="shop_id"/>
+
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+
+                    <field name="route_id"/>
+                    <field name="departure_id"/>
+                    <field name="arrival_id"/>
+                    <field name="active"/>
+
+                    <field name="upload_point"/>
+                    <field name="download_point"/>
+                    <field name="unit_ids"/>
+                    <field name="state"/> 
+                    <field name="notes"/>
+
+                    <field name="company_id" invisible="1"/>
+                    <field name="date"  invisible="1"/>
+                    <field name="currency_id"  invisible="1"/>
+
+                    <field name="units_a" invisible="1"/>
+                    <field name="quotation_id" invisible="1"/>
+                    <field name="waybill_ref_id" invisible="1"/>
+
+                    <button string="Confirmed" type="object" name="action_confirmed" states="draft" icon="gtk-go-forward" class="oe_highlight" />
+                    <button string="Cancelled" type="object" name="action_cancel" states="confirmed" icon="gtk-cancel" class="oe_highlight" /> 
+                    <button string="Done" type="object"  name="action_done" states="confirmed" icon="gtk-apply" class="oe_highlight" /> 
+                    <button string="Reset to Draft" type="object"  name="action_draft" states="cancel,done" icon="gtk-convert" class="oe_highlight" />
+                    <button name="%(action_view_create_travel)d" states="confirmed, done" string="Documentacion" icon="gtk-execute"  type="action" class="oe_highlight"/> 
+
+<!--                     <field name="expenses_amount" sum="Amount Expenses"/>
+                    <field name="amount_untaxed" sum="Cost Total"/>
+                    <field name="amount_tax" sum="Price Total"/>
+                    <field name="amount_total" sum="Gain Total"/> -->
+ 
+                </tree>
+            </field>
+    </record>
+
+    
+
+       <record model="ir.ui.view" id="tms_agreement_form">
+            <field name="name">tms.agreement.form</field>
+            <field name="model">tms.agreement</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Agreement" version="7.0">
+
+                    <header>
+                        <button string="Confirmed" name="action_confirmed" states="draft" icon="gtk-go-forward" type="object" class="oe_highlight"/> 
+                        <button string="Cancelled" name="action_cancel" states="confirmed" icon="gtk-cancel" type="object" class="oe_highlight" /> 
+                        <button string="Done" name="action_done" states="confirmed" icon="gtk-apply" type="object" class="oe_highlight" /> 
+                        <button string="Reset to Draft" name="action_draft" states="cancel" icon="gtk-convert" type="object" class="oe_highlight"/>
+                        <button icon='terp-stock_format-default' type="object" states="draft" string="Re-Calcular" name="action_mount_write"/> 
+                        <button name="%(action_view_create_travel)d" states="confirmed, done" string="Documentacion" icon="gtk-execute"  type="action" class="oe_highlight"/>
+
+                        <!-- <button string="Crear lineas en base a factores" name="action_test_print" icon="gtk-go-forward" type="object" /> -->
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done,cancel"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <label string="Agreement"/>
+                            <field name="name" class="oe_inline" readonly="1"/> <newline/>
+                        </h1>
+                        <field name="company_id" readonly="1" invisible="1"/>
+                    <group col="6">
+                        <!--<field name="version" />-->
+                       
+                    </group>
+                    <group col="4">
+                        <field name="date" />
+                        <field name="currency_id" colspan="2"/>
+
+                        <field name="shop_id" />
+                        <field name="unit_ids" colspan="2"/>
+                        <field name="units_a" invisible="1"/>
+                        <newline/>
+                    </group>
+                    <group colspan="4">
+                        <field name="partner_id" on_change="onchange_partner_id(partner_id)" domain="[('customer','=',True)]" context="{'search_default_customer':1}" required="1" colspan="2"/>
+                    </group>
+                    <group col="4">
+                        <!-- <field name="partner_order_id" domain="[('partner_id','=',partner_id)]" context="{'default_type':'delivery'}" colspan="2"/>
+                        <field name="partner_invoice_id" domain="[('partner_id','=',partner_id)]" context="{'default_type':'invoice'}" colspan="2"/> -->
+                        <field name="partner_order_id" context="{'default_type':'delivery'}" colspan="2"/>
+                        <field name="partner_invoice_id" context="{'default_type':'invoice'}" colspan="2"/>
+
+                        <field name="departure_address_id" colspan="2" context="{'search_default_customer':1, 'show_address': 1}" options="{&quot;always_reload&quot;: True}"/>
+                        <field name="arrival_address_id" colspan="2" context="{'search_default_customer':1, 'show_address': 1}" options="{&quot;always_reload&quot;: True}"/>
+                        <field name="upload_point" colspan="2"/> 
+                        <field name="download_point" colspan="2"/>
+                        <newline/>
+                    </group>
+                    <group col="6">
+                        <field name="route_id"  on_change="on_factors_route(route_id)"/>
+                        <field name="departure" attrs="{'invisible':['|',('arrival','=',True),('departure_2','=',True)]}" />
+                        <field name="arrival"  attrs="{'invisible':['|',('departure','=',True),('arrival_2','=',True)]}" />
+                    </group>
+                    <group col="6">
+                        <field name="route_return_id"  on_change="on_factors_route(route_id)"/>
+                        <field name="departure_2" attrs="{'invisible':['|',('arrival_2','=',True),('departure','=',True)]}" />
+                        <field name="arrival_2" attrs="{'invisible':['|',('departure_2','=',True),('arrival','=',True)]}"/>
+                    </group>
+                    <group col="4">
+                        <field name="payment_term" colspan="2"/>
+                        <field name="active"/>
+                        <newline/>  
+                    </group>
+                        <separator string="Expiration" colspan="4"/>
+                    <group col="4">
+                        <field name="date_start" colspan="2"/> 
+                        <field name="date_end" colspan="2"/>
+                        <newline/>
+                    </group>
+                    <notebook colspan="4">
+
+                    <page string="General Information">
+                        <separator string="Shipped Product" colspan="4"/>
+                           <field name="agreement_shipped_product" nolabel="1" colspan="8"> 
+                                <tree string="Shipped Product" editable="bottom">
+                                    <field name="name" invisible="1" />
+                                    <field name="product_id" 
+                                                    on_change="on_change_product_id(product_id)"
+                                                    domain="[('tms_category','=','transportable')]"
+                                             context="{'default_purchase_ok':0, 'default_sale_ok':0,'default_tms_category': 'transportable','default_type': 'service', 'default_procure_method':'make_to_stock', 'default_supply_method': 'buy'}"/>
+                                    <field name="product_uom" />
+                                    <field name="product_uom_qty" sum="Quantity"/>
+                                    <field name="notes" />
+                                    <field name="sequence" />
+                                </tree>
+                            </field>
+                            <newline/>
+                            <newline/>
+                            <separator string="Customer Factors" colspan="4"/>
+                            <field name="agreement_customer_factor" 
+                                    context="{'default_agreement_id': active_id,'default_category':'customer'}" 
+                                    domain="[('category','=','customer')]"
+                                    colspan="4" nolabel="1" />
+                            <!-- <group col="6">
+                                <field name="amount_customer"/>
+                            </group> -->
+			                <newline/>
+			                <newline/>
+                            <separator string="Billing Concepts" colspan="4"/>
+                            <field name="agreement_line" context="{'default_agreement_id': active_id}" colspan="4" nolabel="1">
+                                <tree string="Agreement Lines">
+                                        <field name="product_id" />
+                                        <field name="product_uom" />
+                                        <field name="product_uom_qty" />
+                                        <field name="price_unit" />
+                                        <field name="price_amount" sum="Price Amount"/>
+                                        <field name="discount" />
+                                        <field name="price_discount" sum="Price Discount"/>
+                                        <field name="price_subtotal" sum="Price Subtotal"/>
+                                        <field name="tax_amount" sum="Tax Amount"/>
+                                        <field name="price_total" sum="Price Total"/>
+                                        <field name="sequence" string="Seq"/>                                       
+                                </tree>
+                                <form string="Agreement Lines">
+                                        <field name="line_type" />
+                                        <newline />
+                                        <field name="product_id" attrs="{'invisible':[('line_type','!=','product')],'required':[('line_type','=','product')]}" 
+                                                            on_change="on_change_product_id(product_id)"
+                                                            domain="[('tms_category','in',('freight', 'move','insurance','highway_tolls', 'other'))]"
+                                                            context="{'default_tms_category': 'freight','default_type': 'service', 'default_procure_method':'make_to_stock', 'default_supply_method': 'buy'}"/>
+                                        <field name="product_uom" attrs="{'invisible':[('line_type','!=','product')],'required':[('line_type','=','product')]}" />
+                                        <field name="product_uom_qty" on_change="on_change_amount(product_uom_qty, price_unit, discount, product_id)" 
+                                                                        attrs="{'invisible':[('line_type','!=','product')],'required':[('line_type','=','product')]}" />
+                                        <field name="price_unit" on_change="on_change_amount(product_uom_qty, price_unit, discount, product_id)" 
+                                                                        attrs="{'invisible':[('line_type','!=','product')],'required':[('line_type','=','product')]}" />
+
+                                        <field name="price_amount" readonly="1" sum="Price Amount" 
+                                                                        attrs="{'invisible':[('line_type','!=','product')]}" />
+
+                                        <field name="discount" on_change="on_change_amount(product_uom_qty, price_unit, discount, product_id)" 
+                                                                        attrs="{'invisible':[('line_type','!=','product')],'required':[('line_type','=','product')]}" />
+                                        <field name="price_discount" readonly="1" attrs="{'invisible':[('line_type','!=','product')]}" />
+                                        <field name="price_subtotal" readonly="1" attrs="{'invisible':[('line_type','!=','product')]}" />
+                                        <field name="tax_amount" readonly="1" attrs="{'invisible':[('line_type','!=','product')]}" />
+                                        <field name="price_total" readonly="1" attrs="{'invisible':[('line_type','!=','product')]}" />
+
+                                        <field name="name" colspan="4"/>
+
+                                        <field name="sequence" />
+                                        </form>
+                            </field> 
+
+                        </page>
+
+                        <page string="Factors Driver and Supplier">
+                            
+                            <separator string="Driver Factors" colspan="4"/>
+                            <field name="agreement_driver_factor" 
+                                            context="{'default_agreement_id': active_id,'default_category':'driver'}" 
+                                            domain="[('category','=','driver')]"
+                                            colspan="4" nolabel="1"/>
+                            <!--<group col="6">
+                                <field name="amount_driver_factor"/>
+                            </group> -->
+                                    <newline/>
+                                    <newline/>
+                            <separator string="Supplier Factors" colspan="4"/>
+                            <field name="agreement_supplier_factor" 
+                                    context="{'default_agreement_id': active_id,'default_category':'supplier'}" 
+                                    domain="[('category','=','supplier')]"
+                                    colspan="4" nolabel="1" />
+                            <!-- <group col="6">
+                                <field name="amount_supplier_factor"/>
+                            </group> -->
+                        </page>
+
+                        <page string="Expenses">
+                            <separator string="Direct Expense" colspan="4"/>
+                        <field name="agreement_direct_expense_line" colspan="4" nolabel="1">
+                            <tree string="Direct Expenses">
+                                <field name="line_type" />
+                               <!-- <field name="name" /> -->
+                                <field name="product_id" />
+                                <field name="product_uom" />
+                                <field name="product_uom_qty" />
+                                <field name="price_unit" />
+                                <field name="price_subtotal" sum="Price Subtotal" />
+                                <field name="tax_amount" sum="Tax Amount"/>
+                                <field name="price_total" sum="Price Total"/>
+                                <field name="automatic" />
+                                <field name="credit" />
+                                <field name="sequence" />
+                            </tree> 
+                            <form string="Direct Expenses" >
+                                <field name="control" invisible="1" />
+                                <field name="line_type" required="1" attrs="{'readonly':[('control','!=',False)]}"/>
+                                <newline />
+                                <field name="product_id" on_change="on_change_product_id(product_id)" required="1" context="{'default_tms_category': 'real_expense','default_type': 'service', 'default_procure_method':'make_to_stock', 'default_supply_method': 'buy'}" attrs="{'readonly':[('control','!=',False)]}" />
+                                <field name="product_uom" required="1" attrs="{'readonly':[('control','!=',False)]}" />
+                                <field name="product_uom_qty" on_change="on_change_amount(product_uom_qty, price_unit, product_id)" required="1" attrs="{'readonly':[('control','!=',False)]}"/>
+                                <newline />
+                                <field name="price_unit" on_change="on_change_amount(product_uom_qty, price_unit, product_id)" required="1" attrs="{'readonly':[('control','!=',False)]}"/>
+                                <newline />
+                                <field name="price_subtotal" readonly="1"  />
+                                <newline />
+                                <field name="tax_amount" readonly="1" />
+                                <newline />
+                                <field name="price_total" readonly="1" />
+                                <newline /> 
+                                <field name="name" colspan="4" attrs="{'readonly':[('control','!=',False)]}"/>
+                                <field name="sequence" attrs="{'readonly':[('control','!=',False)]}" />
+                                <newline />
+                                <field name="credit" attrs="{'invisible':['|',('line_type','!=','fuel'),('automatic','=',True)]}"/>
+                                <field name="automatic" attrs="{'invisible':['|',('line_type','in',('salary','salary_retention','salary_discount')),('credit','=',True)]}"/>
+                                <field name="fuel_supplier_id"  attrs="{'invisible':['|',('line_type','!=','fuel'),('automatic','=',True)],'required':[('credit','!=',False)]}" />
+
+                            </form>
+
+                        </field>
+                            <!--  <newline/> -->
+                            <!-- <group colspan="4">
+                            <separator string="Indirect Expense" colspan="4"/>
+                            <field name="account_periods_ids" widget="many2many_tags" placeholder="Periods..." colspan="4"/><br/><br/>
+                            </group>
+                            <group colspan="4">
+
+                            </group>
+                            <group col="2">
+                            </group>
+                            <field name="agreement_indirect_expense_line" colspan="4" nolabel="1" >
+                                <tree string="Indirect Expense">
+                                    <field name="product_id" context="{'default_tms_category': 'real_expense','default_type': 'service', 'default_procure_method':'make_to_stock', 'default_supply_method': 'buy'}"/>
+                                    <field name="description"/>
+                                    <field name="total_mount_indirect" />
+                                </tree>
+
+                                <form string="Indirect Expenses" version="7.0">
+                                    <sheet>
+                                    <group colspan="4">
+                                        <field name="product_id" domain="[('tms_category','=', 'indirect_expense')]"
+                                    context="{'default_tms_category': 'indirect_expense','default_type': 'service', 'default_procure_method':'make_to_stock', 'default_supply_method': 'buy'}"/>
+                                        <field name="automatic"/>
+                                        <newline/>
+                                    </group>
+                                    <notebook>
+                                    <page string="Description" colspan="4">
+                                        <field name="description"/>
+                                    </page>
+                                    <page string="Notes" colspan="4" >
+                                        <field name="notes" nolabel="1"/>
+                                    </page>
+                                    </notebook>
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="indirect_total">
+                                            <field name="total_mount_indirect" widget="monetary" attrs="{'readonly':[('automatic','=',True)],'required':[('automatic','=',False)]}"  />
+
+                                    </group>
+                                    </sheet>
+                                </form> -->
+                            <!-- </field> -->
+                        </page>
+
+                        <page string="Extra Fields">
+                            <separator string="Extra Fields" colspan="4"/>
+                            <group col="4">
+                            <field name="client_order_ref" />
+                            <!-- <field name="origin" /> -->
+                            <field name="amount_declared" />
+                            </group>
+                            <field name="agreement_extradata" context="{'default_agreement_id': active_id, 'default_mandatory': 1}" colspan="4" nolabel="1">
+                                <tree string="Extra Fields">
+                                    <field name="mandatory" />
+                                    <field name="type_extra"/>
+                                    <field name="name" />
+                                    <field name="value_extra"/>
+                                    <field name="sequence" />
+                                </tree>
+                                <form string="Extra Fields" >
+                                    <field name="name" colspan="4" required="1"/>
+                                    <field name="type_extra"/>
+                                    <newline />
+                                    <field name="mandatory" invisible="1"/>
+                                    <field name="value_extra" invisible="1"/>
+
+                                    <field name="value_char"    attrs="{'invisible':[('type_extra','!=','char')],'required':[('type_extra','=','char'),('mandatory','=',1)]}"
+                                                                on_change="on_change_value(type_extra, value_char)" colspan="4"/>
+                                    <field name="value_text"    attrs="{'invisible':[('type_extra','!=','text')],'required':[('type_extra','=','text'),('mandatory','=',1)]}"
+                                                                on_change="on_change_value(type_extra, value_text)" colspan="4"/>
+                                    <field name="value_integer" attrs="{'invisible':[('type_extra','!=','integer')],'required':[('type_extra','=','integer'),('mandatory','=',1)]}"
+                                                                on_change="on_change_value(type_extra, value_integer)" colspan="4"/>
+                                    <field name="value_float"   attrs="{'invisible':[('type_extra','!=','float')],'required':[('type_extra','=','float'),('mandatory','=',1)]}"
+                                                                on_change="on_change_value(type_extra, value_float)" colspan="4"/>
+                                    <field name="value_date"    attrs="{'invisible':[('type_extra','!=','date')],'required':[('type_extra','=','date'),('mandatory','=',1)]}"
+                                                                on_change="on_change_value(type_extra, value_date)" colspan="4"/>
+                                    <field name="value_datetime" attrs="{'invisible':[('type_extra','!=','datetime')],'required':[('type_extra','=','datetime'),('mandatory','=',1)]}"
+                                                                on_change="on_change_value(type_extra, value_datetime)" colspan="4"/>
+                                    <field name="sequence" />
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Times">
+                            <group col="4">
+                                <separator string="Route Data" /><newline/>
+                                <field name="distance_route"/>
+                                <field name="hours_route"/>
+                                <!-- <field name="date_start_calc"/>-->
+                                <!-- <field name="date_end_calc"/> --><br/>
+                            </group>
+                                <group colspan="4" col="4">
+                                    <group colspan="2">
+                                        <separator string="Time Estimated for Travel in Hours" />
+                                        <newline/>
+                                        <field name="hours_start_upload" />
+                                        <field name="hours_upload_end_upload" />
+                                        <field name="hours_end_upload_lib_docs" />
+                                        <field name="hours_lib_docs_prog_download" />
+                                        <field name="hours_prog_download_start_download" />
+                                        <field name="hours_start_download_end_download" />
+                                        <field name="hours_end_download_lib_docs_download" />
+                                        <field name="hours_lib_docs_download_end_travel" />
+                                        <field name="hours_total_travel" />
+                                    </group>
+                                </group>
+                            </page>
+
+                        <page string="Log">
+                        <separator string="Registries of historial" colspan="4"/>
+
+                            <group col="4">
+                            <field name="user_id" />
+                            <newline/>
+                            <newline/>
+                            <newline/>
+                            <field name="create_uid" readonly="1" />
+                            <field name="create_date" readonly="1" />
+                            <field name="confirmed_by" readonly="1" />
+                            <field name="date_confirmed" readonly="1" />
+                            <field name="done_by" readonly="1" />
+                            <field name="date_done" readonly="1" />
+                            <field name="cancelled_by" readonly="1" />
+                            <field name="date_cancelled" readonly="1" />
+                            <field name="drafted_by" readonly="1" />
+                            <field name="date_drafted" readonly="1" />
+
+                            </group>
+                            <newline/>
+                            <group col="4">
+                                <field name="quotation_id" readonly="1"/>
+                                <field name="waybill_ref_id" readonly="1" invisible="1"/>
+                            </group>
+                        </page>
+                    <page string="Notes">
+                    <separator string="Notes" colspan="4"/>
+                    <field name="notes" colspan="4" nolabel="1"/>
+                    </page>
+                </notebook>
+               <!--  <group class="oe_subtotal_footer oe_right" colspan="2" name="agreement_total">
+                    <field name="amount_untaxed"  widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1"/>
+                    <field name="amount_tax"  widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1"/>
+
+                    <div class="oe_subtotal_footer_separator oe_inline">
+                        <label for="amount_subtotal" />
+                    </div>
+                    <field name="amount_subtotal"  nolabel="1" class="oe_subtotal_footer_separator"  widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1"/>
+                    <field name="expenses_amount" widget='monetary'  options="{'currency_field': 'currency_id'}" readonly="1"/>
+                    <field name="amount_tax_expenses"  widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1"/>
+
+                    <div class="oe_subtotal_footer_separator oe_inline">
+                    <label for="amount_total" />
+                    <button name="action_mount_write"
+                        states="draft" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                    </div>
+                    <field name="amount_total"  nolabel="1" class="oe_subtotal_footer_separator"  widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1"/>
+
+                </group>
+                        <group colspan="4">
+                        <br/>
+                        </group> -->
+                </sheet> 
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/> 
+                </div>   
+                </form>
+            </field>
+        </record>    
+
+
+<!--Vistas Filter para Agreement-->
+        <record model="ir.ui.view" id="tms_agreement_filter">
+            <field name="name">tms.agreement.list.select</field>
+            <field name="model">tms.agreement</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Agreement Search">
+                        <group>
+                        <separator string="search inside the greement " colspan="3"/>
+                        <filter string="Inactive" name="Inactive" domain="[('active','=',False)]" icon="gtk-close"/>
+                        <filter string="Unname" name="Unname" domain="[('name','=',False)]" icon="terp-personal-"/>
+                        <filter string="Draft" name="Draft" domain="[('state','=','draft')]" icon="gtk-convert"/>
+                        <filter string="Confirmed" name="Confirmed" domain="[('state','=','confirmed')]" icon="gtk-go-forward"/>
+                        <filter string="Cancelled" name="Cancelled" domain="[('state','=','cancel')]" icon="gtk-cancel"/>
+                        <filter string="Done" name="Done" domain="[('state','=','done')]" icon="gtk-apply"/>
+                        <newline/>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="shop_id"/>
+                        <field name="route_id"/>
+                        <field name="departure_id"/>
+                        <field name="arrival_id"/>
+                        <field name="notes"/>
+                        <field name="user_id" select="1">
+                        <filter domain="[('user_id','=',uid)]" help="My Agreements" icon="terp-personal"/>
+                        </field>
+
+                        <field name="company_id" />
+                        <field name="date"  />
+                        <field name="currency_id"  />
+
+                        <field name="shop_id"  />
+                        <field name="unit_ids"  />
+                        <field name="units_a" />
+                        <field name="partner_order_id"  />
+                        <field name="partner_invoice_id" />
+                        <field name="departure_address_id" />
+                        <field name="arrival_address_id" />
+                        <field name="upload_point" /> 
+                        <field name="download_point"  />
+                        <field name="user_id"  />
+                        <field name="quotation_id" />
+                        <field name="waybill_ref_id" />
+                        </group>
+                            <newline/>
+                            <group expand="0" string="Group By..." groups="base.groupagreement">
+                            <filter string="Name" icon="terp-stock_zoom" domain="[]" context="{'group_by':'name'}"/>
+                            <filter string="Custommer" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                            <filter string="Route" icon="STOCK_UNINDENT" domain="[]" context="{'group_by':'route_id'}"/>
+                            <filter string="Upload Point" icon="STOCK_SORT_ASCENDING" domain="[]" context="{'group_by':'upload_point'}"/>
+                            <filter string="Download Point" icon="STOCK_SORT_DESCENDING" domain="[]" context="{'group_by':'download_point'}"/>
+
+                            <filter string="Shop" icon="terp-go-home" domain="[]" context="{'group_by':'shop_id'}"/>
+                            </group>
+                </search>
+            </field>
+        </record>
+
+
+    <record model="ir.actions.act_window" id="agreement_tms_action">
+        <field name="name">Agreement</field>
+        <field name="res_model">tms.agreement</field>
+        <field name="view_type">form</field>
+        <!-- <field name="view_mode">kanban,tree,form,calendar,graph,gantt</field> -->
+        <field name="view_mode">kanban,tree,form,gantt</field>
+    </record>    
+
+    <menuitem action="agreement_tms_action" id="menu_tms_agreement_01" name="Agreement's" parent="tms.menu_tms_travels" sequence="1" />
+
+    </data>
+</openerp>

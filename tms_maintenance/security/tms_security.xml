@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="0">
+
+<!--############################################  Menu Padre De la Seguridad  ####################################################-->
+        <record model="ir.module.category" id="tms_maintenance_order_category">
+            <field name="name">TMS Maintenance Security</field>
+            <field name="description">TMS Maintenance Security.</field>
+            <field name="sequence">2</field>
+        </record>
+
+
+<!--############################################ Seguridad Para Admin  ####################################################-->
+
+    <!--################## Grupos ############-->
+    <record id="tms_maintenance_admin" model="res.groups">
+        <field name="name">TMS Maintenance Manager</field>
+        <field name="category_id" ref="tms_maintenance_order_category"/>
+        <field name="comment">The user is TMS Maintenance Manager.</field>
+    </record>
+
+
+
+    <!--################## Menus ############-->
+    <record model="ir.ui.menu" id="menu_tms_order_manager">
+        <field eval="[(4, ref('tms_maintenance_admin'))]" name="groups_id"/>
+        <field name="name">TMS MRO Order</field>
+    </record>
+
+
+<!--############################################ Seguridad Para Mecanicos  ####################################################-->
+
+    <!--################## Grupos ############-->
+    <record id="tms_group_tms_activity_control_time" model="res.groups">
+        <field name="name">User Mechanics TMS Maintenance</field>
+        <field name="category_id" ref="tms_maintenance_order_category"/>
+    </record>
+
+    <record id="tms_rule_tms_activity_control_time" model="ir.rule">
+        <field name="name">Regla Mecanicos</field>
+        <field ref="model_tms_activity_control_time" name="model_id"/>
+        <field name="domain_force">[('hr_employee_user_id','=',user.id)]</field>
+        <field name="groups" eval="[(4, ref('tms_group_tms_activity_control_time'))]"/>
+    </record>
+
+    <!--################## Menus ############-->
+    <record model="ir.ui.menu" id="menu_tms_group_tms_activity_control_time">
+	   <field eval="[(4, ref('tms_group_tms_activity_control_time'))]" name="groups_id"/>
+       <field name="name">TMS MRO Activity Control Time</field>
+    </record>
+
+    
+    
+<!-- TMS.MAINTENANCE.DIVER_REPORT -->
+    <record id="tms_maintenance.group_report_confirm" model="res.groups">
+        <field name="name">Can Confirm Driver Report of Vehicle Failure</field>
+        <field name="category_id" ref="tms_maintenance_order_category"/>
+        <field name="comment">The user will be able to Confirm Driver Report of Vehicle Failure.</field>
+    </record>
+    <record id="tms_maintenance.group_report_cancel" model="res.groups">
+        <field name="name">Can Cancel Driver Report of Vehicle Failures</field>
+        <field name="category_id" ref="tms_maintenance_order_category"/>
+        <field name="comment">The user will be able to Cancel Driver Report of Vehicle Failure.</field>
+    </record>
+    <record id="tms_maintenance.group_report_setdraft" model="res.groups">
+        <field name="name">Can Set to Draft Driver Report of Vehicle Failure</field>
+        <field name="category_id" ref="tms_maintenance_order_category"/>
+        <field name="comment">The user will be able to Set to Draft Driver Report of Vehicle Failure.</field>
+    </record>
+    
+
+
+</data>
+</openerp>

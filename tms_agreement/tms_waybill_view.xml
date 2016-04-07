@@ -1,0 +1,31 @@
+<openerp>
+<data>
+<!-- Inheritance for ir.sequence to assign a Sequence for each Shop -->
+    <record model="ir.ui.view" id="tms_view_waybill_form">
+        <field name="name">TMS tms.waybill.form</field>
+        <field name="model">tms.waybill</field>
+        <field name="type">form</field>
+        <field name="priority">50</field>
+        <field name="inherit_id" ref="tms.view_tms_waybill_form" />
+        <field name="arch" type="xml">
+                 <field name="move_id" position="after">
+                    <newline />
+                    <field name="agreement"/>
+                    <field name="agreement_origin" attrs="{'invisible':[('agreement','=',False)]}" />
+                    <!-- attrs="{'invisible':[('agreement','=',False)]}" -->
+                </field>    
+<!--                 <field name="download_point" position="after">
+ -->                    
+                    <!-- attrs="{'invisible':[('agreement','=',False)]}" -->
+<!--                 </field> -->
+
+        <!-- <xpath expr="//group[@name='shop']" position="inside" >
+            <group cols="2">
+                    <field name="agreement_origin"/>
+            </group>
+            </xpath> -->
+        </field>
+    </record>
+
+</data>
+</openerp>

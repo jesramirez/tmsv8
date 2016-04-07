@@ -1,0 +1,111 @@
+<openerp>
+<data>
+
+<!--  Esta accion busca las facturas que coincidan con las fechas de pagos -->
+        <record id="act_res_partner_2_agreements" model="ir.actions.act_window">
+            <field name="name">Agreements for Customer</field>
+            <field name="res_model">tms.agreement</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="context">{'search_default_partner_id': active_id}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create Agreement for this Customer.
+              </p><p>
+                Hesatec is Partner to implementation for OpenERP.
+              </p><p>
+                The following list shows a list of invoices that match the pay periods defined for the customer
+              </p>
+            </field>
+        </record>
+
+<!-- Add fields to res.partner object
+-->
+        <record model="ir.ui.view" id="tms_view_partner_form_inh">
+            <field name="name">TMS res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside" >
+                    <page string="Pyament Invoices Management">
+                        <group col="4">
+                            <field name="revision_week_r_ids" widget="many2many_tags" placeholder="Select Day for Example Monday, Thuesday..." />
+                            <field name="revision_schedule" />
+                            <field name="revision_week_p_ids" widget="many2many_tags" placeholder="Select Day for Example Monday, Thuesday..." />
+                            <field name="payment_schedule" />
+                            <field name="credit_days" />
+                        </group>
+                        <group>
+                            <field name="notes_payment" widget="html"/>
+<!--                             <field name="child_payment_ids" mode="kanban" >
+                            </field> -->
+                        </group>
+
+                    </page>
+                    <page string="And Charging Equipment">
+                        <field name="charging_equipment_ids">
+                            <tree string="Chargind and Equipment" editable="bottom">
+                                    <field name="product_id" context="{'default_tms_category': 'no_tms_product','default_type': 'product', 'default_procure_method':'make_to_stock', 'default_supply_method': 'buy'}"/>
+                                    <field name="measures" />
+                                    <field name="tons_month" sum="Total Tons"/>
+                                    <field name="origin" />
+                                    <field name="destination" />
+                                </tree>
+                        </field>
+                        <group>
+                        <field name="path_flow" />
+                        <field name="kit_id"/>
+                        </group>
+                        <separator string="Team p / load" />
+                        <group colspan="4" col="6">
+                        <field name="bands_p" />
+                        <field name="banners_p"/>
+                        <field name="chains"/>
+                        <field name="gatas"/>
+                        <field name="polines"/>
+                        <field name="tables"/>
+                        <field name="other"/>
+                        </group>
+                        <newline/>
+                        <group colspan="4" col="6">
+                            <field name="charge_insurance" />
+                            <field name="insurance" domain="[('is_company','=', True),('supplier','=', True)]" attrs="{'readonly':[('charge_insurance','=','uninsured')]}" />
+                        </group>
+                         <group>
+                            <field name="observation" widget="html"/>
+                        </group>
+
+                        <!-- <label string="Revision Days" />
+                            <group colspan="2" name="weekdays_revision" >
+                                <field name="mo_r"/>
+                                <field name="tu_r"/>
+                                <field name="we_r"/>
+                                <field name="th_r"/>
+                                <field name="fr_r"/>
+                                <field name="sa_r"/>
+                                <field name="su_r"/>
+                            </group>
+                            <label string="Paydays" />
+                            <group colspan="2" name="weekdays_payment" >
+                                <field name="mo_p"/>
+                                <field name="tu_p"/>
+                                <field name="we_p"/>
+                                <field name="th_p"/>
+                                <field name="fr_p"/>
+                                <field name="sa_p"/>
+                                <field name="su_p"/>
+                            </group> -->
+                    </page>
+                </notebook> 
+                <xpath expr="//div[@name='buttons']" position="inside">
+                    <button name="%(tms_agreement.act_res_partner_2_agreements)d" type="action"
+                        string="My Agreements" />
+                </xpath>
+            </field>
+        </record>
+
+
+</data>
+</openerp>

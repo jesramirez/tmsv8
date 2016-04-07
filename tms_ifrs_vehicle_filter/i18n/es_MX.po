@@ -1,0 +1,43 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* tms_ifrs_vehicle_filter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0-20150306\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-03 01:28+0000\n"
+"PO-Revision-Date: 2015-07-02 20:29-0600\n"
+"Last-Translator: Israel Cruz Argil <israel.cruz@argil.mx>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_MX\n"
+"X-Generator: Poedit 1.8.1\n"
+
+#. module: tms_ifrs_vehicle_filter
+#: model:ir.model,name:tms_ifrs_vehicle_filter.model_account_move_line
+msgid "Journal Items"
+msgstr "Elementos diario"
+
+#. module: tms_ifrs_vehicle_filter
+#: model:ir.model,name:tms_ifrs_vehicle_filter.model_ifrs_report_wizard
+msgid "IFRS Report"
+msgstr "Reporte NIIF"
+
+#. module: tms_ifrs_vehicle_filter
+#: model:ir.model,name:tms_ifrs_vehicle_filter.model_ifrs_ifrs
+msgid "ifrs.ifrs"
+msgstr "ifrs.ifrs"
+
+#. module: tms_ifrs_vehicle_filter
+#: view:ifrs.report.wizard:0 field:ifrs.report.wizard,vehicle_ids:0
+msgid "Vehicles"
+msgstr "Unidades"
+
+#. module: tms_ifrs_vehicle_filter
+#: model:ir.model,name:tms_ifrs_vehicle_filter.model_ifrs_lines
+msgid "ifrs.lines"
+msgstr "ifrs.lines"

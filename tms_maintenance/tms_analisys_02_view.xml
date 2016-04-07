@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>	
+
+
+
+############################################################################################################################
+                            ### TREE ###
+    <record model="ir.ui.view" id="tms_analisys_02_tree">
+        <field eval="1" name="priority"/>
+        <field name="name">tms.analisys.02.tree</field>
+        <field name="model">tms.analisys.02</field>
+        <field name="arch" type="xml">
+            <tree string="MRO Tasks Analisys">
+                <field name="year" invisible="1"/>
+                <field name="month" invisible="1"/>
+                <field name="day" invisible="1"/>                
+                 <field name="date" />
+                 <field name="name" />
+                 <field name="date_start" />
+                 <field name="date_end" />         
+                 <field name="duration"  widget="float_time" sum="Duration"/>
+                 <field name="unit_id" />
+                 <field name="driver_id" />
+                 <field name="spare_parts" sum="Spare Parts"/>
+                 <field name="manpower" sum="Manpower"/>
+                 <field name="spare_parts_external" sum="Spare Parts Extenal"/>
+                 <field name="manpower_external" sum="Manpower External"/>
+                 <field name="external_workshop" invisible="1"/>
+                 <field name="date_order" />
+                 <field name="order_id" />                
+                 <field name="supplier_id"  invisible="1"/>
+                 <field name="invoice_id" invisible="1"/>
+                 <field name="supplier_invoice_number" invisible="1"/>
+                <field name="product_id" invisible="1"/>
+                <field name="product_category_id" invisible="1"/>
+            </tree>
+	    </field>
+    </record>
+
+                            ### FORM ###
+    <record model="ir.ui.view" id="tms_analisys_02_form">
+        <field eval="1" name="priority"/>
+        <field name="name">tms.analisys.02.form</field>
+        <field name="model">tms.analisys.02</field>
+        <field name="arch" type="xml">
+            <form string="MRO Tasks Analisys" version="7.0">
+                <sheet>
+                    <group colspan="4" col="4">
+                         <field name="name" />
+                         <field name="date" />
+                         <field name="order_id" />
+                        <field name="date_order" />
+                         <field name="date_start" />
+                         <field name="date_end" />
+                         <field name="duration" widget="float_time"/>
+                        <newline />
+                        <field name="product_id" />
+                        <field name="product_category_id"/>
+                         <field name="unit_id" />
+                         <field name="driver_id" />
+                         <field name="spare_parts" />
+                         <field name="manpower" />
+                         <field name="spare_parts_external" />
+                         <field name="manpower_external" />
+                         <field name="external_workshop" />
+                         <field name="supplier_id" />
+                         <field name="invoice_id" />
+                         <field name="supplier_invoice_number" />
+                    </group>
+                </sheet>
+            </form>
+	    </field>
+    </record>
+        
+############################################################################################################################
+                            ### GRAPH ###
+    <record model="ir.ui.view" id="tms_analisys_02_graph">
+        <field eval="1" name="priority"/>
+        <field name="name">tms.analisys.02.graph</field>
+        <field name="model">tms.analisys.02</field>
+        <field name="arch" type="xml">
+             <graph string="TMS Analisys 02" type="bar">
+                <field name="name" group="True"/>
+                <field name="spare_parts" operator="+"/>
+                <field name="manpower" operator="+"/>
+                <field name="spare_parts_external" operator="+"/>
+                <field name="manpower_external" operator="+"/>
+                
+             </graph>
+         </field>
+    </record>
+############################################################################################################################
+                            ### SEARCH ###
+
+    <record id="view_tms_analisys_02_search" model="ir.ui.view">
+        <field name="name">tms.analisys.02.search</field>
+        <field name="model">tms.analisys.02</field>
+        <field name="arch" type="xml">
+            <search string="MRO Tasks Analysis">
+                <field name="product_id" />
+                <field name="order_id" />
+                <field name="unit_id" />
+                <field name="driver_id" />
+                <field name="supplier_id" />
+                <field name="product_category_id" />
+                <filter string="This month" icon="terp-check" domain="[('date','&gt;=', time.strftime('%%Y-%%m-01'))]" name="this_month" />
+                <filter string="External Workshop" icon="terp-gtk-media-pause" domain="[('external_workshop','=','True')]"/>                
+                <group expand="1" string="Group By...">
+                    <filter string="Order"     icon="terp-personal" context="{'group_by':'order_id'}"/>
+                    <filter string="Task"  icon="terp-personal" context="{'group_by':'product_id'}"/>
+                    <filter string="Task Category"  icon="terp-personal" context="{'group_by':'product_category_id'}"/>
+                    <filter string="Unit"      icon="terp-personal" context="{'group_by':'unit_id'}"/>
+                    <filter string="Driver"    icon="terp-personal" context="{'group_by':'driver_id'}"/>
+                    <filter string="External workshop"    icon="terp-personal" context="{'group_by':'external_workshop'}"/>
+                    <filter string="Invoice Number" icon="terp-personal" context="{'group_by':'supplier_invoice_number'}"/>
+                    <filter string="Supplier"              icon="terp-personal" context="{'group_by':'supplier_id'}"/>
+                    <filter string="Period"     icon="terp-personal" context="{'group_by':'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+############################################################################################################################
+                            ### ACTION ###
+
+    <record id="tms_analisys_02_action" model="ir.actions.act_window">
+        <field name="name">Analisys Activity</field>
+        <field name="res_model">tms.analisys.02</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,graph</field>
+        <field name="search_view_id" ref="view_tms_analisys_02_search"/>
+        <field name="view_id"        ref="tms_analisys_02_tree"/>
+        <field name="context">{'search_default_this_month': 1}</field>
+    </record>
+############################################################################################################################
+                            ### MENUS ###
+	<menuitem id="menu_tms_maintenance_Analisys" name="Tms Maintenance Analisys" parent="menu_tms_maintenance" />
+	<menuitem action="tms_analisys_02_action" id="menu_tms_analisys_02" parent="menu_tms_maintenance_Analisys" sequence="401"/>
+############################################################################################################################
+    </data>
+</openerp>

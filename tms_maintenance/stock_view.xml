@@ -1,0 +1,107 @@
+<openerp>
+<data>
+
+############################################################################################################################
+### Cambios en la vista de stock.move ###                                                                                                                                                                                                                                   
+                                                                                                          
+
+        <record id="mro_stock_picking_search_view" model="ir.ui.view">
+            <field name="name">mro.stock.picking.search</field>
+            <field name="model">stock.picking</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="tms_order_id" />
+                    <field name="unit_id" />
+                    <field name="mechanic_id" />
+                    <filter icon="terp-dialog-close" name="mro" string="MRO Related" domain="[('tms_order_id','!=',False)]" help="TMS MRO Related"/>
+                    <filter string="Vehicle" icon="terp-folder-orange" domain="[]" context="{'group_by':'unit_id'}"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="tms_stock_view_picking_tree">
+            <field name="name">TMS stock.picking.tree</field>
+            <field name="model">stock.picking</field>
+            <field name="type">form</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="after" >
+                    <field name="tms_order_id" />
+                    <field name="unit_id" />
+                    <field name="mechanic_id" />
+                </field>                
+            </field>
+        </record>
+
+    
+        <record model="ir.ui.view" id="tms_stock_view_picking_form_view">
+            <field name="name">TMS stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="type">form</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="before">
+                    <field name="from_tms_order" invisible="1" />
+                    <field name="tms_order_id" on_change="on_change_tms_order(tms_order_id)"
+                           domain="[('state','not in',('cancel','draft','done'))]" 
+                           attrs="{'readonly':[('from_tms_order','=',True)]}"/>
+                    <field name="tms_order_state"  invisible="1" />
+                    <field name="unit_id" attrs="{'invisible':[('tms_order_id','=',False)]}"/>
+                    <field name="mechanic_id" />
+                </field>
+                <field name="move_lines" position="replace">
+                    <field name="move_lines" 
+                           context="{'address_in_id': partner_id, 'form_view_ref':'view_move_picking_form', 'tree_view_ref':'view_move_picking_tree', 'picking_type': 'internal', 'default_maintenance_order_id': tms_order_id, 'default_unit_id' : unit_id ,'default_maintenance_order_state' : tms_order_state}" 
+                           options="{&quot;reload_on_button&quot;: true}"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="tms_stock_move_view_tree">
+            <field name="name">TMS stock.move.tree</field>
+            <field name="model">stock.move</field>
+            <field name="type">tree</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+            <field name="arch" type="xml">
+                <!--<field name="product_uom" position="after">
+                    <field name="location_id" />
+                </field>-->
+                <field name="product_id" position="before" >
+                    <field name="maintenance_order_id" invisible="1"/>
+                    <field name="maintenance_order_state" invisible="1"/>
+                    <field name="unit_id"  invisible="1"/> 
+                    <field name="activity_id" />
+                </field>
+            </field>
+        </record>
+    
+
+
+        <record model="ir.ui.view" id="tms_stock_move_view_form">
+            <field name="name">TMS stock.move.form</field>
+            <field name="model">stock.move</field>
+            <field name="type">form</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="stock.view_move_form"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="before" >
+                    <field name="maintenance_order_id" invisible="1"/>
+                    <field name="maintenance_order_state" invisible="1"/>
+                    <field name="unit_id" />
+                    <field name="activity_id" domain="[('maintenance_order_id','=',maintenance_order_id),('state','!=','cancel')]" 
+                           attrs="{ 'invisible':[('maintenance_order_id','=',False)], 
+                                    'readonly':[('maintenance_order_state','in',('cancel','done'))], 
+                                    'required':[('maintenance_order_id','!=',False)]}"/> 
+              </field>
+            </field>
+        </record>
+
+</data>
+</openerp>

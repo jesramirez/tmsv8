@@ -1,0 +1,106 @@
+<openerp>
+<data>
+
+<!-- Add fields to product.product object
+'tms_categorye'
+-->
+
+<!--
+        <record model="ir.ui.view" id="tms_product_search_form_view">
+            <field name="name">TMS product.search.form</field>
+            <field name="model">product.product</field>
+            <field name="type">search</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="/search/filter[@name='filter_to_sell']" position="after" >
+                    <filter string="Can be Purchased" name="filter_to_purchase" icon="terp-accessories-archiver-minus" domain="[('purchase_ok','=',1)]"/>
+                    <separator orientation="vertical"/>
+                   <filter string="TMS Transportable" icon="terp-stock_effects-object-colorize" domain="[('tms_category','=','transportable')]"/>
+                   <filter string="TMS Related" icon="terp-stage" 
+                        domain="[('tms_category','in',('freight', 'travel','move','insurance','highway','other'))]"/>
+                   <filter string="TMS Expense" icon="terp-dolar" domain="[('tms_category','in',('real_expense','madeup_expense', 'salary', 'salary_retention', 'salary_discount', 'negative_balance'))]"/> 
+                </xpath> 
+            </field>
+        </record> -->
+<!-- 
+        <record model="ir.ui.view" id="tms_product_normal_form_view">
+            <field name="name">TMS product.normal.form</field>
+            <field name="model">product.product</field>
+            <field name="type">form</field>
+            <field name="priority">55</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div[@name='buttons']" position="inside" >
+                    <group>
+                        <newline/>
+                        <div attrs="{'invisible':['|',('tms_category','!=','indirect_expense'),('operating_fixed_cost','=',True)]}">
+                                <field name="administrative_expense"  attrs="{'required':[('tms_category','=','indirect_expense'),('operating_fixed_cost','=',False)]}"/>
+                                <label for="administrative_expense" />
+                        </div>
+                        <newline/>
+                        <div attrs="{'invisible':['|',('tms_category','!=','indirect_expense'),('administrative_expense','=',True)]}">
+                            <field name="operating_fixed_cost" attrs="{'required':[('tms_category','=','indirect_expense'),('administrative_expense','=',False)]}"/>
+                            <label for="operating_fixed_cost" />
+                        </div>
+                    </group>
+                </xpath> 
+            </field>
+        </record> -->
+
+        <record model="ir.ui.view" id="tms_product_normal_form_view_agreement">
+            <field name="name">TMS product.normal.form</field>
+            <field name="model">product.product</field>
+            <field name="type">form</field>
+            <field name="priority">55</field>
+            <field name="inherit_id" ref="tms.tms_product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+                <field name="tms_activity_duration" position="after" >
+                    <group>
+                        <newline/>
+                        <!-- <div attrs="{'invisible':['|',('tms_category','!=','indirect_expense'),('operating_fixed_cost','=',True)]}"> -->
+                                <field name="administrative_expense"  attrs="{'required':[('tms_category','=','indirect_expense'),('operating_fixed_cost','=',False)],'invisible':['|',('tms_category','!=','indirect_expense'),('operating_fixed_cost','=',True)]}"/>
+                                <!-- <label for="administrative_expense" />
+                        </div> -->
+                        <newline/>
+                        <!-- <div attrs="{'invisible':['|',('tms_category','!=','indirect_expense'),('administrative_expense','=',True)]}"> -->
+                            <field name="operating_fixed_cost" attrs="{'required':[('tms_category','=','indirect_expense'),('administrative_expense','=',False)],'invisible':['|',('tms_category','!=','indirect_expense'),('administrative_expense','=',True)]}"/>
+                            <!-- <label for="operating_fixed_cost" /> -->
+                        <!-- </div> -->
+                        <newline/>
+                        <!-- <div attrs="{'invisible':[('tms_category','not in',('move','highway_tolls', 'insurance', 'fuel'))]}"> -->
+                            <field name="tms_category_default" attrs="{'invisible':[('tms_category','not in',('move','highway_tolls', 'insurance', 'fuel'))]}" />
+                        <newline/>
+                        <field name="move_ag" attrs="{'invisible':[('tms_category','!=','real_expense')]}" />
+<!--                             <label for="tms_category_default" />
+ -->      <!--                   </div> -->
+                    </group>
+                </field> 
+            </field>
+        </record>
+
+        <record id="tms_quotation_product_search_form_view" model="ir.ui.view">
+            <field name="name">tms.quotation.product.search.form</field>
+            <field name="model">product.product</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
+            <field name="arch" type="xml">
+                <search string="Product">
+                   <field name="categ_id" position="after">
+                     <filter string="Operating Fixed Cost" domain="[('operating_fixed_cost','=',True)]"/>
+                     <separator/>
+                     <filter string="Administratives Expenses" domain="[('administrative_expense','=',True)]"/>
+                     <separator/>
+                     <filter string="Default" domain="[('tms_category_default','=',True)]"/>
+                     <separator/>
+                   </field>
+
+                </search>
+            </field>
+        </record>
+
+
+</data>
+</openerp>

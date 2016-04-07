@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>	
+
+
+
+############################################################################################################################
+                            ### TREE ###
+    <record model="ir.ui.view" id="tms_analisys_01_tree">
+            <field eval="1" name="priority"/>
+            <field name="name">tms.analisys.01.tree</field>
+            <field name="model">tms.analisys.01</field>
+            <field name="arch" type="xml">
+                <tree string="TMS Analisys 01 orders">
+                    <field name="date" />
+                    <field name="name" />
+                    <field name="product_id" />
+                    <field name="date_start_real" />
+                    <field name="date_end_real" />
+                    <field name="duration_real"  widget="float_time" sum="Duration"/>
+                    <field name="supervisor_id" invisible="1"/>
+                    <field name="unit_id" />
+                    <field name="driver_id"  invisible="1"/>
+                    <field name="maint_cycle_id"  invisible="1"/>
+
+                    <field name="year" invisible="1"/>
+                    <field name="month" invisible="1"/>
+                    <field name="day" invisible="1"/>
+                    
+                    <field name="parts_cost" sum="Spare Parts"/>
+                    <field name="cost_service" sum="Manpower"/>
+                    <field name="parts_cost_external" sum="Spare Parts Ext."/>
+                    <field name="cost_service_external" sum="ManPower Ext."/>
+                    <field name="user_id" />
+                    <field name="notes" invisible="1"/>
+                </tree>
+            </field>
+    </record>
+
+                            ### FORM ###
+    <record model="ir.ui.view" id="tms_analisys_01_form">
+            <field eval="1" name="priority"/>
+            <field name="name">tms.analisys.01.form</field>
+            <field name="model">tms.analisys.01</field>
+            <field name="arch" type="xml">
+                <form string="TMS Analisys 01 orders" version="7.0">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="name" />
+                            <field name="date" />
+                            <field name="product_id" />
+                            <field name="maint_cycle_id" />
+                            <field name="date_start_real" />
+                            <field name="date_end_real" />
+                            <field name="duration_real"  widget="float_time"/>
+                            <newline />
+                            <field name="unit_id" />
+                            <field name="driver_id" />
+                            <field name="supervisor_id"/>
+                            <newline />
+                            <field name="parts_cost" />
+                            <field name="cost_service" />
+                            <field name="parts_cost_external" />
+                            <field name="cost_service_external"  />
+                            <field name="user_id" />
+                            <separator string="Notes" colspan="4" />
+                            <field name="notes" colspan="4" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+############################################################################################################################
+                            ### GRAPH ###
+
+    <record model="ir.ui.view" id="tms_analisys_01_graph">
+        <field eval="1" name="priority"/>
+        <field name="name">tms.analisys.01.graph</field>
+        <field name="model">tms.analisys.01</field>
+        <field name="arch" type="xml">
+             <graph string="TMS Analisys 01" type="bar">
+                <field name="product_id" group="True"/>
+                <field name="parts_cost" operator="+"/>
+                <field name="cost_service" operator="+"/>
+                <field name="parts_cost_external" operator="+"/>
+                <field name="cost_service_external" operator="+"/>
+                
+             </graph>
+         </field>
+    </record>
+
+############################################################################################################################
+                            ### SEARCH ###
+
+    <record id="view_tms_analisys_01_search" model="ir.ui.view">
+        <field name="name">tms.analisys.01.search</field>
+        <field name="model">tms.analisys.01</field>
+        <field name="arch" type="xml">
+            <search string="Orders Analysis">
+                <field name="name" />
+                <field name="product_id" />
+                <field name="unit_id" />
+                <field name="driver_id"/>
+                <field name="user_id" />
+                <filter string="This month" icon="terp-check" domain="[('date','&gt;=', time.strftime('%%Y-%%m-01'))]" name="this_month" />
+                <group expand="1" string="Group By...">
+                    <filter string="Order"     icon="terp-personal" context="{'group_by':'name'}"/>
+                    <filter string="Service"   icon="terp-partner"  context="{'group_by':'product_id'}" name="groupby_product_id"/>
+                    <filter string="Unit"      icon="terp-partner"  context="{'group_by':'unit_id'}"/>
+                    <filter string="Driver"      icon="terp-partner"  context="{'group_by':'driver_id'}"/>
+                    <filter string="User"      icon="terp-partner"  context="{'group_by':'user_id'}"/>
+                    <filter string="Period"     icon="terp-personal" context="{'group_by':'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+############################################################################################################################
+                            ### ACTION ###
+
+    <record id="tms_analisys_01_action" model="ir.actions.act_window">
+        <field name="name">Analisys Order</field>
+        <field name="res_model">tms.analisys.01</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,graph</field>
+        <field name="search_view_id" ref="view_tms_analisys_01_search"/>
+        <field name="view_id"        ref="tms_analisys_01_tree"/>
+        <field name="context">{'search_default_this_month': 1, 'search_default_groupby_product_id':1}</field>
+    </record>
+############################################################################################################################
+                            ### MENUS ###
+        <!--<menuitem id="menu_tms_maintenance" name="Tms Maintenance" />
+	<menuitem id="menu_tms_analisys_1" name="Analisys" parent="menu_tms_maintenance" />
+	<menuitem action="tms_analisys_1_action" id="menu_tms_analisys_1_line" name="Analisys " parent="menu_tms_analisys_1" sequence="6" />
+
+        <menuitem id="base.next_id_64" name="Sales" parent="base.menu_reporting" sequence="1" groups="base.group_sale_manager"/>
+        <menuitem action="action_order_report_all" id="menu_report_product_all" parent="base.next_id_64" sequence="10"/>
+		-->
+	
+    	<!--<menuitem action="tms_analisys_01_action" id="menu_tms_analisys_01" parent="base.next_id_64" sequence="400"/>-->
+	<menuitem id="menu_tms_maintenance_Analisys" name="Tms Maintenance Analisys" parent="menu_tms_maintenance" />
+	<menuitem action="tms_analisys_01_action" id="menu_tms_analisys_01" parent="menu_tms_maintenance_Analisys" sequence="400"/>
+############################################################################################################################
+    </data>
+</openerp>

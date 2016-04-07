@@ -1,0 +1,275 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* tms_vehicle_insurance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-07 18:43+0000\n"
+"PO-Revision-Date: 2014-08-07 13:59-0600\n"
+"Last-Translator: Israel Cruz Argil <israel.cruz@argil.mx>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_MX\n"
+"X-Generator: Poedit 1.6.7\n"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:33
+msgid "License Plate"
+msgstr "Placas"
+
+#. module: tms_vehicle_insurance
+#: model:ir.model,name:tms_vehicle_insurance.model_tms_travel
+msgid "Travels"
+msgstr "Viajes"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:64
+msgid "Other"
+msgstr "Otro"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:64
+msgid "Dolly"
+msgstr "Dolly"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:27
+msgid "Vehicle"
+msgstr "Unidad"
+
+#. module: tms_vehicle_insurance
+#: view:fleet.vehicle.expired_insurance:0
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: tms_vehicle_insurance
+#: model:ir.actions.report.xml,name:tms_vehicle_insurance.fleet_vehicle_report_webkit
+msgid "Fleet Vehicles to Expire or Expired Insurance Policies"
+msgstr "Unidades con Póliza de Seguro expirada o por expirar"
+
+#. module: tms_vehicle_insurance
+#: field:fleet.vehicle,insurance_policy_days_to_expire:0
+msgid "Days to expire"
+msgstr "Días para expirar"
+
+#. module: tms_vehicle_insurance
+#: model:email.template,body_html:tms_vehicle_insurance.email_template_fleet_vehicle_expired_insurance
+msgid ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hello,</p>\n"
+"\n"
+"    <p>Attached you will find the list of Fleet Vehicle Insurance Policies "
+"expired or about to expire</p>\n"
+"\n"
+"    <p>Kind Regards</p>\n"
+"\n"
+"    <p>================</p>\n"
+"    <p>This mail was sent automatically from OpenERP, please DO NOT RESPOND "
+"it.</p>\n"
+"\n"
+"</div>\n"
+"            "
+msgstr ""
+"\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-"
+"serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"\n"
+"    <p>Hola,</p>\n"
+"\n"
+"    <p>Adjunto al presente encontrará la lista de Pólizas de Seguro que "
+"están expiradas o por expirar</p>\n"
+"\n"
+"    <p>Saludos</p>\n"
+"\n"
+"    <p>================</p>\n"
+"    <p>This mail was sent automatically from OpenERP, please DO NOT RESPOND "
+"it.</p>\n"
+"\n"
+"</div>\n"
+"            "
+
+#. module: tms_vehicle_insurance
+#: field:fleet.vehicle.expired_insurance,include:0
+msgid "Include"
+msgstr "Incluir unidades"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:36
+msgid "Type"
+msgstr "Tipo"
+
+#. module: tms_vehicle_insurance
+#: field:fleet.vehicle.expired_insurance,date:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: tms_vehicle_insurance
+#: model:email.template,subject:tms_vehicle_insurance.email_template_fleet_vehicle_expired_insurance
+msgid "Vehicle Insurance Policy expired or to expire"
+msgstr "Pólizas de Seguro expiradas o por expirar."
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:39
+#: field:fleet.vehicle,insurance_policy:0
+msgid "Insurance Policy"
+msgstr "Póliza de Seguro"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:64
+msgid "Motorized Unit"
+msgstr "Unidad Motriz"
+
+#. module: tms_vehicle_insurance
+#: selection:fleet.vehicle.expired_insurance,include:0
+msgid "All Vehicles (Own & Suppliers)"
+msgstr "Todas (Propias  y Permisionarios)"
+
+#. module: tms_vehicle_insurance
+#: view:fleet.vehicle.expired_insurance:0
+msgid "Get Vehicle Insurance Policies to Expire on next days"
+msgstr "Obtener Pólizas de Seguro por vencer o vencidas."
+
+#. module: tms_vehicle_insurance
+#: selection:fleet.vehicle.expired_insurance,include:0
+msgid "Supplier Vehicles"
+msgstr "Permisionarios"
+
+#. module: tms_vehicle_insurance
+#: code:addons/tms_vehicle_insurance/tms_travel.py:48
+#: code:addons/tms_vehicle_insurance/tms_travel.py:50
+#: code:addons/tms_vehicle_insurance/tms_travel.py:52
+#: code:addons/tms_vehicle_insurance/tms_travel.py:54
+#, python-format
+msgid ""
+"You can not Dispatch this Travel because this Vehicle's (%s) Insurance "
+"Policy Validity (%s) is expired or about to expire in next %s day(s)"
+msgstr ""
+"No puede Despachar este Viaje de la Unidad (%s) porque la Vigencia de la "
+"Póliza de Seguro (%s) ha expirado o está por expirar en los próximos %s "
+"día(s)."
+
+#. module: tms_vehicle_insurance
+#: selection:fleet.vehicle.expired_insurance,include:0
+msgid "Own Vehicles"
+msgstr "Propias"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:48
+msgid "Days to expire (from today)"
+msgstr "Días para expirar (desde hoy)"
+
+#. module: tms_vehicle_insurance
+#: model:ir.actions.act_window,name:tms_vehicle_insurance.fleet_vehicle_expired_insurance_wizard_action
+#: model:ir.ui.menu,name:tms_vehicle_insurance.menu_tms_fleet_vehicle_insurance_policy_expired
+msgid "Vehicle Insurance Policies by Exp.Date"
+msgstr "Pólizas de Seguro por Vencer/Vencidas"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:45
+#: field:fleet.vehicle,insurance_policy_expiration:0
+msgid "Insurance Policy Expiration"
+msgstr "Expiración Póilza"
+
+#. module: tms_vehicle_insurance
+#: code:addons/tms_vehicle_insurance/fleet_vehicle.py:91
+#, python-format
+msgid "Expire_or_to_expire_Vehicle_Insurance_Policies"
+msgstr "Polizas_de_Seguro_expiradas_o_por_expirar"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:54
+msgid "Vehicle from Supplier"
+msgstr "Permisionario"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:30
+msgid "Model"
+msgstr "Modelo"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:64
+msgid "Trailer"
+msgstr "Remolque"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:13
+msgid "Fleet Vehicle Insurance Policies to expire or expired before"
+msgstr "Pólizas de Seguro expiradas o por expirar al "
+
+#. module: tms_vehicle_insurance
+#: model:ir.model,name:tms_vehicle_insurance.model_fleet_vehicle
+msgid "Information on a vehicle"
+msgstr "Información en un vehículo"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:19
+msgid "Records:"
+msgstr "Registros:"
+
+#. module: tms_vehicle_insurance
+#: field:fleet.vehicle,insurance_supplier_id:0
+msgid "Insurance Supplier"
+msgstr "Proveedor Seguro"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:51
+msgid "Insurance Policy Supplier"
+msgstr "Proveedor Seguro"
+
+#. module: tms_vehicle_insurance
+#: view:fleet.vehicle.expired_insurance:0
+msgid "This date has already added Security days defined in parameter."
+msgstr ""
+"La fecha tiene agregados los días de seguridad definidos en los parámetros"
+
+#. module: tms_vehicle_insurance
+#: code:addons/tms_vehicle_insurance/fleet_vehicle.py:164
+#, python-format
+msgid ""
+"There are no Fleet Vehicle Insurance Policies expired or to expire on this "
+"date"
+msgstr "No hay Pólizas de Seguro expiradas o por expirar a esta fecha"
+
+#. module: tms_vehicle_insurance
+#: code:addons/tms_vehicle_insurance/fleet_vehicle.py:164
+#: code:addons/tms_vehicle_insurance/tms_travel.py:48
+#: code:addons/tms_vehicle_insurance/tms_travel.py:50
+#: code:addons/tms_vehicle_insurance/tms_travel.py:52
+#: code:addons/tms_vehicle_insurance/tms_travel.py:54
+#, python-format
+msgid "Warning!"
+msgstr "Advertencia !"
+
+#. module: tms_vehicle_insurance
+#: view:fleet.vehicle.expired_insurance:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: tms_vehicle_insurance
+#: view:fleet.vehicle.expired_insurance:0
+msgid "Please select date"
+msgstr "Seleccione una fecha"
+
+#. module: tms_vehicle_insurance
+#: report:addons/tms_vehicle_insurance/report/fleet_vehicle_expired_insurance_html.mako:42
+#: field:fleet.vehicle,insurance_policy_data:0
+msgid "Insurance Policy Data"
+msgstr "Datos Póliza de Seguro"
+
+#. module: tms_vehicle_insurance
+#: model:ir.model,name:tms_vehicle_insurance.model_fleet_vehicle_expired_insurance
+msgid "Wizard to get Vehicle Insurance Policies to expire"
+msgstr "Asistente para obtener las Pólizas por Expirar"
+
+#. module: tms_vehicle_insurance
+#: view:fleet.vehicle.expired_insurance:0
+msgid "or"
+msgstr "o"

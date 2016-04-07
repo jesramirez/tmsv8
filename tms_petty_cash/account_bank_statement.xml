@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <openerp>
+        <data>
+            <record id="view_bank_statement_form_invoice_tms" model="ir.ui.view">
+                <field name="name">account.bank.statement.invoice.form.inherit.tms</field>
+                <field name="model">account.bank.statement</field>
+                <field name="inherit_id" ref="account.view_bank_statement_form2"/>
+                <field name="arch" type="xml">
+                    <label for="name" position="before">
+                        <div class="oe_right oe_button_box" name="import_buttons">
+                            <button name="%(account_voucher.action_view_account_statement_from_invoice_lines)d"
+                                string="Anticipos / Liquidaciones / Facturas" type="action"
+                                attrs="{'invisible':[('state','=','confirm')]}"/>
+                        </div>
+                    </label>
+                </field>
+            </record>
+        </data>
+</openerp>

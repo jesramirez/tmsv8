@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>	
+
+############################################################################################################################
+                            ### FORM ###
+    <record model="ir.ui.view" id="tms_maintenance_order_form">
+            <field name="name">tms.maintenance.order.form</field>
+            <field name="model">tms.maintenance.order</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Order of Maintenance" version="7.0">
+		    <header>
+                        <button string="Confirmed" name="action_confirmed" states="draft" icon="gtk-go-forward" type="object" />
+                        <button string="Cancelled" name="action_cancel" states="confirmed" icon="gtk-cancel" type="object" /> 
+                        <button string="Done" name="action_done" states="confirmed" icon="gtk-apply" type="object" /> 
+                        <button string="Reset to Draft" name="action_draft" states="cancel,done" icon="gtk-convert" type="object" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done,cancel"/> 
+                    </header>
+		    <sheet>
+			<group col="4">
+                        	<field name="name" />
+                        	<field name="concept_id" />
+                        	<field name="unit_id" />
+
+                        	<field name="supervisor_id" />
+                        	<field name="driver_report_id" />
+                        	<field name="user_register_order_id" />
+		    	</group>
+			<newline />
+			<group col="2">
+                        	<field name="description" />
+                        	<field name="notes" />
+		    	</group>
+<!--                        ### FORM ###  ### PESTAÑAS PAGE ###     -->
+			<notebook>
+				<page string="Cheduled Date">                   <!--Page 01-->
+					<group col="4">
+						<field name="cheduled_start" />
+						<field name="cheduled_start_real" />
+						<field name="cheduled_end" />
+						<field name="cheduled_end_real" />
+					</group>
+				</page>
+				<page string="Activities">                      <!--Page 02-->
+					<group col="2">
+						<field name="activities_ids" />
+					</group>
+				</page>
+			</notebook> 
+		    </sheet>
+<!--                        ### FORM ###  ### Intrachat ###     -->
+		    <div class="oe_chatter">
+                    	<field name="message_follower_ids" widget="mail_followers"/>
+                    	<field name="message_ids" widget="mail_thread"/> 
+                    </div>
+		</form><!--### Fin Etiqueta Form ###-->
+	    </field>
+    </record>
+
+############################################################################################################################
+                            ### TREE ###
+    <record model="ir.ui.view" id="tms_maintenance_order_tree">
+            <field name="name">tms.maintenance.order.tree</field>
+            <field name="model">tms.maintenance.order</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Order of Maintenance">
+                        	<field name="name" />
+                        	<field name="concept_id" />
+		</tree>
+	    </field>
+    </record>
+############################################################################################################################
+                            ### ACTION ###
+    <record model="ir.actions.act_window" id="tms_maintenance_order_action">
+        <field name="name">Order Maintenace TMS</field>
+        <field name="res_model">tms.maintenance.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>    
+############################################################################################################################
+                            ### MENUS ###
+        <menuitem id="menu_tms_maintenance" name="Tms Maintenance" />
+	<menuitem id="menu_tms_maintenance_orders" name="Orders" parent="menu_tms_maintenance" />
+	
+	<menuitem action="tms_maintenance_order_action" id="menu_tms_maintenance_order_line" name="TMS Maintenance Order"
+ parent="menu_tms_maintenance_orders" sequence="1" />
+############################################################################################################################
+    </data>
+</openerp>

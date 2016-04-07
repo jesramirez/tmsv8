@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>	
+
+
+
+############################################################################################################################
+                            ### TREE ###
+    <record model="ir.ui.view" id="tms_analisys_03_tree">
+            <field eval="1" name="priority"/>
+            <field name="name">tms.analisys.03.tree</field>
+            <field name="model">tms.analisys.03</field>
+            <field name="arch" type="xml">
+                <tree string="TMS Analisys Spare Parts">
+                    <field name="date"/>
+                    <field name="name" invisible="1" />
+                    <field name="year" invisible="1" />
+                    <field name="day" invisible="1" />
+                    <field name="month" invisible="1" />
+                    <field name="date_order"/>
+                    <field name="order_id"/>
+                    <field name="date_start"/>
+                    <field name="task_id"/>
+                    <field name="product_id"/>
+                    <field name="product_category_id" invisible="1" />
+                    <field name="external_workshop" invisible="1" />
+                    <field name="unit_id"/>
+                    <field name="driver_id"/>
+                    <field name="supplier_id"/>
+                    <field name="qty" sum="Qty"/>
+                    <field name="product_uom"/>
+                    <field name="list_price"/>
+                    <field name="amount" sum="Amount"/>
+                </tree>
+	    </field>
+    </record>
+
+                            ### FORM ###
+    <record model="ir.ui.view" id="tms_analisys_03_form">
+            <field eval="1" name="priority"/>
+            <field name="name">tms.analisys.03.form</field>
+            <field name="model">tms.analisys.03</field>
+            <field name="arch" type="xml">
+                <form string="MRO Analisys Spare Parts" version="7.0">
+                    <sheet>
+                        <group colspan="4" col="4">
+                            <field name="order_id"/>
+                            <field name="date_order"/>
+                            <field name="task_id"/>
+                            <field name="date_start"/>
+                            <field name="name" />
+                            <field name="date"/>                            
+                            <field name="product_id"/>
+                            <field name="product_category_id" />
+                            <field name="qty"/>
+                            <field name="product_uom"/>
+                            <field name="list_price"/>
+                            <field name="amount"/>
+                            <field name="unit_id"/>
+                            <field name="driver_id"/>
+                            <field name="supplier_id"/>
+                            <field name="external_workshop" />
+                        </group>
+                    </sheet>
+                </form>
+	    </field>
+    </record>
+        
+############################################################################################################################
+                            ### GRAPH ###
+    <record model="ir.ui.view" id="tms_analisys_03_graph">
+        <field eval="1" name="priority"/>
+        <field name="name">tms.analisys.03.graph</field>
+        <field name="model">tms.analisys.03</field>
+        <field name="arch" type="xml">
+             <graph string="MRO Analisys Spare Parts" type="bar">
+                <field name="product_id" group="True"/>
+                <field name="qty" operator="+"/>
+                <field name="amount" operator="+"/>
+             </graph>
+         </field>
+    </record>
+############################################################################################################################
+                            ### SEARCH ###
+
+    <record id="view_tms_analisys_03_search" model="ir.ui.view">
+        <field name="name">tms.analisys.03.search</field>
+        <field name="model">tms.analisys.03</field>
+        <field name="arch" type="xml">
+            <search string="MRO Analisys Spare Parts">
+                    <field name="product_id"/>
+                    <field name="order_id"/>
+                    <field name="task_id"/>
+                    <field name="product_category_id"/>
+                    <field name="unit_id"/>
+                    <field name="driver_id"/>
+                    <field name="supplier_id"/>
+                <filter string="This month" icon="terp-check" domain="[('date','&gt;=', time.strftime('%%Y-%%m-01'))]" name="this_month" />
+                <filter string="External Workshop" icon="terp-gtk-media-pause" domain="[('external_workshop','=','True')]"/>
+                <group expand="1" string="Group By...">
+                    <filter string="Spare Part"     icon="terp-personal" context="{'group_by':'product_id'}"/>
+                    <filter string="Spare Part Category"     icon="terp-personal" context="{'group_by':'product_category_id'}"/>
+                    <filter string="Order"     icon="terp-personal" context="{'group_by':'order_id'}"/>
+                    <filter string="Activity"     icon="terp-personal" context="{'group_by':'task_id'}"/>
+                    <filter string="Unit"     icon="terp-personal" context="{'group_by':'unit_id'}"/>
+                    <filter string="Driver"     icon="terp-personal" context="{'group_by':'driver_id'}"/>
+                    <filter string="Period"     icon="terp-personal" context="{'group_by':'date'}"/>
+                </group>
+
+            </search>
+        </field>
+    </record>
+############################################################################################################################
+                            ### ACTION ###
+
+    <record id="tms_analisys_03_action" model="ir.actions.act_window">
+        <field name="name">Analisys Products Material</field>
+        <field name="res_model">tms.analisys.03</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,graph</field>
+        <field name="search_view_id" ref="view_tms_analisys_03_search"/>
+        <field name="view_id"        ref="tms_analisys_03_tree"/>
+        <field name="context">{'search_default_this_month': 1}</field>
+    </record>
+############################################################################################################################
+                            ### MENUS ###
+        <!--<menuitem id="menu_tms_maintenance" name="Tms Maintenance" />
+	<menuitem id="menu_tms_analisys_1" name="Analisys" parent="menu_tms_maintenance" />
+	<menuitem action="tms_analisys_1_action" id="menu_tms_analisys_1_line" name="Analisys " parent="menu_tms_analisys_1" sequence="6" />
+
+        <menuitem id="base.next_id_64" name="Sales" parent="base.menu_reporting" sequence="1" groups="base.group_sale_manager"/>
+        <menuitem action="action_order_report_all" id="menu_report_product_all" parent="base.next_id_64" sequence="10"/>
+		-->
+	
+    	<!--<menuitem action="tms_analisys_03_action" id="menu_tms_analisys_03" parent="base.next_id_64" sequence="400"/>-->
+	<menuitem id="menu_tms_maintenance_Analisys" name="Tms Maintenance Analisys" parent="menu_tms_maintenance" />
+	<menuitem action="tms_analisys_03_action" id="menu_tms_analisys_03" parent="menu_tms_maintenance_Analisys" sequence="402"/>
+############################################################################################################################
+    </data>
+</openerp>

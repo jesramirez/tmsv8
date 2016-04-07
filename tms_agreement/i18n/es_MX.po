@@ -1,0 +1,2856 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* tms_agreement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-04 22:33+0000\n"
+"PO-Revision-Date: 2013-12-04 19:10-0600\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:1138
+#, python-format
+msgid "Agreement <em>%s</em> <b>confirmed</b>."
+msgstr "Acuerdo <em>%s</em> <b>confirmado</b>."
+
+#. module: tms_agreement
+#: view:tms.quotation.agreement.wizard:0
+msgid "Fill in the data for the Agreement"
+msgstr "Ingresa los datos para el Acuerdo"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Route's for Quotation"
+msgstr "Rutas Asignadas"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1703
+#, python-format
+msgid ""
+"La Ruta de Partida y Retorno no puede ser la misma seleccione una "
+"Distinta ..."
+msgstr ""
+"La Ruta de Partida y Retorno no puede ser la misma seleccione una "
+"Distinta ..."
+
+#. module: tms_agreement
+#: field:tms.agreement,confirmed_by:0
+msgid "Confirmed by"
+msgstr "Confirmado por"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,trailer_insurance:0
+msgid "Trailer Insurance"
+msgstr "Seguro de Remolque"
+
+#. module: tms_agreement
+#: view:res.partner:0
+msgid "Select Day for Example Monday, Thuesday..."
+msgstr "Selecciona el dia por Ejemplo, Lunes, Martes ..."
+
+#. module: tms_agreement
+#: help:tms.agreement,departure_address_id:0
+msgid "Departure address for current Agreement."
+msgstr "Dirección actual de salida para este Acuerdo."
+
+#. module: tms_agreement
+#: view:res.partner:0
+msgid "Pyament Invoices Management"
+msgstr "Gestion del Pago de Facturas"
+
+#. module: tms_agreement
+#: field:tms.agreement,travel_wizard:0
+msgid "Travel Created by Wizard"
+msgstr "Viaje creado mediante asistente"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:218
+#: code:addons/tms_agreement/tms_agreement.py:759
+#, python-format
+msgid "There is no product defined as Freight !!!"
+msgstr "No hay ningún producto definido como Flete de tipo Freight."
+
+#. module: tms_agreement
+#: field:tms.quotation.config,salary_diary_movers:0
+msgid "Salary Movers Journal"
+msgstr "Salario diario de Movedores"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_waybill_extradata
+msgid "Tms Waybill Extra Data"
+msgstr "Datos Extra en Cartas Porte"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Registries of historial"
+msgstr "Historial de registros"
+
+#. module: tms_agreement
+#: help:factor.quotation,factor_type:0
+msgid ""
+"\n"
+"For next options you have to type Ranges or Fixed Amount\n"
+" - Distance Route (Km/mi)\n"
+" - Distance Real (Km/Mi)\n"
+" - Weight\n"
+" - Quantity\n"
+" - Volume\n"
+"For next option you only have to type Fixed Amount:\n"
+" - Travel\n"
+"For next option you only have to type Factor like 10.5 for 10.50%:\n"
+" - Income Percent\n"
+"For next option you only have to type Special Python Code:\n"
+" - Special\n"
+"\t\t\t\t\t\t"
+msgstr ""
+"\n"
+"Para las siguientes opciones capture los Rangos y/o el Monto Fijo:\n"
+" - Distancia de Ruta (Km/mi)\n"
+" - Distancia Real (Km/Mi)\n"
+" - x Peso\n"
+" - x Cantidad\n"
+" - n Volumen\n"
+"Para la siguiente opción capture Monto Fijo:\n"
+" - Travel\n"
+"Para la siguiente opción capture el Factor (P.Ej. 10.5 para 10.50%:\n"
+" - Porcentaje del Ingreso\n"
+"Para la siguiente opción capture el Código Python:\n"
+" - Especial\n"
+"\t\t\t\t\t\t"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,charged_performance:0
+msgid "Charged Performance"
+msgstr "Rendimiento Cargado"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:705
+#, python-format
+msgid "Product not found for Highway Tolls,  tms_category = highway_tolls !!!"
+msgstr ""
+"No se encontro un producto especificado para Casetas,  tms_category = "
+"highway_tolls !!!"
+
+#. module: tms_agreement
+#: field:tms.direct.expense,on_change:0
+msgid "Creado desde el Onchange"
+msgstr "Creado desde el Onchange"
+
+#. module: tms_agreement
+#: field:tms.indirect.expense,automatic:0
+msgid "Automatic"
+msgstr "Automático"
+
+#. module: tms_agreement
+#: help:tms.agreement,message_unread:0 help:tms.quotation,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr "Activa para mensajes que necesiten mayor atención."
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:26
+#, python-format
+msgid "Total Cost for Agreement = <b><em>%s</em></b>."
+msgstr "Costo Total para el Acuerdo = <b><em>%s</em></b>."
+
+#. module: tms_agreement
+#: field:charging.equipment,origin:0
+msgid "Origin"
+msgstr "Origen"
+
+#. module: tms_agreement
+#: field:tms.agreement,hours_lib_docs_download_end_travel:0
+msgid "Lib. Docs. DwnLd to End Travel"
+msgstr "Lib. Docs. DwnLd para finalizar el viaje"
+
+#. module: tms_agreement
+#: field:tms.direct.expense,fuel_voucher:0
+msgid "Fuel Voucher"
+msgstr "Vale de Combustible"
+
+#. module: tms_agreement
+#: selection:tms.direct.expense,line_type:0
+msgid "Salary Discount"
+msgstr "Descuento de Salario"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Description:"
+msgstr "Descripcion:"
+
+#. module: tms_agreement
+#: field:tms.administrative.cost,acumulated_moth:0
+msgid "Accumulated current month"
+msgstr "Monto Acumulado A."
+
+#. module: tms_agreement
+#: selection:tms.direct.expense,line_type:0
+msgid "Salary Retention"
+msgstr "Retención de Salario"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_res_partner
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: tms_agreement
+#: field:res.partner,tables:0
+msgid "Tables"
+msgstr "Tablas"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Time Estimated for Travel in Hours"
+msgstr "Tiempo estimado para el Viaje en Hrs."
+
+#. module: tms_agreement
+#: help:tms.direct.expense,automatic:0
+msgid "Check this if you want to create Advances for this line automatically"
+msgstr "Activar si se desea crear anticipos automáticos por esta linea."
+
+#. module: tms_agreement
+#: field:tms.agreement,version:0
+msgid "Version"
+msgstr "Versión"
+
+#. module: tms_agreement
+#: field:product.product,administrative_expense:0
+msgid "Administrative Expense"
+msgstr "Gasto Administrativo"
+
+#. module: tms_agreement
+#: help:tms.agreement,origin:0 help:tms.waybill,agreement_origin:0
+msgid "Reference of the document that generated this agreement request."
+msgstr "Referencia del documento generado desde la solicitud del Acuerdo."
+
+#. module: tms_agreement
+#: view:tms.quotation:0 field:tms.quotation,diesel_percent:0
+#: field:tms.quotation,move_percent:0 field:tms.quotation,salary_percent:0
+#: field:tms.quotation,summary_cost_km_percent:0
+#: field:tms.quotation,summary_expenditures_percent:0
+#: field:tms.quotation,summary_income_percent:0
+#: field:tms.quotation,summary_km_productive_percent:0
+#: field:tms.quotation,summary_margin_percent:0
+#: field:tms.quotation,summary_mk_shot_percent:0
+#: field:tms.quotation,summary_utility_km_percent:0
+#: field:tms.quotation,summary_utility_percent:0
+#: field:tms.quotation,toll_percent:0
+msgid "Percentage"
+msgstr "Porcentaje"
+
+#. module: tms_agreement
+#: model:ir.actions.act_window,name:tms_agreement.act_res_partner_2_agreements
+msgid "Agreements for Customer"
+msgstr "Acuerdos del Cliente"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,number_trailers:0
+msgid "Number of Trailers"
+msgstr "Numero de Remolques"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:2038
+#, python-format
+msgid "No se tiene un producto configurado de tipo Move o Maniobra por Defecto"
+msgstr ""
+"No se tiene un producto configurado de tipo Move o Maniobra por Defecto"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:291
+#: funciones.py:358 funciones.py:419 funciones.py:480
+#, python-format
+msgid "agreement %s has no Products with Quantity > 0.0"
+msgstr "El Acuerdo %s no puede tener Productos con Cantidad > 0.0"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement_travel.py:88
+#, python-format
+msgid "Waybill Created"
+msgstr "Carta Porte Creada"
+
+#. module: tms_agreement
+#: view:tms.quotation.agreement.wizard:0
+#: field:tms.quotation.agreement.wizard,route_seleccion:0
+#: field:tms.quotation.agreement.wizard,route_seleccion_return:0
+msgid "Selecciona la Ruta de Partida"
+msgstr "Selecciona la Ruta de Partida"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 view:tms.quotation:0
+msgid "search inside the greement "
+msgstr "Buscar dentro del acuerdo"
+
+#. module: tms_agreement
+#: field:tms.quotation,load_operating_cost:0
+msgid "Cargar Costos Operativos Automaticamente"
+msgstr "Cargar Costos Operativos Automaticamente"
+
+#. module: tms_agreement
+#: view:res.partner:0
+msgid "And Charging Equipment"
+msgstr "Y Equipo de Carga"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Direct Expenses"
+msgstr "Gastos Directos"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:542
+#, python-format
+msgid ""
+"agreements related to Travel %s has no Products with UoM Category = Volume "
+"or Product Qty = 0.0"
+msgstr ""
+"Acuerdos relacionados al Viaje %s no tiene productos con UoM Category = "
+"Volume or Product Qty = 0.0"
+
+#. module: tms_agreement
+#: field:tms.direct.expense,automatic:0
+#: field:tms.direct.expense,automatic_advance:0
+msgid "Automatic Advance"
+msgstr "Anticipo Automático"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "agreement"
+msgstr "Acuerdo"
+
+#. module: tms_agreement
+#: field:tms.quotation,move_amount:0
+msgid "Shunting"
+msgstr "Maniobras"
+
+#. module: tms_agreement
+#: field:tms.agreement,hours_start_upload:0
+msgid "Start to Upload"
+msgstr "Inicio de Carga"
+
+#. module: tms_agreement
+#: field:tms.agreement.line,discount:0
+msgid "Discount (%)"
+msgstr "Descuento (%)"
+
+#. module: tms_agreement
+#: field:tms.administrative.cost,name:0 field:tms.operating.cost,name:0
+msgid "Concept"
+msgstr "Concepto"
+
+#. module: tms_agreement
+#: selection:factor.quotation,framework:0
+#: selection:tms.quotation.route,framework:0
+msgid "Any"
+msgstr "Cualquier"
+
+#. module: tms_agreement
+#: field:tms.agreement.line,product_uom:0
+#: field:tms.agreement.shipped_product,product_uom:0
+#: field:tms.direct.expense,product_uom:0
+#: field:tms.quotation.route,product_uom:0
+msgid "Unit of Measure "
+msgstr "Unidad de medida"
+
+#. module: tms_agreement
+#: field:tms.quotation,administrative_amount_all:0
+msgid "Administratives Exenses Amount"
+msgstr "Monto de Gastos Administrativos"
+
+#. module: tms_agreement
+#: help:tms.agreement,amount_declared:0
+msgid " Load value amount declared for insurance purposes..."
+msgstr "Cantidad de carga valor declarado para efectos del seguro ..."
+
+#. module: tms_agreement
+#: field:tms.agreement,product_qty:0
+msgid "Sum Qty"
+msgstr "Suma Ctdd"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Billing Concepts"
+msgstr "Conceptos de Cobro"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Route:"
+msgstr "Ruta:"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Join x Km Shot"
+msgstr "Ingreso x Km rodado"
+
+#. module: tms_agreement
+#: field:tms.agreement.travel,dolly_id:0
+msgid "Dolly"
+msgstr "Dolly"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,tractor_insurance:0
+msgid "Tractor Insurance"
+msgstr "Seguro por Tractores"
+
+#. module: tms_agreement
+#: field:tms.quotation,amount_total_diesel:0
+#: field:tms.quotation,money_diesel:0
+msgid "$ Diesel"
+msgstr "$ Diesel"
+
+#. module: tms_agreement
+#: field:tms.agreement.travel,employee2_id:0
+msgid "Driver 2"
+msgstr "Operador 2"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:200
+#, python-format
+msgid "Product not found for freight  tms_category = Freight !!!"
+msgstr "No se encontro un producto para Flete tms_category = Freight !!!"
+
+#. module: tms_agreement
+#: help:tms.agreement.line,discount:0
+msgid "Please use 99.99 format..."
+msgstr "Por favor usa el formato 99.99    ..."
+
+#. module: tms_agreement
+#: field:tms.quotation,amount_monthly_administrative:0
+#: field:tms.quotation,amount_monthly_fixed:0
+msgid "Amount Acumulated Monthly"
+msgstr "Monto mensual Acumulado"
+
+#. module: tms_agreement
+#: selection:factor.quotation,category:0
+#: field:tms.agreement.travel,employee_id:0
+#: field:tms.direct.expense,expense_employee_id:0
+msgid "Driver"
+msgstr "Operador"
+
+#. module: tms_agreement
+#: field:tms.agreement,amount_declared:0
+msgid "Amount Declared"
+msgstr "Monto Declarado"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1232
+#, python-format
+msgid "Agreement <em>%s</em> <b>has been Eliminated</b>."
+msgstr "El Acuerdo <em>%s</em> <b> ah sido Eliminado</b>."
+
+#. module: tms_agreement
+#: field:tms.agreement,indirect_amount:0
+msgid "Indirect Amount Total  $"
+msgstr "Monto total Indirecto $"
+
+#. module: tms_agreement
+#: view:res.partner:0
+msgid "Team p / load"
+msgstr "Team p / load"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,dolly_insurance:0
+msgid "Dolly Insurance"
+msgstr "Seguro por Dolly"
+
+#. module: tms_agreement
+#: field:tms.quotation,total_tons:0
+msgid "Total Tonnes"
+msgstr "Total Tons"
+
+#. module: tms_agreement
+#: view:product.product:0 field:product.product,tms_category_default:0
+msgid "Default"
+msgstr "Default"
+
+#. module: tms_agreement
+#: view:tms.quotation:0 field:tms.quotation,administrative_expenses_ids:0
+msgid "Administrative Expenses"
+msgstr "Gastos Administrativos"
+
+#. module: tms_agreement
+#: field:tms.agreement,message_summary:0 view:tms.quotation:0
+#: field:tms.quotation,message_summary:0
+msgid "Summary"
+msgstr "Resumen"
+
+#. module: tms_agreement
+#: field:tms.quotation,total_kms:0
+msgid "Total Kms"
+msgstr "Total Kms"
+
+#. module: tms_agreement
+#: field:tms.quotation,operator_salary:0
+msgid "Operator Salary"
+msgstr "Salario del Operador"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:605
+#: code:addons/tms_agreement/tms_quotation.py:1726
+#: code:addons/tms_agreement/tms_quotation.py:1853
+#: code:addons/tms_agreement/tms_quotation.py:1959
+#: code:addons/tms_agreement/tms_quotation.py:1985
+#: code:addons/tms_agreement/tms_quotation.py:2011
+#: code:addons/tms_agreement/tms_quotation.py:2037
+#, python-format
+msgid "Error al Crear el Acuerdo !"
+msgstr "Error al Crear el Acuerdo !"
+
+#. module: tms_agreement
+#: model:ir.actions.act_window,name:tms_agreement.quotation_tms_action
+msgid "Quotations"
+msgstr "Cotizaciones"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:580
+#, python-format
+msgid ""
+"quotation %s has no Products with UoM Category = Volume or Product Qty = 0.0"
+msgstr ""
+"La Cotizacion %s no tiene dedinido un producto UoM Category = Volume or "
+"Product Qty = 0.0"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:133
+#: selection:factor.quotation,factor_type:0 view:tms.agreement:0
+#: selection:tms.quotation.route,factor_type:0
+#, python-format
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: tms_agreement
+#: field:factor.quotation,quotation_id:0
+#: field:tms.administrative.cost,quotation_id:0
+#: field:tms.operating.cost,quotation_id:0
+#: field:tms.quotation.route,quotation_id:0
+msgid "Quotation ID"
+msgstr "ID Cotizacion"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_administrative_cost
+#: model:ir.model,name:tms_agreement.model_tms_operating_cost
+#: view:tms.quotation:0 field:tms.quotation,operating_cost_ids:0
+msgid "Fixed Operating Costs"
+msgstr "Costos Fijos Operativos"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Custommer"
+msgstr "Cliente"
+
+#. module: tms_agreement
+#: field:res.partner,credit_days:0
+msgid "Credit Days"
+msgstr "Dias de Credito"
+
+#. module: tms_agreement
+#: field:tms.agreement,fiscal_position:0
+msgid "Fiscal Position"
+msgstr "Posición Fiscal"
+
+#. module: tms_agreement
+#: model:ir.actions.act_window,help:tms_agreement.act_res_partner_2_agreements
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create Agreement for this Customer.\n"
+"              </p><p>\n"
+"                Hesatec is Partner to implementation for OpenERP.\n"
+"              </p><p>\n"
+"                The following list shows a list of invoices that match the "
+"pay periods defined for the customer\n"
+"              </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                Click to create Agreement for this Customer.\n"
+"              </p><p>\n"
+"                Hesatec is Partner to implementation for OpenERP.\n"
+"              </p><p>\n"
+"                The following list shows a list of invoices that match the "
+"pay periods defined for the customer\n"
+"              </p>\n"
+"            "
+
+#. module: tms_agreement
+#: selection:res.partner,path_flow:0
+msgid "Federal"
+msgstr "Federal"
+
+#. module: tms_agreement
+#: field:res.partner,polines:0
+msgid "Polines"
+msgstr "Polines"
+
+#. module: tms_agreement
+#: field:tms.agreement,quotation_id:0
+msgid " Quotation"
+msgstr "Cotizacion"
+
+#. module: tms_agreement
+#: model:ir.ui.menu,name:tms_agreement.menu_tms_config_parameter
+msgid "Parameter's"
+msgstr "Parametros"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:653
+#, python-format
+msgid ""
+"Product not found for Driver Payment,  name = Supplier Payment or Pago al "
+"Proveedores !!!"
+msgstr "No se encontro un producto para Salario del Operador!!!"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:572
+#, python-format
+msgid "quotation %s has no Products with Quantity > 0.0"
+msgstr "La Cotizacion  %s no puede tener productos con Cantidad > 0.0"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,movers:0
+msgid "Movers"
+msgstr "Movedores"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Kms:"
+msgstr "Kms:"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Driver Factors"
+msgstr "Factor Operador"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Join x Km Productive"
+msgstr "Ingreso x Km productivo"
+
+#. module: tms_agreement
+#: constraint:tms.quotation:0
+msgid "Error ! No se pueden tener 2 Rutas Marcadas "
+msgstr "Error ! No se pueden tener 2 Rutas Marcadas "
+
+#. module: tms_agreement
+#: field:factor.quotation,fixed_amount:0
+#: field:tms.quotation.route,fixed_amount:0
+msgid "Fixed Amount"
+msgstr "Monto Fijo"
+
+#. module: tms_agreement
+#: field:factor.quotation,range_start:0
+msgid "Range Start"
+msgstr "Rango Inicio"
+
+#. module: tms_agreement
+#: field:res.partner,banners_p:0
+msgid "Banners"
+msgstr "Banners"
+
+#. module: tms_agreement
+#: field:tms.direct.expense,price_unit:0
+msgid "Price Unit"
+msgstr "Precio Unitario"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,insurance_satellite_equipment:0
+msgid "Insurance Satellite Equipment"
+msgstr "Seguro x Eq. Satelital de Rastreo"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1761
+#, python-format
+msgid ""
+"La Cotizacion %s se encuentra en el Estado Borrador, Confirmelo antes de "
+"crear el Acuerdo ..."
+msgstr ""
+"La Cotizacion %s se encuentra en el Estado Borrador, Confirmelo antes de "
+"crear el Acuerdo ..."
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Acumulated Monthly"
+msgstr "Acumulado Mensual"
+
+#. module: tms_agreement
+#: field:res.partner,charge_insurance:0
+msgid "Charge Insurance"
+msgstr "Seguro de la Carga"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Route's"
+msgstr "Rutas"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Type Armed"
+msgstr "Tipo de Armado"
+
+#. module: tms_agreement
+#: field:res.partner,payment_schedule:0
+msgid "Payment schedule"
+msgstr "Calendario de Pagos"
+
+#. module: tms_agreement
+#: field:res.partner,path_flow:0
+msgid "Path to Flow"
+msgstr "Ruta del Flujo"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:155
+#, python-format
+msgid "Could calculate Amount for Agreement !"
+msgstr "No se puede obtener el Monto del Acuerdo !"
+
+#. module: tms_agreement
+#: help:tms.agreement,partner_order_id:0
+msgid ""
+"The name and address of the contact who requested the order or quotation."
+msgstr "El nombre y dirección de contacto quien pidió la orden o cotización."
+
+#. module: tms_agreement
+#: field:sale.shop,tms_agreement_seq:0
+msgid "Agreement Sequence"
+msgstr "Secuencia del Acuerdo"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:951
+#: code:addons/tms_agreement/tms_quotation.py:1154
+#, python-format
+msgid "Error de Configuracion!"
+msgstr "Error de Configuracion!"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1220
+#, python-format
+msgid "Quotation %s <em>%s</em> <b>done</b>."
+msgstr "Cotizacion %s <em>%s</em> <b> Finalizada</b>."
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_quotation
+msgid "Quotations for TMS"
+msgstr "Cotizacion para TMS"
+
+#. module: tms_agreement
+#: view:tms.quotation:0 field:tms.quotation.route,income:0
+msgid "Income"
+msgstr "Ingresos"
+
+#. module: tms_agreement
+#: field:tms.quotation.agreement.wizard,quotation_id:0
+msgid "Active ID"
+msgstr "Active ID"
+
+#. module: tms_agreement
+#: field:tms.agreement,date_done:0
+msgid "Date Done"
+msgstr "Fecha de Realizado"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Total Expenditures"
+msgstr "Total de Gastos"
+
+#. module: tms_agreement
+#: constraint:tms.agreement:0
+msgid "Error ! No se puede definir mas de 1 linea por cada Factor Asignado "
+msgstr "Error ! No se puede definir mas de 1 linea por cada Factor Asignado "
+
+#. module: tms_agreement
+#: field:tms.quotation.config,ambiental_insurance:0
+msgid "Ambiental Insurance"
+msgstr "Seguro Ambiental"
+
+#. module: tms_agreement
+#: field:res.partner,bands_p:0
+msgid "Bands"
+msgstr "Bandas"
+
+#. module: tms_agreement
+#: selection:tms.quotation,type_armed:0
+msgid "Single Trailer"
+msgstr "Remolque Individual"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Descripcion:"
+msgstr "Descripción:"
+
+#. module: tms_agreement
+#: field:tms.agreement,create_uid:0
+msgid "Created by"
+msgstr "Creado por "
+
+#. module: tms_agreement
+#: field:tms.agreement.line,price_subtotal:0
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#. module: tms_agreement
+#: selection:tms.direct.expense,line_type:0
+msgid "Salary"
+msgstr "Salario"
+
+#. module: tms_agreement
+#: field:tms.direct.expense,fuel_supplier_id:0
+msgid "Fuel Supplier"
+msgstr "Proveedor de Combustible"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Operative Margin"
+msgstr "Margen Operativo"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_travel
+msgid "Travels"
+msgstr "Viajes"
+
+#. module: tms_agreement
+#: help:tms.direct.expense,credit:0
+msgid "Check this if you want to create Fuel Vouchers for this line"
+msgstr "Activar si deseamos que se cree un vale de combustible por esta linea."
+
+#. module: tms_agreement
+#: help:tms.quotation,factor_mtto_monthly:0
+msgid "Maintenance Factor Daily Average"
+msgstr "Promedio Diario de Mantenimiento"
+
+#. module: tms_agreement
+#: field:factor.quotation,control:0 field:tms.agreement.line,control:0
+#: field:tms.direct.expense,control:0
+msgid "Control"
+msgstr "Control"
+
+#. module: tms_agreement
+#: field:tms.agreement,partner_invoice_id:0
+#: field:tms.quotation.agreement.wizard,partner_invoice_id:0
+msgid "Invoice Address"
+msgstr "Dirección de Factura"
+
+#. module: tms_agreement
+#: field:tms.quotation,type_armed:0
+msgid "Type of Armed"
+msgstr "Tipo de Armado"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Route Data"
+msgstr "Datos de la ruta"
+
+#. module: tms_agreement
+#: help:tms.quotation,factor_mtto_percent:0
+msgid "Maintenance Factor %"
+msgstr "Factor de Mantenimiento %"
+
+#. module: tms_agreement
+#: view:tms.quotation.agreement.wizard:0
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#. module: tms_agreement
+#: field:tms.indirect.expense,description:0
+msgid "Descripcion"
+msgstr "Descripción"
+
+#. module: tms_agreement
+#: selection:tms.quotation,type_armed:0
+msgid "Double Trailer"
+msgstr "Doble Remolque"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:561
+#, python-format
+msgid ""
+"Product not found for Driver Payment,  (tms_category,=,freight),"
+"(tms_default_supplier_freight,=,True) !!!"
+msgstr ""
+"No se encontro un producto para Pago del Operador,  (tms_category,=,freight),"
+"(tms_default_supplier_freight,=,True) !!!"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 view:tms.quotation:0
+msgid ""
+"$('.oe_picture').load(function() { if($(this).width() > $(this).height()) "
+"{ $(this).addClass('oe_employee_picture_wide') } });"
+msgstr ""
+"$('.oe_picture').load(function() { if($(this).width() > $(this).height()) "
+"{ $(this).addClass('oe_employee_picture_wide') } });"
+
+#. module: tms_agreement
+#: field:tms.agreement,account_periods_ids:0
+msgid "Accounts for this product"
+msgstr "Periodos para el producto"
+
+#. module: tms_agreement
+#: field:tms.agreement,departure_address_id:0
+#: field:tms.quotation.agreement.wizard,departure_address_id:0
+msgid "Departure Address"
+msgstr "Dirección de partida"
+
+#. module: tms_agreement
+#: field:tms.agreement.line,line_type:0 field:tms.direct.expense,line_type:0
+msgid "Line Type"
+msgstr "Tipo de linea"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:402
+#, python-format
+msgid "Configuration Error Found no Predefined Parameters !!!"
+msgstr ""
+"Error de Configuracion, no se encontro Ningun Registro de Parametros!!!"
+
+#. module: tms_agreement
+#: field:factor.quotation,factor:0
+msgid "Factor"
+msgstr "Factor"
+
+#. module: tms_agreement
+#: field:factor.quotation,category:0
+msgid "Type"
+msgstr "Typo"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_agreement_travel
+#: model:ir.model,name:tms_agreement.model_tms_quotation_agreement_wizard
+msgid "Make Travel from Agreement"
+msgstr "Generar viaje desde el Acuerdo"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Direct Expense"
+msgstr "Gastos Directos"
+
+#. module: tms_agreement
+#: field:tms.quotation,factor_tires:0
+#: field:tms.quotation.config,factor_tires:0
+msgid "Tires Factor"
+msgstr "Factor Llantas"
+
+#. module: tms_agreement
+#: field:tms.agreement.line,product_uom_qty:0
+#: field:tms.agreement.shipped_product,product_uom_qty:0
+#: field:tms.direct.expense,product_uom_qty:0
+msgid "Quantity (UoM)"
+msgstr "Cantidad (UoM)"
+
+#. module: tms_agreement
+#: field:tms.agreement,create_date:0
+msgid "Creation Date"
+msgstr "Fecha de creación"
+
+#. module: tms_agreement
+#: field:tms.quotation,amount_percentage_variable:0
+msgid "Total %"
+msgstr "Total %"
+
+#. module: tms_agreement
+#: model:ir.actions.act_window,name:tms_agreement.agreement_tms_action
+#: model:ir.model,name:tms_agreement.model_tms_agreement view:tms.agreement:0
+#: field:tms.agreement.line,agreement_id:0
+#: field:tms.agreement.shipped_product,agreement_id:0
+#: field:tms.direct.expense,agreement_id:0 field:tms.factor,agreement_id:0
+#: field:tms.indirect.expense,agreement_id:0
+#: field:tms.quotation,agreement_id:0 field:tms.unit.category,agreement_id:0
+#: field:tms.waybill,agreement:0 field:tms.waybill.extradata,agreement_id:0
+#: field:tms.waybill.line,agreement_id:0
+#: field:tms.waybill.shipped_product,agreement_id:0
+msgid "Agreement"
+msgstr "Acuerdo"
+
+#. module: tms_agreement
+#: constraint:product.product:0
+msgid ""
+"Error ! Al Seleccionar el tipo de producto como gasto indirecto es necesario "
+"seleccionar si es Gasto Administrativo o Costo Fijo Operativo"
+msgstr ""
+"Error ! Al Seleccionar el tipo de producto como gasto indirecto es necesario "
+"seleccionar si es Gasto Administrativo o Costo Fijo Operativo"
+
+#. module: tms_agreement
+#: help:product.product,tms_category_default:0
+msgid ""
+"Activar Esta casilla para poder Utilizar este producto en Cotizaciones y "
+"Acuerdos"
+msgstr ""
+"Activar Esta casilla para poder Utilizar este producto en Cotizaciones y "
+"Acuerdos"
+
+#. module: tms_agreement
+#: view:res.partner:0 field:res.partner,charging_equipment_ids:0
+msgid "Chargind and Equipment"
+msgstr "Carga y Equipo"
+
+#. module: tms_agreement
+#: field:tms.direct.expense,credit:0
+msgid "Automatic Fuel"
+msgstr "Combustible Automático"
+
+#. module: tms_agreement
+#: field:tms.agreement,date_drafted:0
+msgid "Date Drafted"
+msgstr "Fecha Borrador"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 field:tms.agreement.line,tax_amount:0
+#: field:tms.direct.expense,tax_amount:0
+msgid "Tax Amount"
+msgstr "Total Impuestos"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:1086
+#, python-format
+msgid ""
+"Agreements related to Travel %s has no Products with UoM Category = Weight "
+"or Product Qty = 0.0"
+msgstr ""
+"Agreements related to Travel %s has no Products with UoM Category = Weight "
+"or Product Qty = 0.0"
+
+#. module: tms_agreement
+#: field:factor.quotation,mixed:0 field:tms.quotation.route,mixed:0
+msgid "Mixed"
+msgstr "Mixto"
+
+#. module: tms_agreement
+#: field:factor.quotation,expense_id:0 field:tms.direct.expense,expense_id:0
+msgid "Expense"
+msgstr "Gasto"
+
+#. module: tms_agreement
+#: help:tms.agreement,message_summary:0 help:tms.quotation,message_summary:0
+msgid ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+msgstr ""
+"Holds the Chatter summary (number of messages, ...). This summary is "
+"directly in html format in order to be inserted in kanban views."
+
+#. module: tms_agreement
+#: field:factor.quotation,factor_type:0
+#: field:tms.quotation.route,factor_type:0
+msgid "Factor Type"
+msgstr "Tipo de Factor"
+
+#. module: tms_agreement
+#: field:tms.agreement,currency_id:0 field:tms.quotation,currency_id:0
+#: field:tms.quotation.agreement.wizard,currency_id:0
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: tms_agreement
+#: field:tms.agreement,others_charges_calculate:0
+msgid "Impuestos  $"
+msgstr "Impuestos  $"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:1152
+#, python-format
+msgid "Agreement <em>%s</em> <b>done</b>."
+msgstr "Acuerdo <em>%s</em> <b>realizado</b>."
+
+#. module: tms_agreement
+#: field:tms.agreement.travel,trailer2_id:0
+msgid "Trailer2"
+msgstr "Tráiler2"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Extra Fields"
+msgstr "Campos Extra"
+
+#. module: tms_agreement
+#: help:tms.quotation,factor_tires_monthly:0
+msgid "Tires Factor Daily Average"
+msgstr "Factor de Promedio Diario de Llantas"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,operators:0
+msgid "Operators"
+msgstr "Operadores"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Expenditures"
+msgstr "Gastos"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Expenditures Sum"
+msgstr "Suma de Gastos"
+
+#. module: tms_agreement
+#: field:tms.agreement,hours_end_download_lib_docs_download:0
+msgid "End Download to Lib. Docs. DwnLd"
+msgstr "Fin Descarga a Lib. Docs. Dscga."
+
+#. module: tms_agreement
+#: field:tms.operating.cost,acumulated_moth:0
+msgid "Accumulated C. Month"
+msgstr "Monto Acumulado A."
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:299
+#: funciones.py:366 funciones.py:427 funciones.py:488
+#, python-format
+msgid ""
+"agreement %s has no Products with UoM Category = Volume or Product Qty = 0.0"
+msgstr ""
+"En el Acuerdo %s no se encontro un producto UoM Category = Volume or Product "
+"Qty = 0.0"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Operating Variable Costs"
+msgstr "Operating Variable Costs"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:606
+#: code:addons/tms_agreement/tms_quotation.py:1986
+#, python-format
+msgid "No se tiene un producto configurado de tipo Caseta por Defecto"
+msgstr "No se tiene un producto configurado de tipo Caseta por Defecto"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:668
+#, python-format
+msgid ""
+"Product not found for Driver Payment,  (tms_category,=,salary) and "
+"(tms_default_salary=True) !!!"
+msgstr ""
+"No se encontro un producto para Pago del Operador,  (tms_category,=,salary) "
+"and (tms_default_salary=True) !!!"
+
+#. module: tms_agreement
+#: selection:tms.direct.expense,line_type:0
+msgid "Made-up Expense"
+msgstr "Compuesto por gastos"
+
+#. module: tms_agreement
+#: field:tms.quotation,route_ids:0
+msgid "unknown"
+msgstr "Desconocido"
+
+#. module: tms_agreement
+#: field:tms.agreement.line,price_total:0
+msgid "Total Amount"
+msgstr "Monto Total"
+
+#. module: tms_agreement
+#: field:tms.agreement,message_is_follower:0
+#: field:tms.quotation,message_is_follower:0
+msgid "Is a Follower"
+msgstr "Es un seguidor"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:155
+#: code:addons/tms_agreement/tms_agreement.py:415
+#, python-format
+msgid "You have not defined Travel Sequence for shop "
+msgstr ""
+"Tu no as definido una secuencia para el viaje en la tienda Ventas -> "
+"Configuracion -> Tienda"
+
+#. module: tms_agreement
+#: field:tms.agreement,date:0
+msgid "Date"
+msgstr "Fecha"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Notas"
+msgstr "Notas"
+
+#. module: tms_agreement
+#: help:tms.agreement,state:0
+msgid ""
+"Gives the state of the agreement. \n"
+" -The exception state is automatically set when a cancel operation occurs in "
+"the invoice validation (Invoice Exception) or in the picking list process "
+"(Shipping Exception). \n"
+"The 'Waiting Schedule' state is set when the invoice is confirmed but "
+"waiting for the scheduler to run on the date 'Ordered Date'."
+msgstr ""
+"Indica el estado del acuerdo.  n  -El estado de excepción se ajusta "
+"automáticamente cuando se produce una operación de cancelación en la "
+"validación de factura (factura de excepción) o en el proceso de lista de "
+"picking (Excepción de despacho).  nEl 'Lista de Espera' estado se establece "
+"cuando la factura está confirmada, pero esperar el planificador para "
+"ejecutar en 'Date Pedido \"de la fecha."
+
+#. module: tms_agreement
+#: field:factor.quotation,variable_amount:0
+#: field:tms.quotation.route,variable_amount:0
+msgid "Variable"
+msgstr "Variable"
+
+#. module: tms_agreement
+#: help:tms.quotation,factor_tires_travel_days:0
+msgid "TiresFactor Travel Days"
+msgstr "Factor Dias de Viaje en Llantas"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Unit Category:"
+msgstr "Categoria de Unidad:"
+
+#. module: tms_agreement
+#: model:ir.ui.menu,name:tms_agreement.menu_tms_agreement_01
+msgid "Agreement's"
+msgstr "Acuerdos"
+
+#. module: tms_agreement
+#: view:tms.quotation:0 field:tms.quotation,total_ingr:0
+msgid "Total Income"
+msgstr "Total de Ingresos"
+
+#. module: tms_agreement
+#: field:tms.agreement,date_end:0 field:tms.agreement,date_end_calc:0
+#: field:tms.quotation.agreement.wizard,date_end:0
+msgid "Date End"
+msgstr "Fecha Fin"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Seq"
+msgstr "Sec"
+
+#. module: tms_agreement
+#: field:tms.agreement,hours_lib_docs_prog_download:0
+msgid "Lib. Docs. UpLd to Prog DwnLd"
+msgstr "Lib. Docs. Carga a Prod Dscga."
+
+#. module: tms_agreement
+#: help:tms.quotation,factor_mtto_travel_days:0
+msgid "Maintenance Factor Travel Days"
+msgstr "Factor de Mantenimiento por dias de viaje"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Inactive"
+msgstr "Inactivo"
+
+#. module: tms_agreement
+#: model:ir.actions.act_window,name:tms_agreement.quotation_config_action
+msgid "Quotations Parameters"
+msgstr "Parametros para Cotizaciones"
+
+#. module: tms_agreement
+#: selection:factor.quotation,framework:0 field:tms.agreement.travel,unit_id:0
+#: selection:tms.quotation.route,framework:0
+msgid "Unit"
+msgstr "Unidad"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Supplier Factors"
+msgstr "Factor Proveedor"
+
+#. module: tms_agreement
+#: view:product.product:0
+msgid "Administratives Expenses"
+msgstr "Gastos Administrativos"
+
+#. module: tms_agreement
+#: field:res.partner,other:0
+msgid "Other"
+msgstr "Otro"
+
+#. module: tms_agreement
+#: view:tms.quotation.config:0
+msgid "Quotation's Parameters"
+msgstr "Parametros para Cotizaciones"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:841
+#: code:addons/tms_agreement/tms_agreement.py:908
+#: code:addons/tms_agreement/tms_agreement.py:969
+#: code:addons/tms_agreement/tms_agreement.py:1030
+#: code:addons/tms_agreement/tms_quotation.py:168
+#, python-format
+msgid ""
+"Agreement %s has no Products with UoM Category = Weight or Product Qty = 0.0"
+msgstr ""
+"El Acuerdo %s no puede tener productos con  UoM Category = Weight or Product "
+"Qty = 0.0"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:273
+#: funciones.py:342 funciones.py:403 funciones.py:464
+#, python-format
+msgid "agreement %s is not assigned to a Travel"
+msgstr "El Acuerdo %s no esta Asignado a un Viaje!"
+
+#. module: tms_agreement
+#: field:tms.agreement,arrival:0 field:tms.agreement,arrival_2:0
+#: field:tms.agreement,arrival_id:0 field:tms.travel,arrival_2:0
+msgid "Arrival"
+msgstr "Llegada"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1714
+#, python-format
+msgid ""
+"No se tiene Configurado un producto con las caracteristicas Flete "
+"(tms_category, =, freight),(tms_default_freight,=,True),(active,=, 1)"
+msgstr ""
+"No se tiene Configurado un producto con las caracteristicas Flete "
+"(tms_category, =, freight),(tms_default_freight,=,True),(active,=, 1)"
+
+#. module: tms_agreement
+#: field:tms.agreement,partner_order_id:0
+#: field:tms.quotation.agreement.wizard,partner_order_id:0
+msgid "Ordering Contact"
+msgstr "Direccion de Contacto"
+
+#. module: tms_agreement
+#: model:ir.actions.act_window,name:tms_agreement.action_view_create_travel
+msgid "Create Travel from Agreement"
+msgstr "Generar Viaje desde el Acuerdo"
+
+#. module: tms_agreement
+#: field:tms.agreement,distance_route:0
+msgid "Distance (mi./kms)"
+msgstr "Distancia (mi./kms)"
+
+#. module: tms_agreement
+#: field:tms.agreement.travel,kit_id:0
+msgid "Kit"
+msgstr "Kit"
+
+#. module: tms_agreement
+#: help:tms.operating.cost,acumulated_moth:0
+msgid "Accumulated Current Month"
+msgstr "Acumulado del Mes"
+
+#. module: tms_agreement
+#: constraint:product.product:0
+msgid "Error ! Solo se puede Definir un solo producto por Default"
+msgstr "Error ! Solo se puede Definir un solo producto por Default"
+
+#. module: tms_agreement
+#: field:factor.quotation,name:0 view:tms.agreement:0
+#: field:tms.agreement,description:0 field:tms.agreement,name:0
+#: view:tms.quotation:0 field:week.days,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Income Sum"
+msgstr "Suma de Ingresos"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 view:tms.quotation:0
+msgid "Re-Calcular"
+msgstr "Re-Calcular"
+
+#. module: tms_agreement
+#: field:tms.quotation,uncharged_performance:0
+#: field:tms.quotation.config,uncharged_performance:0
+msgid "Uncharged Performance"
+msgstr "Rendimiento Vacio"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 view:tms.quotation.agreement.wizard:0
+msgid "Expiration"
+msgstr "Expiración"
+
+#. module: tms_agreement
+#: field:factor.quotation,range_end:0
+msgid "Range End"
+msgstr "Rango Final"
+
+#. module: tms_agreement
+#: field:factor.quotation,total_amount:0
+#: field:tms.direct.expense,price_total:0
+#: field:tms.quotation.route,total_amount:0
+msgid "Total"
+msgstr "Total"
+
+#. module: tms_agreement
+#: field:tms.quotation,amount_travel_days_administrative:0
+#: field:tms.quotation,amount_travel_days_fixed:0
+msgid "Amount Acumulated Travel Days"
+msgstr "Monto Acumulado por los Dias de Viaje"
+
+#. module: tms_agreement
+#: field:tms.agreement,agreement_indirect_expense_line:0
+msgid "Expenses Indirect"
+msgstr "Gastos Indirectos"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_waybill
+msgid "Waybills"
+msgstr "Cartas Porte"
+
+#. module: tms_agreement
+#: selection:factor.quotation,framework:0
+#: selection:tms.quotation.route,framework:0
+msgid "Single"
+msgstr "Solo"
+
+#. module: tms_agreement
+#: selection:tms.direct.expense,line_type:0
+msgid "Indirect"
+msgstr "Indirecto"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Utility"
+msgstr "Utilidad"
+
+#. module: tms_agreement
+#: field:tms.agreement,final_cost:0
+msgid "Final Cost  $"
+msgstr "Costo Final $"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1214
+#, python-format
+msgid "Quotation %s <em>%s</em> <b>drafted </b>."
+msgstr "Cotizacion %s <em>%s</em> <b>Borrador </b>."
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:564
+#, python-format
+msgid ""
+"quotation %s has no Products with UoM Category = Weight or Product Qty = 0.0"
+msgstr ""
+"En Cotizacion %s no puede existir un producto UoM Category = Weight or "
+"Product Qty = 0.0"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 view:tms.quotation:0
+msgid "Group By..."
+msgstr "Agrupar por..."
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Shop:"
+msgstr "Tienda:"
+
+#. module: tms_agreement
+#: help:tms.agreement,hours_route:0
+msgid "Route Hours."
+msgstr "Horas de la Ruta."
+
+#. module: tms_agreement
+#: field:tms.agreement,date_confirmed:0
+msgid "Date Confirmed"
+msgstr "Fecha Confirmación"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:129
+#: selection:factor.quotation,factor_type:0
+#: selection:tms.quotation.route,factor_type:0
+#, python-format
+msgid "Distance Route (Km/Mi)"
+msgstr "Distancia de la Ruta (Km/Mi)"
+
+#. module: tms_agreement
+#: field:tms.waybill,agreement_origin:0
+msgid "Source Agreement"
+msgstr "Acuerdo Origen"
+
+#. module: tms_agreement
+#: field:tms.agreement,message_unread:0 field:tms.quotation,message_unread:0
+msgid "Unread Messages"
+msgstr "Mensajes no leídos"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:1168
+#, python-format
+msgid "Agreement <em>%s</em> <b>cancelled</b>."
+msgstr "Acuerdo <em>%s</em> <b>cancelado</b>."
+
+#. module: tms_agreement
+#: field:charging.equipment,measures:0
+msgid "Measures"
+msgstr "Medidas"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:282
+#: funciones.py:290 funciones.py:298 funciones.py:349 funciones.py:357
+#: funciones.py:365 funciones.py:410 funciones.py:418 funciones.py:426
+#: funciones.py:471 funciones.py:479 funciones.py:487 funciones.py:527
+#: funciones.py:534 funciones.py:541
+#: code:addons/tms_agreement/tms_agreement.py:840
+#: code:addons/tms_agreement/tms_agreement.py:848
+#: code:addons/tms_agreement/tms_agreement.py:856
+#: code:addons/tms_agreement/tms_agreement.py:907
+#: code:addons/tms_agreement/tms_agreement.py:915
+#: code:addons/tms_agreement/tms_agreement.py:923
+#: code:addons/tms_agreement/tms_agreement.py:968
+#: code:addons/tms_agreement/tms_agreement.py:976
+#: code:addons/tms_agreement/tms_agreement.py:984
+#: code:addons/tms_agreement/tms_agreement.py:1029
+#: code:addons/tms_agreement/tms_agreement.py:1037
+#: code:addons/tms_agreement/tms_agreement.py:1045
+#: code:addons/tms_agreement/tms_agreement.py:1085
+#: code:addons/tms_agreement/tms_agreement.py:1092
+#: code:addons/tms_agreement/tms_agreement.py:1099
+#: code:addons/tms_agreement/tms_quotation.py:167
+#: code:addons/tms_agreement/tms_quotation.py:179
+#: code:addons/tms_agreement/tms_quotation.py:191
+#: code:addons/tms_agreement/tms_quotation.py:563
+#: code:addons/tms_agreement/tms_quotation.py:571
+#: code:addons/tms_agreement/tms_quotation.py:579
+#, python-format
+msgid "Could calculate Freight Amount !"
+msgstr "No se pudo Calcular el monto del Flete !"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_factor
+msgid "Factors to calculate Payment (Driver/Supplier) & Client charge"
+msgstr "Factores para calcular el Pago (Operador/Proveed) & Cobro a cliente"
+
+#. module: tms_agreement
+#: field:tms.administrative.cost,product_id:0
+msgid "Concep"
+msgstr "Concepto"
+
+#. module: tms_agreement
+#: field:tms.agreement,agreement_shipped_product:0
+msgid "Shipped Products"
+msgstr "Productos Embarcador"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_direct_expense
+msgid "Directs expenses lines"
+msgstr "Lineas de gatos directos"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,factor_administrative_expenses:0
+msgid "Factor Administrative Expenses"
+msgstr "Factor Gastos Administrativos"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Agreement Search"
+msgstr "Buscar Acuerdo"
+
+#. module: tms_agreement
+#: field:tms.quotation,load_administrative_expenses:0
+msgid "Cargar Gastos Administrativos"
+msgstr "Cargar Gastos Administrativos"
+
+#. module: tms_agreement
+#: field:factor.quotation,notes:0 field:res.partner,notes_payment:0
+#: view:tms.agreement:0 field:tms.agreement,notes:0
+#: field:tms.agreement.line,notes:0
+#: field:tms.agreement.shipped_product,notes:0
+#: field:tms.direct.expense,notes:0 field:tms.indirect.expense,notes:0
+#: view:tms.quotation:0 field:tms.quotation,notes:0
+#: field:tms.quotation.route,notes:0
+msgid "Notes"
+msgstr "Notas"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_quotation_config
+msgid "Parameters for TMS QUOTATION"
+msgstr "Parametros para la Cotizacion en TMS"
+
+#. module: tms_agreement
+#: field:tms.agreement.line,tax_id:0 field:tms.direct.expense,tax_id:0
+msgid "Taxes"
+msgstr "Impuestos"
+
+#. module: tms_agreement
+#: view:tms.quotation.agreement.wizard:0
+msgid "_Generate Agreement"
+msgstr "_Generar Acuerdo"
+
+#. module: tms_agreement
+#: field:tms.agreement.travel,waybill_created_id:0
+msgid "ID Waybill Created"
+msgstr "ID Carta Porte Creada"
+
+#. module: tms_agreement
+#: field:tms.agreement,hours_total_travel:0
+msgid "Total Time for Travel in Hrs."
+msgstr "Tiempo rotal para el viaje en Hrs."
+
+#. module: tms_agreement
+#: view:tms.agreement.travel:0
+msgid "Generate Travel"
+msgstr "Generar Viajes"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:2164
+#, python-format
+msgid "TMS AGREEMENTS"
+msgstr "TMS AGREEMENTS"
+
+#. module: tms_agreement
+#: field:tms.agreement,done_by:0
+msgid "Done by"
+msgstr "Realizado por"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:135
+#: selection:factor.quotation,factor_type:0
+#, python-format
+msgid "Income Percent"
+msgstr "Income Percent"
+
+#. module: tms_agreement
+#: view:tms.agreement.travel:0
+msgid "Generar Documentacion a partir del Acuerdo ?"
+msgstr "Generar Documentacion a partir del Acuerdo ?"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:528
+#, python-format
+msgid ""
+"agreements related to Travel %s has no Products with UoM Category = Weight "
+"or Product Qty = 0.0"
+msgstr ""
+"En Acuerdos  %s no puede haber un producto UoM Category = Weight or Product "
+"Qty = 0.0"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 view:tms.quotation:0
+msgid "Reset to Draft"
+msgstr "Regresar a Borrador"
+
+#. module: tms_agreement
+#: field:tms.quotation,state:0
+msgid "Quotation State"
+msgstr "Estado de la Cotizacion"
+
+#. module: tms_agreement
+#: field:charging.equipment,tons_month:0
+msgid "Emb. Tons/Month"
+msgstr "Emb. Tons/Mes"
+
+#. module: tms_agreement
+#: model:ir.ui.menu,name:tms_agreement.main_tms_agreement
+msgid "Agreement TMS"
+msgstr "Acuerdo TMS"
+
+#. module: tms_agreement
+#: field:factor.quotation,agreement_id:0
+msgid "Agreement ID"
+msgstr "Agreement ID"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_quotation_route
+msgid "Quotations Routes for TMS QUOTATION"
+msgstr "Rutas de la Cotizacion para TMS"
+
+#. module: tms_agreement
+#: view:tms.quotation:0 field:tms.quotation.route,kms:0
+msgid "Kms"
+msgstr "Kms"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:171
+#: funciones.py:181 funciones.py:190 funciones.py:199 funciones.py:581
+#: funciones.py:596 funciones.py:652 funciones.py:662 funciones.py:704
+#: funciones.py:759 code:addons/tms_agreement/tms_agreement.py:560
+#: code:addons/tms_agreement/tms_agreement.py:667
+#: code:addons/tms_agreement/tms_agreement.py:808
+#: code:addons/tms_agreement/tms_quotation.py:401
+#, python-format
+msgid "Error !"
+msgstr "Error !"
+
+#. module: tms_agreement
+#: help:tms.indirect.expense,automatic:0
+msgid ""
+"If this field is enabled the amount of expenses will be calculated "
+"automatically"
+msgstr ""
+"Si este campo esta activo el monto de los gastos sera calculado de manera "
+"automática."
+
+#. module: tms_agreement
+#: field:tms.quotation,liters_diesel:0
+msgid "Liters of Diesel"
+msgstr "Litros de Diesel"
+
+#. module: tms_agreement
+#: field:tms.agreement,hours_start_download_end_download:0
+msgid "Start Download to End DwnLd"
+msgstr "Inicio Descarga a Fin de Descarga"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Customer Factors"
+msgstr "Factor Cliente"
+
+#. module: tms_agreement
+#: field:tms.agreement,departure:0 field:tms.agreement,departure_2:0
+#: field:tms.agreement,departure_id:0 field:tms.travel,departure_2:0
+msgid "Departure"
+msgstr "Salida"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_waybill_line
+msgid "Waybill Line"
+msgstr "Línea de Carta Porte"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:130
+#: selection:factor.quotation,factor_type:0
+#, python-format
+msgid "Distance Real (Km/Mi)"
+msgstr "Distancia Real (Km/Mi)"
+
+#. module: tms_agreement
+#: field:tms.agreement,agreement_driver_factor:0
+msgid "Agreement Driver Payment Factors"
+msgstr "Pago de Operador para el Acuerdo"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1757
+#, python-format
+msgid ""
+"La Cotizacion Tiene el Acuerdo %s asignado, duplica el registro o crea uno "
+"Nuevamente ..."
+msgstr ""
+"La Cotizacion Tiene el Acuerdo %s asignado, duplica el registro o crea uno "
+"Nuevamente ..."
+
+#. module: tms_agreement
+#: view:tms.quotation:0 field:tms.quotation,amount_travel_days_variable:0
+msgid "Total Travel Days"
+msgstr "Dias de Viaje"
+
+#. module: tms_agreement
+#: help:tms.quotation,agreement_id:0
+msgid "Representa el Acuerdo que se genero a partir de esta Cotizacion"
+msgstr "Representa el Acuerdo que se genero a partir de esta Cotizacion"
+
+#. module: tms_agreement
+#: field:tms.agreement,image:0 field:tms.agreement,image_medium:0
+#: field:tms.agreement,image_small:0 field:tms.quotation,image:0
+#: field:tms.quotation,image_medium:0 field:tms.quotation,image_small:0
+msgid "Logo"
+msgstr "Logo"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_agreement_line
+msgid "Agreement Line"
+msgstr "Linea Acuerdo"
+
+#. module: tms_agreement
+#: field:res.partner,gatas:0
+msgid "Gatas"
+msgstr "Gatas"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Log"
+msgstr "Log"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:132
+#: selection:factor.quotation,factor_type:0 field:factor.quotation,travel_id:0
+#: field:tms.direct.expense,travel_id:0
+#: selection:tms.quotation.route,factor_type:0
+#: field:tms.travel.wizard,travel_id:0
+#, python-format
+msgid "Travel"
+msgstr "Viaje"
+
+#. module: tms_agreement
+#: constraint:tms.agreement:0
+msgid ""
+"Error ! You can not create Agreement start date is greater than the end date "
+msgstr ""
+"Error !  No puedes crear un acuerdo con fecha de inicio mayor a la fecha fin "
+"del acuerdo."
+
+#. module: tms_agreement
+#: selection:tms.agreement.line,line_type:0
+msgid "Note"
+msgstr "Nota"
+
+#. module: tms_agreement
+#: selection:res.partner,charge_insurance:0
+msgid "Uninsured"
+msgstr "Sin Seguro"
+
+#. module: tms_agreement
+#: view:tms.agreement.travel:0
+msgid "Definicion del Viaje para la Carta Porte"
+msgstr "Definicion del Viaje para la Carta Porte"
+
+#. module: tms_agreement
+#: help:tms.agreement.travel,date_start:0
+msgid ""
+"Esta Fecha/Hora es la Base para Poder Calcular las fechas de la carta Porte, "
+"hace referencia a la Fecha/Hora Base de Salida o Inicio del Viaje"
+msgstr ""
+"Esta Fecha/Hora es la Base para Poder Calcular las fechas de la carta Porte, "
+"hace referencia a la Fecha/Hora Base de Salida o Inicio del Viaje"
+
+#. module: tms_agreement
+#: field:tms.agreement.line,price_discount:0
+msgid "Discount"
+msgstr "Descuento"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 field:tms.agreement,upload_point:0
+#: field:tms.quotation.agreement.wizard,upload_point:0
+msgid "Upload Point"
+msgstr "Punto de Carga"
+
+#. module: tms_agreement
+#: field:tms.agreement,active:0 field:tms.quotation.config,active:0
+msgid "Active"
+msgstr "Activo"
+
+#. module: tms_agreement
+#: field:tms.quotation,diesel_cost:0 field:tms.quotation.config,diesel_cost:0
+msgid "Cost of Diesel"
+msgstr "Costo Diesel"
+
+#. module: tms_agreement
+#: field:tms.quotation,month_travel:0
+msgid "Month Travels"
+msgstr "Viajes al Mes"
+
+#. module: tms_agreement
+#: field:tms.administrative.cost,average_moth:0
+#: field:tms.operating.cost,average_moth:0 view:tms.quotation:0
+msgid "Average Month"
+msgstr "Promedio por Mes"
+
+#. module: tms_agreement
+#: field:tms.agreement,drafted_by:0
+msgid "Drafted by"
+msgstr "Borrador por"
+
+#. module: tms_agreement
+#: model:ir.actions.act_window,name:tms_agreement.factor_quotation_action
+msgid "Quotations Factors"
+msgstr "Factores de Cotizacion"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1207
+#, python-format
+msgid "Quotation %s <em>%s</em> <b>confirmed</b>."
+msgstr "Cotizacion %s <em>%s</em> <b>Confirmada</b>."
+
+#. module: tms_agreement
+#: field:tms.agreement,product_uom_type:0
+msgid "Product UoM Type"
+msgstr "Tipo de Producto UoM"
+
+#. module: tms_agreement
+#: sql_constraint:tms.agreement:0
+msgid "Agreement must be unique !"
+msgstr "Acuerdo debe ser unico!"
+
+#. module: tms_agreement
+#: field:tms.agreement.line,price_unit:0
+msgid "Unit Price"
+msgstr "Precio Unitario"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 selection:tms.agreement,state:0 view:tms.quotation:0
+#: selection:tms.quotation,state:0
+msgid "Done"
+msgstr "Realizado"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_indirect_expense
+msgid "Indirect Expense for Agreement"
+msgstr "Gastos Indirectos para el Acuerdo"
+
+#. module: tms_agreement
+#: field:tms.agreement,origin:0
+msgid "Source Document"
+msgstr "Documento Origen"
+
+#. module: tms_agreement
+#: view:factor.quotation:0
+msgid "Factors"
+msgstr "Factores"
+
+#. module: tms_agreement
+#: field:tms.agreement,agreement_customer_factor:0
+msgid "Agreement Customer Charge Factors"
+msgstr "Factores de Carga del Cliente para el Acuerdo"
+
+#. module: tms_agreement
+#: field:res.partner,revision_schedule:0
+msgid "Revision schedule"
+msgstr "Programa de Revision"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1960
+#, python-format
+msgid "No se tiene un producto configurado de tipo Combustible por Defecto"
+msgstr "No se tiene un producto configurado de tipo Combustible por Defecto"
+
+#. module: tms_agreement
+#: field:tms.agreement,date_cancelled:0
+msgid "Date Cancelled"
+msgstr "Fecha Cancelación"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Factors Driver and Supplier"
+msgstr "Factores Operador y Proveedor"
+
+#. module: tms_agreement
+#: selection:tms.direct.expense,line_type:0
+msgid "Fuel"
+msgstr "Combustible"
+
+#. module: tms_agreement
+#: selection:res.partner,path_flow:0
+msgid "Expressway"
+msgstr "Autopista"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_travel_wizard
+msgid "tms.travel.wizard"
+msgstr "tms.travel.wizard"
+
+#. module: tms_agreement
+#: field:tms.quotation,amount_daily_administrative:0
+#: field:tms.quotation,amount_daily_fixed:0
+msgid "Amount Acumulated Daily"
+msgstr "Monto Diario Acumulado"
+
+#. module: tms_agreement
+#: field:charging.equipment,product_id:0
+#: model:ir.model,name:tms_agreement.model_product_product
+#: view:product.product:0 selection:tms.agreement.line,line_type:0
+#: field:tms.agreement.line,product_id:0
+#: field:tms.agreement.shipped_product,product_id:0
+#: field:tms.direct.expense,product_id:0
+#: field:tms.indirect.expense,product_id:0
+#: field:tms.operating.cost,product_id:0
+#: field:tms.quotation.route,product_id:0
+msgid "Product"
+msgstr "Producto"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:582
+#: funciones.py:597 funciones.py:663 funciones.py:760
+#, python-format
+msgid "Product not found for Driver Payment,  (tms_category,=,salary) !!!"
+msgstr ""
+"No se encontro producto para el Pago del Operador,  (tms_category,=,"
+"salary) !!!"
+
+#. module: tms_agreement
+#: field:tms.agreement,state:0
+msgid "Agreement State"
+msgstr "Estado del Acuerdo"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,integrated_wage_factor:0
+msgid "Integrated Wage Factor"
+msgstr "Factor de Salario Integrado"
+
+#. module: tms_agreement
+#: view:product.product:0 field:product.product,operating_fixed_cost:0
+msgid "Operating Fixed Cost"
+msgstr "Costos Fijos Operativos"
+
+#. module: tms_agreement
+#: field:tms.quotation,operating_amount_all:0
+msgid "Operating Amount"
+msgstr "Monto de Operacion"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 view:tms.quotation:0
+msgid "State:"
+msgstr "Estado:"
+
+#. module: tms_agreement
+#: field:tms.agreement,product_weight:0
+msgid "Sum Weight"
+msgstr "Suma Peso"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_unit_category
+msgid "Types, Brands, Models, Motor Type for Transport Units"
+msgstr "Tipos, Marcas, Modelos y Tipos de Motor para las Unidades"
+
+#. module: tms_agreement
+#: field:tms.administrative.cost,travel_days:0
+#: field:tms.operating.cost,travel_days:0 view:tms.quotation:0
+#: field:tms.quotation,days:0 field:tms.quotation,diesel_mtto_travel_days:0
+#: field:tms.quotation,diesel_travel_days:0
+#: field:tms.quotation,factor_mtto_travel_days:0
+#: field:tms.quotation,factor_tires_travel_days:0
+#: field:tms.quotation,move_travel_days:0
+#: field:tms.quotation,salary_travel_days:0
+#: field:tms.quotation,summary_cost_km_travel_days:0
+#: field:tms.quotation,summary_expenditures_travel_days:0
+#: field:tms.quotation,summary_income_travel_days:0
+#: field:tms.quotation,summary_km_productive_travel_days:0
+#: field:tms.quotation,summary_margin_travel_days:0
+#: field:tms.quotation,summary_mk_shot_travel_days:0
+#: field:tms.quotation,summary_utility_km_travel_days:0
+#: field:tms.quotation,summary_utility_travel_days:0
+#: field:tms.quotation,toll_travel_days:0
+msgid "Travel Days"
+msgstr "Dias de Viaje"
+
+#. module: tms_agreement
+#: field:tms.agreement,cancelled_by:0
+msgid "Cancelled by"
+msgstr "Cancelado por"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:131
+#: selection:factor.quotation,factor_type:0 view:tms.quotation:0
+#: selection:tms.quotation.route,factor_type:0
+#: field:tms.quotation.route,product_weight:0
+#, python-format
+msgid "Weight"
+msgstr "Peso"
+
+#. module: tms_agreement
+#: view:tms.quotation:0 field:tms.quotation.route,rate:0
+msgid "Rate"
+msgstr "Tarifa"
+
+#. module: tms_agreement
+#: field:tms.quotation,name:0 field:tms.quotation.route,name:0
+msgid "Description of the Route"
+msgstr "Descripcion de la Ruta"
+
+#. module: tms_agreement
+#: field:tms.agreement,hours_route:0
+msgid "Travel Time (hrs)"
+msgstr "Tiempo de Viaje (hrs)"
+
+#. module: tms_agreement
+#: field:tms.agreement,client_order_ref:0
+msgid "Customer Reference"
+msgstr "Referencia de Cliente"
+
+#. module: tms_agreement
+#: field:tms.agreement,date_start_calc:0
+#: field:tms.agreement.travel,date_start:0
+#: field:tms.quotation.agreement.wizard,date:0
+msgid "Date Start"
+msgstr "Fecha Inicio"
+
+#. module: tms_agreement
+#: field:tms.quotation,performance_loaded:0
+msgid "Performance Loaded"
+msgstr "Rendimiento Cargado"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1686
+#: code:addons/tms_agreement/tms_quotation.py:1713
+#: code:addons/tms_agreement/tms_quotation.py:1756
+#: code:addons/tms_agreement/tms_quotation.py:1760
+#, python-format
+msgid "Error, No se puede generar el Acuerdo!"
+msgstr "Error, No se puede generar el Acuerdo!"
+
+#. module: tms_agreement
+#: field:charging.equipment,destination:0
+msgid "Destination"
+msgstr "Destino"
+
+#. module: tms_agreement
+#: field:tms.quotation,amount_daily_variable:0
+msgid "Total Daily"
+msgstr "Total Diario"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,tires:0
+msgid "Number of Tires"
+msgstr "Numero de Llantas"
+
+#. module: tms_agreement
+#: field:tms.agreement.travel,travel_created_id:0
+msgid "ID Travel Created"
+msgstr "ID Viaje Creado"
+
+#. module: tms_agreement
+#: field:tms.quotation,total_highway_toll:0
+msgid "Highway Tolls"
+msgstr "Casetas"
+
+#. module: tms_agreement
+#: field:tms.direct.expense,price_subtotal:0
+msgid "SubTotal"
+msgstr "SubTotal"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Quotation Travel"
+msgstr "Cotizacion Viaje"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:134
+#: selection:factor.quotation,factor_type:0
+#, python-format
+msgid "Volume"
+msgstr "Volumen"
+
+#. module: tms_agreement
+#: field:tms.agreement,date_start:0
+#: field:tms.quotation.agreement.wizard,date_start:0
+msgid "Date Star"
+msgstr "Fecha Inicio"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:272
+#: funciones.py:341 funciones.py:402 funciones.py:463
+#: code:addons/tms_agreement/tms_agreement.py:830
+#: code:addons/tms_agreement/tms_agreement.py:899
+#: code:addons/tms_agreement/tms_agreement.py:960
+#: code:addons/tms_agreement/tms_agreement.py:1021
+#, python-format
+msgid "Could calculate Freight amount for agreement !"
+msgstr "No se ah podido calcular el monto para el Acuerdo !"
+
+#. module: tms_agreement
+#: field:tms.agreement,company_id:0 field:tms.agreement.line,company_id:0
+#: field:tms.agreement.shipped_product,company_id:0
+#: field:tms.direct.expense,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: tms_agreement
+#: field:tms.agreement,agreement_extradata:0
+msgid "Extra Data Fields"
+msgstr "Campos de datos Extra"
+
+#. module: tms_agreement
+#: field:factor.quotation,framework:0 field:tms.quotation.route,framework:0
+msgid "Framework"
+msgstr "Framework"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:857
+#: code:addons/tms_agreement/tms_agreement.py:924
+#: code:addons/tms_agreement/tms_agreement.py:985
+#: code:addons/tms_agreement/tms_agreement.py:1046
+#: code:addons/tms_agreement/tms_quotation.py:192
+#, python-format
+msgid ""
+"Agreement %s has no Products with UoM Category = Volume or Product Qty = 0.0"
+msgstr ""
+"El Acuerdo %s no puede tener productos  UoM Category = Volume or Product Qty "
+"= 0.0"
+
+#. module: tms_agreement
+#: model:ir.ui.menu,name:tms_agreement.menu_tms_config_quotation
+#: model:ir.ui.menu,name:tms_agreement.menu_tms_quotation view:tms.quotation:0
+msgid "Quotation's"
+msgstr "Cotizaciones"
+
+#. module: tms_agreement
+#: selection:res.partner,path_flow:0
+msgid "Both"
+msgstr "Ambos"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:556
+#, python-format
+msgid "quotation %s is not assigned to a Travel"
+msgstr "La Cotizacion %s no tiene un Viaje Asignado"
+
+#. module: tms_agreement
+#: field:tms.agreement,message_ids:0 field:tms.quotation,message_ids:0
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_charging_equipment
+msgid "charging.equipment"
+msgstr "charging.equipment"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Unname"
+msgstr "Sin nombre"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1702
+#, python-format
+msgid "Error!"
+msgstr "Error!"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 selection:tms.agreement,state:0 view:tms.quotation:0
+#: selection:tms.quotation,state:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: tms_agreement
+#: field:tms.agreement,waybill_ref_id:0
+msgid "Waibill"
+msgstr "Carta Porte"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:1146
+#, python-format
+msgid "Agreement <em>%s</em> <b>drafted </b>."
+msgstr "Acuerdo <em>%s</em> <b>Borrador </b>."
+
+#. module: tms_agreement
+#: view:tms.agreement:0 field:tms.agreement,shop_id:0
+#: field:tms.agreement.shipped_product,shop_id:0
+#: field:tms.agreement.travel,shop_id:0 field:tms.direct.expense,shop_id:0
+#: field:tms.quotation.agreement.wizard,shop_id:0
+msgid "Shop"
+msgstr "Tienda"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:1093
+#, python-format
+msgid "Agreements related to Travel %s has no Products with Quantity > 0.0"
+msgstr "El Acuerdo %s no puede tener Productos con Cantidad > 0.0"
+
+#. module: tms_agreement
+#: field:tms.quotation,amount_acumulated_administrative:0
+#: field:tms.quotation,amount_acumulated_fixed:0
+msgid "Amount Acumulated Fixed"
+msgstr "Monto Fijo Acumulado"
+
+#. module: tms_agreement
+#: selection:factor.quotation,category:0
+msgid "Supplier"
+msgstr "Proveedor"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:156
+#, python-format
+msgid "Agreement %s is not assigned to Route"
+msgstr "El Acuerdo %s no puede ser Asignado a la Ruta"
+
+#. module: tms_agreement
+#: view:tms.agreement.travel:0 field:tms.agreement.travel,dispatch_travel:0
+msgid "Dispatch Travel"
+msgstr "Despachar Viaje"
+
+#. module: tms_agreement
+#: field:tms.agreement.travel,trailer1_id:0
+msgid "Trailer1"
+msgstr "Remolque 1"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1727
+#: code:addons/tms_agreement/tms_quotation.py:2012
+#, python-format
+msgid ""
+"No se tiene un producto configurado de tipo Salario y Default por Defecto"
+msgstr ""
+"No se tiene un producto configurado de tipo Salario y Default por Defecto"
+
+#. module: tms_agreement
+#: field:tms.agreement,agreement_supplier_factor:0
+msgid "Agreement Supplier Payment Factors"
+msgstr "Factores de pago para Proveedores para el Acuerdo"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Join Utility x Km"
+msgstr "Utilidad Ingreso x Km"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:831
+#: code:addons/tms_agreement/tms_agreement.py:900
+#: code:addons/tms_agreement/tms_agreement.py:961
+#: code:addons/tms_agreement/tms_agreement.py:1022
+#, python-format
+msgid "Agreement %s is not assigned to a Travel"
+msgstr "El Acuerdo %s No tiene un Viaje Asignado"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:1100
+#, python-format
+msgid ""
+"Agreements related to Travel %s has no Products with UoM Category = Volume "
+"or Product Qty = 0.0"
+msgstr ""
+"Agreements related to Travel %s has no Products with UoM Category = Volume "
+"or Product Qty = 0.0"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 selection:tms.agreement,state:0 view:tms.quotation:0
+#: selection:tms.quotation,state:0
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#. module: tms_agreement
+#: field:tms.quotation,parameter_id:0 view:tms.quotation.config:0
+msgid "Parameters"
+msgstr "Parametros"
+
+#. module: tms_agreement
+#: field:tms.quotation.route,mark:0
+msgid "Mark"
+msgstr "Marca"
+
+#. module: tms_agreement
+#: field:tms.agreement,message_follower_ids:0
+#: field:tms.quotation,message_follower_ids:0
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1229
+#, python-format
+msgid "Quotation %s <em>%s</em> <b>cancelled</b>."
+msgstr "Cotizacion %s <em>%s</em> <b>Cancelada</b>."
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_agreement_shipped_product
+msgid "Agreement Shipped Product"
+msgstr "Producto Embarcado para el Acuerdo"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "TMS Quotation"
+msgstr "TMS Cotizacion"
+
+#. module: tms_agreement
+#: view:factor.quotation:0
+msgid "Billing Factors"
+msgstr "Factores de Cobro"
+
+#. module: tms_agreement
+#: field:tms.agreement,hours_upload_end_upload:0
+msgid "Start UpLd to End UpLd"
+msgstr "Inicio Carga a Fin de Carga"
+
+#. module: tms_agreement
+#: field:tms.agreement,final_price:0
+msgid "Final Price  $"
+msgstr "Precio Final $"
+
+#. module: tms_agreement
+#: field:tms.agreement,units_a:0 field:tms.quotation.config,units_number:0
+msgid "Units Number"
+msgstr "Numero de Unidades"
+
+#. module: tms_agreement
+#: field:res.partner,revision_week_p_ids:0
+msgid "Paydays Add"
+msgstr "Añadir Dias de Pago"
+
+#. module: tms_agreement
+#: field:tms.waybill,agreement_id:0
+msgid "Agreement Reference"
+msgstr "Referencia del Acuerdo"
+
+#. module: tms_agreement
+#: help:tms.quotation,factor_tires_percent:0
+msgid "Tires Factor %"
+msgstr "Factor Llantas %"
+
+#. module: tms_agreement
+#: view:res.partner:0
+msgid "Total Tons"
+msgstr "Total de Toneladas"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Price Subtotal"
+msgstr "Precio Subtotal"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 field:tms.agreement,download_point:0
+#: field:tms.quotation.agreement.wizard,download_point:0
+msgid "Download Point"
+msgstr "Punto de Descarga"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:535
+#, python-format
+msgid "agreements related to Travel %s has no Products with Quantity > 0.0"
+msgstr "agreements related to Travel %s has no Products with Quantity > 0.0"
+
+#. module: tms_agreement
+#: help:tms.quotation.route,factor_type:0
+msgid ""
+"\n"
+"For next options you have to type Ranges or Fixed Amount\n"
+" - Distance Route (Km/mi)\n"
+" - Weight\n"
+" - Quantity\n"
+" - Volume\n"
+"For next option you only have to type Fixed Amount:\n"
+" - Travel\n"
+"For next option you only have to type Factor like 10.5 for 10.50%:\n"
+"\n"
+"\t\t\t\t\t\t"
+msgstr ""
+"\n"
+"For next options you have to type Ranges or Fixed Amount\n"
+" - Distance Route (Km/mi)\n"
+" - Weight\n"
+" - Quantity\n"
+" - Volume\n"
+"For next option you only have to type Fixed Amount:\n"
+" - Travel\n"
+"For next option you only have to type Factor like 10.5 for 10.50%:\n"
+"\n"
+"\t\t\t\t\t\t"
+
+#. module: tms_agreement
+#: field:tms.direct.expense,special_tax_amount:0
+msgid "Special Tax"
+msgstr "Impuesto Especial"
+
+#. module: tms_agreement
+#: field:tms.agreement.travel,travel_return_id:0
+msgid "ID Travel Created Uncharged"
+msgstr "ID Viaje Creado Vacio"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Times"
+msgstr "Tiempos"
+
+#. module: tms_agreement
+#: field:tms.agreement,product_volume:0
+msgid "Sum Volume"
+msgstr "Suma de Volumen"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:555
+#, python-format
+msgid "Could calculate Freight amount for quotation !"
+msgstr "Could calculate Freight amount for quotation !"
+
+#. module: tms_agreement
+#: field:tms.quotation,total_security:0
+msgid "Total Insurance"
+msgstr "Total Seguro"
+
+#. module: tms_agreement
+#: field:tms.agreement,user_id:0 field:tms.agreement.line,salesman_id:0
+#: field:tms.agreement.shipped_product,salesman_id:0
+msgid "Salesman"
+msgstr "Vendedor"
+
+#. module: tms_agreement
+#: field:tms.quotation,factor_mtto:0 field:tms.quotation.config,factor_mtto:0
+msgid "Maintenance Factor"
+msgstr "Factor de Mantenimiento"
+
+#. module: tms_agreement
+#: help:tms.agreement,partner_invoice_id:0
+msgid "Invoice address for current Agreement."
+msgstr "Dirección de factura para el Acuerdo."
+
+#. module: tms_agreement
+#: model:ir.actions.act_window,name:tms_agreement.action_view_create_agreement
+#: view:tms.quotation:0 view:tms.quotation.agreement.wizard:0
+msgid "Create Agreement"
+msgstr "Generar Acuerdo"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Utility: $"
+msgstr "Utilidad $"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1854
+#, python-format
+msgid "No se tiene un producto configurado como Seguro por Defecto"
+msgstr "No se tiene un producto configurado como Seguro por Defecto"
+
+#. module: tms_agreement
+#: field:res.partner,kit_id:0
+msgid "Configuration Kit"
+msgstr "Configuration Kit"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:217
+#: code:addons/tms_agreement/tms_agreement.py:758
+#, python-format
+msgid "Missing configuration !"
+msgstr "Fallo en Configuracion !"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Shipped Product"
+msgstr "Producto Embarcado"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 selection:tms.agreement,state:0 view:tms.quotation:0
+#: selection:tms.quotation,state:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: tms_agreement
+#: field:tms.administrative.cost,daily_average:0
+#: field:tms.operating.cost,daily_average:0 view:tms.quotation:0
+#: field:tms.quotation,diesel_monthly:0
+#: field:tms.quotation,diesel_mtto_monthly:0
+#: field:tms.quotation,factor_mtto_monthly:0
+#: field:tms.quotation,factor_tires_monthly:0
+#: field:tms.quotation,move_monthly:0 field:tms.quotation,salary_monthly:0
+#: field:tms.quotation,summary_cost_km_monthly:0
+#: field:tms.quotation,summary_expenditures_monthly:0
+#: field:tms.quotation,summary_income_monthly:0
+#: field:tms.quotation,summary_km_productive_monthly:0
+#: field:tms.quotation,summary_margin_monthly:0
+#: field:tms.quotation,summary_mk_shot_monthly:0
+#: field:tms.quotation,summary_utility_km_monthly:0
+#: field:tms.quotation,summary_utility_monthly:0
+#: field:tms.quotation,toll_monthly:0
+msgid "Daily Average"
+msgstr "Promedio Diario"
+
+#. module: tms_agreement
+#: field:res.partner,chains:0
+msgid "Chains"
+msgstr "Cadenas"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_week_days
+msgid "week.days"
+msgstr "week.days"
+
+#. module: tms_agreement
+#: field:tms.agreement,unit_ids:0 field:tms.quotation,unit_ids:0
+msgid "Unit Category"
+msgstr "Categoria de Unidad"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 field:tms.agreement,agreement_line:0
+msgid "Agreement Lines"
+msgstr "Lineas del Acuerdo"
+
+#. module: tms_agreement
+#: selection:tms.quotation,type_armed:0
+msgid "Drive Unit"
+msgstr "Drive Unit"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Price Total"
+msgstr "Precio Total"
+
+#. module: tms_agreement
+#: help:tms.agreement,message_ids:0 help:tms.quotation,message_ids:0
+msgid "Messages and communication history"
+msgstr "Historial de mensajes y comunicacion"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_sale_shop
+msgid "Sales Shop"
+msgstr "Tienda ventas"
+
+#. module: tms_agreement
+#: field:res.partner,revision_week_r_ids:0
+msgid "Revision Days Add"
+msgstr "Agregar Dias de Revision"
+
+#. module: tms_agreement
+#: field:tms.agreement,hours_end_upload_lib_docs:0
+msgid "End UpLd to Lib. Docs. UpLd"
+msgstr "Fin  Crga. a Lib. Docs. Crga."
+
+#. module: tms_agreement
+#: field:charging.equipment,parent_r_id:0
+msgid " ID R"
+msgstr " ID R"
+
+#. module: tms_agreement
+#: help:tms.agreement.line,sequence:0
+#: help:tms.agreement.shipped_product,sequence:0
+#: help:tms.direct.expense,sequence:0
+msgid "Gives the sequence order when displaying a list of sales order lines."
+msgstr ""
+"Da la orden de la secuencia cuando se muestra una lista de líneas de pedido "
+"de ventas."
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_agreement.py:849
+#: code:addons/tms_agreement/tms_agreement.py:916
+#: code:addons/tms_agreement/tms_agreement.py:977
+#: code:addons/tms_agreement/tms_agreement.py:1038
+#: code:addons/tms_agreement/tms_quotation.py:180
+#, python-format
+msgid "Agreement %s has no Products with Quantity > 0.0"
+msgstr "Agreement %s has no Products with Quantity > 0.0"
+
+#. module: tms_agreement
+#: field:tms.indirect.expense,total_mount_indirect:0
+msgid "Total Mount"
+msgstr "Monto total"
+
+#. module: tms_agreement
+#: field:tms.agreement,route_return_id:0
+msgid "Uncharged Route"
+msgstr "Ruta sin Carga"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:155
+#: code:addons/tms_agreement/tms_agreement.py:415
+#, python-format
+msgid "Travel Sequence Error !"
+msgstr "Error de Secuencia en Viaje!"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Operating Cost x Km"
+msgstr "Costo de Operación x Km"
+
+#. module: tms_agreement
+#: field:factor.quotation,driver_helper:0
+msgid "For Driver Helper"
+msgstr "Para Ayuda del Conductor"
+
+#. module: tms_agreement
+#: view:tms.quotation.agreement.wizard:0
+msgid "Selecciona la Ruta de Retorno"
+msgstr "Selecciona la Ruta de Retorno"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "General Information"
+msgstr "Informacion General"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Tons"
+msgstr "Toneladas"
+
+#. module: tms_agreement
+#: field:tms.travel.wizard,wizard_id:0
+msgid "Wizard Id"
+msgstr "Id Asistente"
+
+#. module: tms_agreement
+#: field:res.partner,insurance:0 view:tms.quotation:0
+#: field:tms.quotation.route,insurance:0
+msgid "Insurance"
+msgstr "Seguro"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:136
+#: field:factor.quotation,factor_special_id:0
+#: selection:factor.quotation,factor_type:0
+#, python-format
+msgid "Special"
+msgstr "Special"
+
+#. module: tms_agreement
+#: field:tms.agreement,hours_prog_download_start_download:0
+msgid "Prog Download to Start DwnLd"
+msgstr "Prog Descarga to Inicio de Descarga"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 field:tms.agreement.line,price_amount:0
+msgid "Price Amount"
+msgstr "Monto"
+
+#. module: tms_agreement
+#: field:res.partner,observation:0
+msgid "Observations"
+msgstr "Observaciones"
+
+#. module: tms_agreement
+#: field:tms.agreement.travel,sequence_waybill_id:0
+msgid "Waybill sequence"
+msgstr "Secuencia Carta Porte"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:172
+#, python-format
+msgid "Product not found for freight  tms_category = Freight and Default!!!"
+msgstr ""
+"No se encontro producto definido como Flete tms_category = Freight and "
+"Default!!!"
+
+#. module: tms_agreement
+#: help:tms.agreement,distance_route:0
+msgid "Route Distance."
+msgstr "Distancia de la Ruta"
+
+#. module: tms_agreement
+#: field:charging.equipment,note:0 field:tms.agreement.line,name:0
+#: field:tms.agreement.shipped_product,name:0 field:tms.direct.expense,name:0
+#: field:tms.quotation.config,name:0
+msgid "Description"
+msgstr "Descripción"
+
+#. module: tms_agreement
+#: field:tms.agreement,total_calculate:0
+msgid "Total  $"
+msgstr "Total  $"
+
+#. module: tms_agreement
+#: field:tms.agreement,arrival_address_id:0
+#: field:tms.quotation.agreement.wizard,arrival_address_id:0
+msgid "Arrival Address"
+msgstr "Dirección de Llegada"
+
+#. module: tms_agreement
+#: field:tms.quotation.route,uncharged:0
+msgid "Uncharged"
+msgstr "Vacio"
+
+#. module: tms_agreement
+#: view:tms.agreement:0 view:tms.agreement.travel:0
+msgid "Create Travel"
+msgstr "Crear Viaje"
+
+#. module: tms_agreement
+#: selection:factor.quotation,category:0
+#: selection:res.partner,charge_insurance:0 field:tms.agreement,partner_id:0
+#: field:tms.agreement.line,agreement_partner_id:0
+#: field:tms.agreement.shipped_product,agreement_partner_id:0
+#: view:tms.quotation:0 field:tms.quotation,partner_id:0
+#: field:tms.quotation.agreement.wizard,partner_id:0
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: tms_agreement
+#: field:tms.agreement,gain_calculate:0
+msgid "Gain  $"
+msgstr "Ganancia $"
+
+#. module: tms_agreement
+#: selection:factor.quotation,framework:0
+#: selection:tms.quotation.route,framework:0
+msgid "Double"
+msgstr "Doble"
+
+#. module: tms_agreement
+#: field:factor.quotation,route_id:0 view:tms.agreement:0
+#: field:tms.agreement,route_id:0 field:tms.quotation.route,route_id:0
+msgid "Route"
+msgstr "Ruta"
+
+#. module: tms_agreement
+#: field:tms.quotation,amount_percentage_administrative:0
+#: field:tms.quotation,amount_percentage_fixed:0
+msgid "Amount Acumulated Percentage"
+msgstr "Monto Acumulado en %"
+
+#. module: tms_agreement
+#: view:res.partner:0 view:tms.agreement:0
+msgid "My Agreements"
+msgstr "Mis Acuerdos"
+
+#. module: tms_agreement
+#: selection:res.partner,charge_insurance:0
+msgid "Carrier"
+msgstr "Cargador"
+
+#. module: tms_agreement
+#: help:tms.agreement,arrival_address_id:0
+msgid "Arrival address for current Agreement."
+msgstr "Dirección de Llegada para el Acuerdo."
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_factor_quotation
+msgid "Factors to calculate Payment Client charge"
+msgstr "Factors to calculate Payment Client charge"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Utility Sum"
+msgstr "Suma de Utilidad"
+
+#. module: tms_agreement
+#: view:tms.quotation:0
+msgid "Tons:"
+msgstr "Toneladas:"
+
+#. module: tms_agreement
+#: field:tms.quotation.config,month_days:0
+msgid "Days of the Month"
+msgstr "Dias del Mes"
+
+#. module: tms_agreement
+#: model:ir.model,name:tms_agreement.model_tms_waybill_shipped_product
+msgid "Waybill Shipped Product"
+msgstr "Productos Embarcados"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:182
+#: funciones.py:191 code:addons/tms_agreement/tms_agreement.py:809
+#, python-format
+msgid "It was found measuring unit Unit Type !!!"
+msgstr "No se encontro unidad de Medido de Tipo Unidad !"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "DateTime:"
+msgstr "Fecha/Hora:"
+
+#. module: tms_agreement
+#: field:factor.quotation,sequence:0 field:tms.agreement.line,sequence:0
+#: field:tms.agreement.shipped_product,sequence:0
+#: field:tms.direct.expense,sequence:0 field:tms.quotation,sequence:0
+#: field:tms.quotation.route,sequence:0
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: tms_agreement
+#: field:tms.agreement,payment_term:0
+#: field:tms.quotation.agreement.wizard,payment_term:0
+msgid "Payment Term"
+msgstr "Términos de pago"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Expenses"
+msgstr "Gastos"
+
+#. module: tms_agreement
+#: field:tms.waybill.extradata,agreement_control:0
+#: field:tms.waybill.line,agreement_control:0
+#: field:tms.waybill.shipped_product,agreement_control:0
+msgid "Agreement Control"
+msgstr "Control Acuerdo"
+
+#. module: tms_agreement
+#: help:factor.quotation,sequence:0 help:tms.quotation.route,sequence:0
+msgid "Gives the sequence calculation for these factors."
+msgstr "Gives the sequence calculation for these factors."
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/respaldo tms agreement funciones.py:283
+#: funciones.py:350 funciones.py:411 funciones.py:472
+#, python-format
+msgid ""
+"agreement %s has no Products with UoM Category = Weight or Product Qty = 0.0"
+msgstr ""
+"agreement %s has no Products with UoM Category = Weight or Product Qty = 0.0"
+
+#. module: tms_agreement
+#: selection:tms.direct.expense,line_type:0
+msgid "Real Expense"
+msgstr "Gasto Real"
+
+#. module: tms_agreement
+#: field:tms.agreement,agreement_direct_expense_line:0
+msgid "Expenses Direct"
+msgstr "Gastos Directos"
+
+#. module: tms_agreement
+#: view:tms.agreement:0
+msgid "Price Discount"
+msgstr "Precio de Descuento"
+
+#. module: tms_agreement
+#: code:addons/tms_agreement/tms_quotation.py:1687
+#, python-format
+msgid ""
+"No se tiene Configurado un producto Flete con las caracteristicas "
+"(tms_category, =, freight),(tms_default_freight,=,True),(active,=, 1)"
+msgstr ""
+"No se tiene Configurado un producto Flete con las caracteristicas "
+"(tms_category, =, freight),(tms_default_freight,=,True),(active,=, 1)"

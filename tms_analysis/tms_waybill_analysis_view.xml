@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_tms_waybill_analysis_tree" model="ir.ui.view">
+            <field name="name">tms.waybill.analysis.tree</field>
+            <field name="model">tms.waybill.analysis</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Waybill Analisis" create="false">
+                    <field name="office_id"       invisible="1"/>
+                    <field name="sequence_id"   invisible="1"/>
+                    <field name="framework"     invisible="1"/>
+                    <field name="name" />
+                    <field name="date_order"/>
+                    <field name="year"          invisible="1"/>
+                    <field name="month"         invisible="1"/>
+                    <field name="day"           invisible="1"/>
+                    <field name="partner_id" />
+                    <field name="travel_id"/>
+                    <field name="employee_id"/>
+                    <field name="unit_char"/>
+                    <field name="trailer1_id"   invisible="1"/>
+                    <field name="dolly_id"      invisible="1"/>
+                    <field name="trailer2_id"   invisible="1"/>
+                    <field name="route_id"      invisible="1"/>
+                    <field name="departure_id"  invisible="1"/>
+                    <field name="arrival_id"    invisible="1"/>
+                    <field name="currency_id"   invisible="1"/>
+                    <field name="waybill_type"  invisible="1"/>
+                    <field name="invoice_id"    invisible="1"/>
+                    <field name="user_id"      invisible="1"/>
+                    <field name="tms_category" invisible="1"/>
+                    <field name="shipped_product_id" />
+                    <field name="qty" sum="Qty" />
+                    <field name="product_id" />
+                    <field name="amount" sum="Amount"/>
+                    <field name="state"  />
+                    <field name="waybill_category" invisible="1"/>
+                    <field name="operation_id" invisible="1"/>
+                    <field name="invoice_name" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_tms_waybill_analysis_search">
+		<field name="name">tms.waybill.analysis.search</field>
+		<field name="model">tms.waybill.analysis</field>
+		<field name="type">search</field>
+		<field name="priority" eval="5"/>
+		<field name="arch" type="xml">
+    		<search string="Search Waybill Analysis">
+                <filter string="My Waybills" icon="terp-personnal" domain="[('user_id','=',uid)]" help="Waybills related to me" name="my_waybills"/>
+                <filter string="This month" icon="terp-check" domain="[('date_order','&gt;=', time.strftime('%%Y-%%m-01'))]" name="this_month" />
+                <filter string="Confirmed State" icon="terp-check" domain="[('state','=', 'confirmed')]" name="confirmed" />
+                <filter string="Not Invoiced" icon="terp-dialog-close" domain="[('invoice_id','=', False)]"/>
+                <field name="office_id" />
+                <field name="sequence_id" />
+                <field name="state"  />
+                <field name="partner_id"/>
+                <field name="product_id"/>
+                <field name="shipped_product_id"/>
+                <group expand="0" string="Extended Filters...">
+                    <field name="employee_id"/>
+                    <field name="unit_char"/>
+                    <field name="trailer1_id"/>
+                    <field name="dolly_id"/>
+                    <field name="trailer2_id"/>
+                    <field name="framework"/>
+                    <newline />
+                    <field name="waybill_type"/>
+                    <field name="invoice_id"/> 
+                </group>
+			    <group expand="1" string="Group By...">
+                    <filter string="Name"     icon="terp-partner"                 domain="[]" context="{'group_by':'name'}" name="groupby_name"/>
+                    <filter string="Partner"     icon="terp-partner"                 domain="[]" context="{'group_by':'partner_id'}" name="groupby_partner_id"/>
+                    <filter string="Unit"        icon="terp-stage"                   domain="[]" context="{'group_by':'unit_char'}" />
+                    <filter string="Driver"      icon="terp-personal"                domain="[]" context="{'group_by':'employee_id'}"/>
+                    <filter string="Product"     icon="terp-accessories-archiver"    domain="[]" context="{'group_by':'product_id'}"/>
+                    <filter string="Shipped Product"     icon="terp-accessories-archiver"    domain="[]" context="{'group_by':'shipped_product_id'}"/>
+                    <filter string="Invoice"  icon="terp-personal"                domain="[]" context="{'group_by':'invoice_id'}"/>
+                    <filter string="Waybill Category"           icon="terp-purchase" domain="[]" context="{'group_by':'waybill_category'}"/>
+                    <filter string="Operation"           icon="terp-purchase" domain="[]" context="{'group_by':'operation_id'}"/>
+                    <filter string="Salesman"           icon="terp-purchase" domain="[]" context="{'group_by':'user_id'}"/>
+			    </group>
+			    <group expand="0" string="More Groups By...">
+                    <filter string="State"          icon="terp-stock_symbol-selection"  domain="[]" context="{'group_by':'state'}"/>
+                    <filter string="Office"           icon="terp-purchase" domain="[]" context="{'group_by':'office_id'}"/>
+                    <filter string="Route"          icon="STOCK_OK" domain="[]" context="{'group_by':'route_id'}"/>
+                    <filter string="Departure"      icon="terp-gtk-go-back-rtl" domain="[]" context="{'group_by':'departure_id'}"/>
+                    <filter string="Arrival"        icon="terp-gtk-jump-to-ltr" domain="[]" context="{'group_by':'arrival_id'}"/>
+                    <filter string="Framework"      icon="terp-stock_symbol-selection" domain="[]" context="{'group_by':'framework'}"/>
+                    <filter string="Waybill Type"   icon="terp-stock_symbol-selection" domain="[]" context="{'group_by':'waybill_type'}"/>
+                    <filter string="Day"            icon="terp-go-today"    domain="[]" context="{'group_by':'day'}"     help="Ordered Day of the Waybill"/>
+                    <filter string="Month"          icon="terp-go-month"    domain="[]" context="{'group_by':'month'}"   help="Ordered Month of the Waybill"/>
+                    <filter string="Year"           icon="terp-go-year"     domain="[]" context="{'group_by':'year'}"    help="Ordered Year of the Waybill"/>
+			    </group>
+                </search>
+		</field>
+	</record>
+
+    <record id="view_tms_waybill_analysis_graph" model="ir.ui.view">
+        <field name="name">tms.waybill.analysis.graph</field>
+        <field name="model">tms.waybill.analysis</field>
+        <field name="type">graph</field>
+        <field name="arch" type="xml">
+            <graph string="Waybills" type="bar">
+                <field name="unit_char"/>
+                <field name="amount" operator="+"/>
+            </graph>
+        </field>
+    </record>
+
+
+    <record id="action_tms_waybill_analysis" model="ir.actions.act_window">
+        <field name="name">tms.waybill.analysis.action</field>
+        <field name="res_model">tms.waybill.analysis</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,graph</field>
+        <field name="context">{"search_default_this_month":True,"search_default_my_waybills":True,"search_default_groupby_partner_id":True,"search_default_confirmed":True}</field>
+        <field name="view_id" ref="view_tms_waybill_analysis_tree"></field>
+       
+    </record>
+
+<!-- Menu for tms.waybill.analysis -->
+    <menuitem name="Waybill Analysis" 
+              parent="tms.menu_tms_reporting" 
+              id="menu_tms_waybill_analysis"
+              action="action_tms_waybill_analysis"
+			  sequence="30"/>
+    </data>
+</openerp>

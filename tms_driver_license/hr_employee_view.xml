@@ -1,0 +1,112 @@
+<openerp>
+<data>
+
+
+<!-- Agregamos los campos necesarios para administrar las licencias de operadores
+-->
+        <record model="ir.ui.view" id="view_employee_driver_license_form_tms">
+            <field name="name">Employee - TMS - Driver License</field>
+            <field name="model">hr.employee</field>
+            <field name="type">form</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="tms.view_employee_form_tms"/>
+            <field name="arch" type="xml">
+                <field name="tms_supplier_id" position="after">
+                    <field name="tms_driver_license_id" />
+                    <field name="tms_driver_license_type"  attrs="{'required':[('tms_driver_license_id','!=',False)]}"/>
+                    <field name="tms_driver_license_expiration" attrs="{'required':[('tms_driver_license_id','!=',False)]}"/>
+                    <field name="tms_driver_license_days_to_expire" />
+                    <field name="tms_driver_additional_certifications" />
+                </field>
+            </field>
+        </record>
+
+
+    
+
+    <record id="hr_employee_expired_license_wizard" model="ir.ui.view">
+          <field name="name">Get Driver Expired Licenses on next days</field>
+          <field name="model">hr.employee.expired_license</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+	        <form string="Get expired license driver" version="7.0">
+                <separator colspan="4" string="Please select date" />
+                <group colspan="4" col="4">
+                    <field name="date" />
+                    <field name="include" />
+                    <p colspan="4">This date has already added Security days defined in parameter.</p>
+                    <newline />
+                </group>
+                <footer>
+                    <button name="button_get_licenses_to_expire" string="Print" colspan="1" type="object" icon="gtk-ok" />
+                    or
+                    <button special="cancel" string="Cancel" class="oe_link"/>
+                
+                </footer>
+	        </form>
+          </field>
+    </record>
+    
+    
+    <record id="hr_employee_expired_license_wizard_action" model="ir.actions.act_window">
+        <field name="name">Driver Licenses by Exp.Date</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.employee.expired_license</field>
+        <field name="src_model">hr.employee</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="hr_employee_expired_license_wizard_action" id="menu_tms_driver_expired_license" 
+                  parent="tms.menu_tms_config_drivers" sequence="45" />
+
+    
+</data>
+    
+    <!-- Mail template for sending report triggered by automated action.
+It's declared in a NOUPDATE block so users can freely customize -->
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="email_template_hr_employee_expired_license" model="email.template">
+            <field name="name">Send Report: Driver license  to expire or expired on next days</field>
+            <field name="email_from">${(object.user_id.email or '')|safe}</field>
+            <field name="subject">Driver licenses expired or to expire</field>
+            <field name="email_to">jonh_doe@gmail.com</field>
+            <field name="auto_delete" eval="True" />
+            <field name="model_id" ref="hr.model_hr_employee" />
+            <field name="body_html"><![CDATA[
+<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+
+    <p>Hello,</p>
+
+    <p>Attached you will find the list of Driver's License expired or about to expire</p>
+
+    <p>Kind Regards</p>
+
+    <p>================</p>
+    <p>This mail was sent automatically from OpenERP, please DO NOT RESPOND it.</p>
+
+</div>
+            ]]></field>
+        </record>
+        
+        
+        <record forcecreate="True" id="ir_cron_scheduler_action" model="ir.cron">
+            <field name="name">Send Driver License expired or to expire by mail - scheduler</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">7</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'hr.employee'" name="model"/>
+            <field eval="'send_mail_driver_license_report'" name="function"/>
+            <!--<field eval="'(False,True)'" name="args"/>-->
+        </record>
+        
+    </data>
+    
+    
+</openerp>
+

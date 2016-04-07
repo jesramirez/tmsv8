@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_ifrs_report_tms_vehicle_filter" model="ir.ui.view">
+            <field name="name">ifrs.report.wizard.form.tms.vehicle_filter</field>
+            <field name="model">ifrs.report.wizard</field>
+            <field name="inherit_id" ref="ifrs_report.view_ifrs_report"/>
+            <field name="arch" type="xml">
+                <field name="report_type" position="after">
+                    <separator string="Vehicles" colspan="4" />
+                    <field name="vehicle_ids" colspan="4" nolabel="1">
+                        <!--<tree>
+                            <field name="name" />    
+                            <field name="tag_ids" />
+                            <field name="model_id" />
+                            <field name="fleet_type" />
+                            <field name="supplier_unit" />
+                            <field name="year_model" />
+                        </tree> -->
+                    </field>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

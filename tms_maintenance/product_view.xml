@@ -1,0 +1,91 @@
+<openerp>
+    <data>
+############################################################################################################################
+### Cambios en la vista de Product ###                                                                                                                                                                                                                                   
+                                                                                                          
+
+        <record id="tms_maintenance_product_search_form_view" model="ir.ui.view">
+            <field name="name">tms_maintenance.product.search.form</field>
+            <field name="model">product.template</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <search string="Product">
+                   <field name="categ_id" position="after">
+                     <filter string="MRO Related" icon="terp-accessories-archiver" 
+                             domain="[('tms_category','in',('maint_service_program','maint_service_type','maint_service_cycle','maint_part','maint_activity'))]"/>
+                   </field>
+                </search>
+            </field>
+        </record>
+
+
+
+
+
+
+        <record model="ir.ui.view" id="tms_maintenance_product_normal_form_view">
+            <field name="name">TMS Maintenance product.normal.form</field>
+            <field name="model">product.template</field>
+            <field name="type">form</field>
+            <field name="priority">52</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+              <notebook position="inside">
+                <page string="MRO Program Details" attrs="{'invisible':[('tms_category','not in',('maint_service_program', 'maint_service_cycle'))]}">
+                  <group col="4" colspan="4">
+                    <field name="mro_frequency" attrs="{'invisible':[('tms_category','!=','maint_service_cycle')]}"/>
+                    <newline />
+                    <separator string="Tasks" colspan="4" attrs="{'invisible':[('tms_category','!=','maint_service_cycle')]}"/>
+                    <field name="mro_activity_ids" colspan="4" nolabel="1"
+                           domain="[('tms_category','=','maint_activity'), ('type', '=', 'service')]"
+                           context="{'tms_category': 'maint_activity', 'type':'service'}"
+                           attrs="{'invisible':[('tms_category','!=','maint_service_cycle')]}">
+                      <tree>
+                        <field name="default_code" />
+                        <field name="name" />
+                        <field name="tms_category" />
+                        <field name="tms_activity_duration" widget="time_float"/>
+                        <field name="list_price" />
+                      </tree>
+                    </field>
+                    <separator string="Cycle Services Included" colspan="4" />
+                    <field name="mro_cycle_ids" colspan="4" nolabel="1"
+                           domain="[('tms_category','=','maint_service_cycle'), ('type', '=', 'service')]"
+                           context="{'tms_category': 'maint_service_cycle', 'type':'service'}">
+                      <tree>
+                        <field name="default_code" />
+                        <field name="name" />
+                        <field name="tms_category" />
+                        <field name="mro_frequency"/>
+                        <field name="mro_activity_ids"/>
+                        <field name="mro_cycle_ids"/>
+                        <field name="list_price" />
+                      </tree>
+                    </field>
+                  </group>
+                </page>
+                </notebook>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="tms_maintenance_product_normal_form_view2">
+            <field name="name">TMS Maintenance product.normal.form2</field>
+            <field name="model">product.template</field>
+            <field name="type">form</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="tms.tms_product_template_form_view"/>
+            <field name="arch" type="xml">
+              <field name="tms_category" position="after">
+                <newline />
+                <div name="mro_prev" attrs="{'invisible':[('tms_category','!=','maint_service_type')]}">
+                  <field name="mro_preventive"  class="oe_left" nolabel="1"/>
+                  <label for="mro_preventive" />
+                </div>
+              </field>
+            </field>
+        </record>
+        
+</data>
+</openerp>

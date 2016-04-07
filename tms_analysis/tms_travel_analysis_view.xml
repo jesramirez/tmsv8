@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_tms_travel_analysis_tree" model="ir.ui.view">
+            <field name="name">tms.travel.analysis.tree</field>
+            <field name="model">tms.travel.analysis</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Travel Analysis" create="false">
+                    <field name="office_id" invisible="1" />
+                    <field name="name" />
+                    <field name="date" />
+                    <field name="year" invisible="1" />
+                    <field name="month" invisible="1" />
+                    <field name="day" invisible="1" />
+                    <field name="unit_char" />
+                    <field name="employee_id" />
+                    <field name="framework" invisible="1" />
+                    <field name="unit_type_id" invisible="1" />
+                    <field name="trailer1_id" />
+                    <field name="dolly_id" />
+                    <field name="trailer2_id" />
+                    <field name="route_id" />
+                    <field name="departure" invisible="1" />
+                    <field name="arrival" invisible="1" />
+                    <field name="waybill_id" />
+                    <field name="waybill_date" />
+                    <field name="partner_id" />
+                    <field name="waybill_state" invisible="1" />
+                    <field name="waybill_sequence" invisible="1" />
+                    <field name="currency_id" invisible="1" />
+                    <field name="waybill_type" />
+                    <field name="invoice_id" invisible="1" />
+                    <field name="invoice_name" invisible="1" />
+                    <field name="user_id" invisible="1" />
+                    <field name="product_id" />
+                    <field name="amount" />
+                    <field name="tms_category" />
+                    <field name="shipped_product_id" />
+                    <field name="qty" />
+                    <field name="state" />
+                    <field name="partner_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_tms_travel_analysis_search">
+		  <field name="name">tms.travel.analysis.tree</field>
+		  <field name="model">tms.travel.analysis</field>
+		  <field name="type">search</field>
+		  <field name="priority" eval="5"/>
+		  <field name="arch" type="xml">
+    		<search string="Search Travel Analysis">
+              <filter string="Travels with Company's Vehicles" icon="terp-check" domain="[('waybill_type','=', 'self')]" />
+              <filter string="Travels with Third Part Vehicles" icon="terp-check" domain="[('waybill_type','=', 'outsourced')]" />
+              <filter string="My Travels" icon="terp-personnal" domain="[('user_id','=',uid)]" help="Travels related to me" name="my_travels"/>
+
+              <filter string="This month" icon="terp-check" domain="[('date','&gt;=', time.strftime('%%Y-%%m-01'))]" name="this_month" />
+              <filter string="Amount > 0" icon="terp-check" domain="[('amount','&gt;', 0.0)]"  />
+              <filter string="Shipped Product Quantity > 0" icon="terp-check" domain="[('qty','&gt;', 0.0)]" />
+
+              <filter string="Framework => One Trailer" icon="terp-check" domain="[('framework','=', 'Single')]" />
+              <filter string="Framework => Double Trailer" icon="terp-check" domain="[('framework','=', 'Double')]" />
+
+              <filter string="Freight Income" icon="terp-check" domain="[('tms_category','=', 'freight')]" />
+
+              <field name="unit_char"/>
+              <field name="state"  />
+              <field name="partner_id"/>
+              <field name="product_id"/>
+              <field name="shipped_product_id"/>
+              <field name="waybill_sequence" />
+              <field name="office_id" />
+              <group expand="0" string="Extended Filters...">
+                <field name="employee_id"/>
+                <field name="trailer1_id"/>
+                <field name="dolly_id"/>
+                <field name="trailer2_id"/>
+                <field name="framework"/>
+                <newline />
+                <field name="invoice_id"/> 
+              </group>
+			  <group expand="1" string="Group By...">
+                <filter string="Date"     icon="terp-partner"                 domain="[]" context="{'group_by':'date'}"/>
+			    <filter string="Partner"     icon="terp-partner"                 domain="[]" context="{'group_by':'partner_id'}"/>
+			    <filter string="Unit"        icon="terp-stage"                   domain="[]" context="{'group_by':'unit_char'}" name="groupby_unit_id"/>
+			    <filter string="Driver"      icon="terp-personal"                domain="[]" context="{'group_by':'employee_id'}"/>
+                <filter string="State"          icon="terp-stock_symbol-selection"  domain="[]" context="{'group_by':'state'}"/>
+                <filter string="Route"          icon="STOCK_OK" domain="[]" context="{'group_by':'route_id'}"/>
+
+			    <filter string="Product"     icon="terp-accessories-archiver"    domain="[]" context="{'group_by':'product_id'}"/>
+			    <filter string="Income Type"     icon="terp-accessories-archiver"    domain="[]" context="{'group_by':'tms_category'}"/>
+			    <filter string="Shipped Product"     icon="terp-accessories-archiver"    domain="[]" context="{'group_by':'shipped_product_id'}"/>
+			    <filter string="Waybill Sequence"  icon="terp-personal"                domain="[]" context="{'group_by':'waybill_sequence'}"/>
+			    <filter string="Invoice"  icon="terp-personal"                domain="[]" context="{'group_by':'invoice_id'}"/>
+                <filter string="Operation"  icon="terp-personal"                domain="[]" context="{'group_by':'operation_id'}"/>
+			  </group>
+			  <group expand="0" string="More Groups By...">
+                <filter string="Office"           icon="terp-purchase" domain="[]" context="{'group_by':'office_id'}"/>
+
+                 <filter string="Departure"      icon="terp-gtk-go-back-rtl" domain="[]" context="{'group_by':'departure'}"/>
+                <filter string="Arrival"        icon="terp-gtk-jump-to-ltr" domain="[]" context="{'group_by':'arrival'}"/>
+                <filter string="Framework"      icon="terp-stock_symbol-selection" domain="[]" context="{'group_by':'framework'}"/>
+                <filter string="Waybill Type"   icon="terp-stock_symbol-selection" domain="[]" context="{'group_by':'waybill_type'}"/>
+                <filter string="Day"            icon="terp-go-today"    domain="[]" context="{'group_by':'day'}"     help="Ordered Day of the Waybill"/>
+                <filter string="Month"          icon="terp-go-month"    domain="[]" context="{'group_by':'month'}"   help="Ordered Month of the Waybill"/>
+                <filter string="Year"           icon="terp-go-year"     domain="[]" context="{'group_by':'year'}"    help="Ordered Year of the Waybill"/>
+			  </group>
+            </search>
+		  </field>
+	    </record>
+        
+        <record id="view_tms_travel_analysis_graph" model="ir.ui.view">
+            <field name="name">tms.travel.analysis.graph</field>
+            <field name="model">tms.travel.analysis</field>
+            <field name="type">graph</field>
+            <field name="arch" type="xml">
+                <graph string="Travels" type="bar">
+                    <field name="unit_char"/>
+                    <field name="amount" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+
+        <record id="action_tms_travel_analysis" model="ir.actions.act_window">
+            <field name="name">tms.travel.analysis.action</field>
+            <field name="res_model">tms.travel.analysis</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,graph</field>
+            <field name="context">{"search_default_this_month":True,"search_default_my_travels":True,"search_default_groupby_unit_id":True}</field>
+            <field name="view_id" ref="view_tms_travel_analysis_tree"></field>          
+        </record>
+        
+        <!-- Menu for tms.travel.analysis -->
+        <menuitem name="Travel Analysis" 
+                  parent="tms.menu_tms_reporting" 
+                  id="menu_tms_travel_analysis"
+                  action="action_tms_travel_analysis"
+			      sequence="20"/>
+        
+
+        <!-- TMS.TRAVEL.AVAILABILITY -->
+        <record id="view_tms_travel_availability_tree" model="ir.ui.view">
+          <field name="name">tms.travel.availability.tree</field>
+          <field name="model">tms.travel.availability</field>
+          <field name="type">tree</field>
+          <field name="arch" type="xml">
+            <tree string="Unit Availability" create="false">
+              <field name="office_id" invisible="1" />
+              <field name="name" />
+              <field name="travel_id" />
+              <field name="date" />
+              <field name="trailer1_id" />
+              <field name="dolly_id" />
+              <field name="trailer2_id" />
+              
+              <field name="employee_id" />
+              <field name="route_id" />
+              <field name="departure" invisible="1" />
+              <field name="arrival" invisible="1" />
+              <field name="state" />
+              <field name="framework" invisible="1" />
+              <field name="unit_type_id" invisible="1" />
+              <field name="waybill_id" />
+              <field name="waybill_date" />
+              <field name="partner_id" />
+              <field name="user_id" invisible="1" />
+            </tree>
+          </field>
+        </record>
+        
+
+        <record id="view_tms_travel_availability_form" model="ir.ui.view">
+          <field name="name">Unit Availability</field>
+          <field name="model">tms.travel.availability</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+            <form string="Unit Availability" create="false" version="7.0">
+		      <group colspan="4" col="4" >
+		        <field name="name" />
+		        <field name="office_id" />
+		        <field name="travel_id" />
+		        <field name="date" />
+		        <field name="trailer1_id" />
+		        <field name="dolly_id" />
+		        <field name="trailer2_id" />
+		        <field name="employee_id" />
+		        <field name="route_id" colspan="4"/>
+		        <field name="departure" />
+		        <field name="arrival" />
+		        <field name="state" />
+		        <field name="framework"  />
+		        <field name="unit_type_id"/>
+		        <field name="waybill_id" />
+		        <field name="waybill_date" />
+		        <field name="partner_id" />
+		        <field name="user_id"  />
+		      </group>
+            </form>
+          </field>
+        </record>
+        
+        
+        <record model="ir.ui.view" id="view_tms_travel_availability_search">
+		  <field name="name">tms.travel.availability.tree</field>
+		  <field name="model">tms.travel.availability</field>
+		  <field name="type">search</field>
+		  <field name="priority" eval="5"/>
+		  <field name="arch" type="xml">
+    		<search string="Search Unit Availability">
+                <filter string="My Travels" icon="terp-personnal" domain="[('user_id','=',uid)]" help="Travels related to me"/>
+                <filter string="My units" icon="terp-personnal" domain="[('supplier_unit','=',False)]" help="Vehicles of the company..."/>
+                <filter string="Supplier's Unit" icon="terp-personnal" domain="[('supplier_unit','=',True)]" help="Vehicles of the Suppliers..."/>
+                <filter string="Motorized Unit" icon="terp-personnal" domain="[('fleet_type','=','tractor')]" help="Motorized unit..."/>
+
+                <field name="name" />
+                <field name="office_id" />
+                <field name="state"  />
+                <field name="date"/>
+                <field name="partner_id"/>
+                <field name="framework"/>                
+              <group expand="0" string="Extended Filters...">
+                <filter string="Trailer" icon="terp-personnal" domain="[('fleet_type','=','trailer')]" help="Trailer unit..."/>
+                <filter string="Dolly" icon="terp-personnal" domain="[('fleet_type','=','dolly')]" help="Dolly unit..."/>
+                <filter string="Other" icon="terp-personnal" domain="[('fleet_type','=','other')]" help="Other unit type..."/>
+                <filter string="Just Unit" icon="terp-personnal" domain="[('framework','=','unit')]" help="Just motorized unit"/>
+                <filter string="Single Trailer" icon="terp-personnal" domain="[('framework','=','single')]" help="Single Trailer"/>
+                <filter string="Double Trailer" icon="terp-personnal" domain="[('framework','=','full')]" help="Double Trailer"/>
+
+              </group>
+		      <group expand="1" string="Group By...">
+			    <filter string="Name"        icon="terp-partner"                 domain="[]" context="{'group_by':'name'}"/>
+			    <filter string="Date"        icon="terp-partner"                 domain="[]" context="{'group_by':'date'}"/>
+			    <filter string="Partner"     icon="terp-partner"                 domain="[]" context="{'group_by':'partner_id'}"/>
+			    <filter string="Driver"      icon="terp-personal"                domain="[]" context="{'group_by':'employee_id'}"/>	          
+		        <filter string="State"          icon="terp-stock_symbol-selection"  domain="[]" context="{'group_by':'state'}"/>
+		        <filter string="Office"           icon="terp-purchase" domain="[]" context="{'group_by':'office_id'}"/>
+		        <filter string="Route"          icon="STOCK_OK" domain="[]" context="{'group_by':'route_id'}"/>
+		        <filter string="Departure"      icon="terp-gtk-go-back-rtl" domain="[]" context="{'group_by':'departure'}"/>
+		        <filter string="Arrival"        icon="terp-gtk-jump-to-ltr" domain="[]" context="{'group_by':'arrival'}"/>
+		        <filter string="Framework"      icon="terp-stock_symbol-selection" domain="[]" context="{'group_by':'framework'}"/>
+		      </group>
+            </search>
+		  </field>
+	    </record>
+        
+        <record id="view_tms_travel_availability" model="ir.ui.view">
+          <field name="name">tms.travel.availability.gantt</field>
+          <field name="model">tms.travel.availability</field>
+          <field name="arch" type="xml">
+            <gantt date_start="date_start" date_stop="date_end" string="Availability" default_group_by="name" color="travel_id">
+            </gantt>
+          </field>
+        </record>
+        
+
+        <record id="action_tms_travel_availability" model="ir.actions.act_window">
+          <field name="name">Unit Availability</field>
+          <field name="res_model">tms.travel.availability</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">gantt,tree,form</field>
+          <field name="view_id" ref="view_tms_travel_availability_tree"></field>
+          
+        </record>
+
+        <!-- Menu for tms.travel.availability -->
+        <menuitem name="Unit Availability" 
+                  parent="tms.menu_tms_reporting" 
+                  id="menu_tms_travel_availability"
+                  action="action_tms_travel_availability"
+			      sequence="10"/>
+        
+
+    </data>
+</openerp>

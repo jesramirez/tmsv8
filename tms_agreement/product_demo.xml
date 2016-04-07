@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+
+        <record id="product_product_1888" model="product.product">
+            <field name="name">Fleet</field>
+            <field name="categ_id" ref="product.product_category_5"/>
+            <field name="standard_price">0.0</field>
+            <field name="list_price">1.0</field>
+            <field name="type">service</field>
+            <field name="uom_id" ref="product_uom_hour"/>
+            <field name="uom_po_id" ref="product_uom_hour"/>
+            <field name="description">This product are defined for Agreement.</field>
+            <field name="description_sale">This product are defined for Agreement.</field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,112 @@
+<openerp>
+<data>
+
+
+<!-- Agregamos los campos necesarios para administrar las polizas de seguro
+-->
+        <record id="fleet_vehicle_form_insurance" model="ir.ui.view">
+            <field name="name">fleet.vehicle.insurance.form</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="tms.fleet_vehicle_form_inherit_tms"/>
+            <field name="arch" type="xml">
+                <field name="gps_id" position="after">
+                    <field name="insurance_policy" />
+                    <field name="insurance_policy_expiration" attrs="{'required':[('insurance_policy','!=',False)]}"/>
+                    <field name="insurance_policy_data" attrs="{'required':[('insurance_policy','!=',False)]}"/>
+                    <field name="insurance_policy_days_to_expire" />
+                    <field name="insurance_supplier_id" attrs="{'required':[('insurance_policy','!=',False)]}"/>
+                    <newline />
+                </field>
+            </field>
+        </record>
+
+
+    
+
+    <record id="fleet_vehicle_expired_insurance_wizard" model="ir.ui.view">
+          <field name="name">Get Vehicle Insurance Policies to be Expired on next days</field>
+          <field name="model">fleet.vehicle.expired_insurance</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+	        <form string="Get Vehicle Insurance Policies to Expire on next days" version="7.0">
+                <separator colspan="4" string="Please select date" />
+                <group colspan="4" col="4">
+                    <field name="date" />
+                    <field name="include" />
+                    <p colspan="4">This date has already added Security days defined in parameter.</p>
+                    <newline />
+                </group>
+                <footer>
+                    <button name="button_get_vehicle_insurance_policies_to_expire" string="Print" colspan="1" type="object" icon="gtk-ok" />
+                    or
+                    <button special="cancel" string="Cancel" class="oe_link"/>
+                
+                </footer>
+	        </form>
+          </field>
+    </record>
+    
+    
+    <record id="fleet_vehicle_expired_insurance_wizard_action" model="ir.actions.act_window">
+        <field name="name">Vehicle Insurance Policies by Exp.Date</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fleet.vehicle.expired_insurance</field>
+        <field name="src_model">fleet.vehicle</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="fleet_vehicle_expired_insurance_wizard_action" id="menu_tms_fleet_vehicle_insurance_policy_expired" 
+                  parent="tms.menu_tms_config_unit" sequence="45" />
+
+    
+</data>
+    
+    <!-- Mail template for sending report triggered by automated action.
+It's declared in a NOUPDATE block so users can freely customize -->
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="email_template_fleet_vehicle_expired_insurance" model="email.template">
+            <field name="name">Send Report: Fleet Vehicle Insurance Policy to expire or expired on next days</field>
+            <field name="email_from">${(object.user_id.email or '')|safe}</field>
+            <field name="subject">Vehicle Insurance Policy expired or to expire</field>
+            <field name="email_to">jonh_doe@gmail.com</field>
+            <field name="auto_delete" eval="True" />
+            <field name="model_id" ref="fleet.model_fleet_vehicle" />
+            <field name="body_html"><![CDATA[
+<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+
+    <p>Hello,</p>
+
+    <p>Attached you will find the list of Fleet Vehicle Insurance Policies expired or about to expire</p>
+
+    <p>Kind Regards</p>
+
+    <p>================</p>
+    <p>This mail was sent automatically from OpenERP, please DO NOT RESPOND it.</p>
+
+</div>
+            ]]></field>
+        </record>
+        
+        
+        <record forcecreate="True" id="ir_cron_scheduler_action" model="ir.cron">
+            <field name="name">Send Vehicle Insurance POlicies expired or to expire by mail - scheduler</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">7</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'fleet.vehicle'" name="model"/>
+            <field eval="'send_mail_vehicle_insurance_report'" name="function"/>
+            <!--<field eval="'(False,True)'" name="args"/>-->
+        </record>
+        
+    </data>
+    
+    
+</openerp>
+

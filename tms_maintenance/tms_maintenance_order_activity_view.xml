@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>	
+
+############################################################################################################################
+			### Assign Manpower to Tasks ###
+
+        <record id="view_tms_maintenance_order_activity_assing_manpower" model="ir.ui.view">
+          <field name="name">Assign Manpower to Tasks</field>
+          <field name="model">tms.maintenance.order.activity.assing_manpower</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+	        <form string="Assign Manpower" version="7.0">
+                <separator colspan="4" string="Please select Mechanic or Thecnical Staff to assign to selected Tasks" />
+                <group colspan="4" col="4">
+		    <separator string="Mechanics or Thecnical Staff" colspan="4" />
+                    <field name="mechanic_ids" colspan="4" nolabel="1"/>
+		    <p colspan="4">
+Please note that:<br/> 
+* Selected Tasks must be in Pending and Process State<br/>
+* If selected manpower is already assign to Task, it will not be assigned double.<br/>
+			</p>
+                </group>
+                <footer>
+                    <button name="assign_manpower" string="Assign Manpower" colspan="1" type="object" icon="gtk-ok"  />
+                    or
+                    <button special="cancel" string="Cancel" class="oe_link"/>
+                
+                </footer>
+	        </form>
+          </field>
+        </record>
+
+                            ### ACTION ###
+    <act_window name="Assign Manpower to Selected Tasks"		    
+		res_model="tms.maintenance.order.activity.assing_manpower"
+		src_model="tms.maintenance.order.activity"
+		view_mode="form"
+		target="new"
+		key2="client_action_multi"    
+		id="action_tms_maintenance_order_activity_assing_manpower"/>	
+
+
+############################################################################################################################
+
+############################################################################################################################
+			### Create Supplier Invoice from Tasks ###
+
+        
+        
+    <record id="tms_maintenance_activity_invoice_form" model="ir.ui.view">
+        <field name="name">Create Supplier Invoice from Tasks</field>
+        <field name="model">tms.maintenance.order.activity.invoice</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+        <form string="Create Invoice" version="7.0">
+            <separator colspan="4" string="Create Supplier Invoice(s) from selected Tasks ?" />
+		    <p colspan="4">
+Please note that:<br/> 
+* Selected Tasks must be in Done State<br/>
+* In case you selected several Tasks from different Supplier, this process will 
+  create as many invoices as suppliers.<br/>
+			</p>
+            <footer>
+                <button name="button_generate_invoices" string="Create Invoice(s)" colspan="1" type="object" icon="gtk-ok"  />
+                or
+                <button special="cancel" string="Cancel" class="oe_link"/>
+            </footer>
+        </form>
+        </field>
+	</record>
+        
+
+                            ### ACTION ###
+    <act_window name="Create Supplier Invoice from Tasks"		    
+		res_model="tms.maintenance.order.activity.invoice"
+		src_model="tms.maintenance.order.activity"
+		view_mode="form"
+		target="new"
+		key2="client_action_multi"    
+		id="tms_maintenance_activity_invoice_action"/>
+
+############################################################################################################################
+        
+        
+############################################################################################################################
+                            ### FORM ###
+    <record model="ir.ui.view" id="tms_maintenance_order_activity_form">
+            <field name="name">tms.maintenance.order.activity.form</field>
+            <field name="model">tms.maintenance.order.activity</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Order of Maintenance Activity" version="7.0">
+		    <header>
+                        <button string="Process"  name="action_process"  states="pending" icon="gtk-go-forward" type="object" />  
+                        <button string="Done"     name="action_done"     states="process" icon="gtk-apply" type="object" /> 
+                        <button string="Cancel"   name="action_cancel"   states="pending" icon="gtk-cancel" type="object" />
+                        <field                    name="state" widget="statusbar" statusbar_visible="cancel,pending,process,done"/> 
+                    </header>
+		    <sheet>
+			<h1>
+				<label for="product_id" />
+				<field name="product_id" on_change="on_change_product_id(product_id, date_start)" attrs="{'readonly':[('state','in',('process','done','cancel'))]}" nolabel="1" class="oe_inline"/>
+			</h1>
+			<group col="4" attrs="{'readonly':[('state_order','in',('done','cancel'))]}" >
+                        	
+				
+                        	<field name="maintenance_order_id" />
+
+				<field name="external_workshop" on_change="on_change_external_workshop(external_workshop)" attrs="{'readonly':[('state','in',('process','done','cancel'))]}" />
+				<field name="supplier_id" attrs="{'invisible':[('external_workshop','in',False)], 'readonly':[('state','in',('process','done','cancel'))], 'required':[('external_workshop','in',True)]}" />
+
+				<field name="breakdown" attrs="{'readonly':[('state','in',('process','done','cancel'))], 'invisible':[('external_workshop','in',False)]}" />
+
+				<newline/>
+<!--				<field name="cost_service_external" attrs="{'readonly':[('state','in',('done','cancel'))], 'invisible':[('external_workshop','in',False)]}" />
+				<field name="parts_cost_external"   attrs="{'readonly':[('state','in',('done','cancel'))], 'invisible':[('breakdown','in',True)]}" />
+
+				<newline/>
+-->
+				<newline/>
+				<field name="date_start" attrs="{'readonly':[('state','in',('process','done','cancel'))]}" 
+                       on_change="on_change_date_start(hours_estimated, date_start)"/>
+				<field name="date_start_real" />
+				<field name="date_end" attrs="{'readonly':[('state','in',('process','done','cancel'))]}" />
+				<field name="date_end_real" />
+                        	<field name="hours_estimated"  widget="float_time"/>
+                        	<field name="hours_real"  widget="float_time" />
+				
+
+				<newline/>
+				<field name="cost_service" />
+				<field name="parts_cost" />
+				<field name="cost_service_external" />
+				<field name="parts_cost_external" />
+
+                <field name="office_id" invisible="1" />
+		    	</group>
+			<notebook col="4" colspan="4">
+			    <page string="Mechanics" attrs="{'invisible':[('external_workshop','in',True)]}">
+				<field name="mechanic_ids" attrs="{'readonly':[('state','in',('done', 'process','cancel'))]}" nolabel="1" colspan="4">
+				    <tree string="Mechanics">
+					<field name="name" />
+					<field name="job_id" />
+				    </tree> 
+				</field>
+			    </page>
+			    <page string="Spare Parts" attrs="{'invisible':[('breakdown','in',False)]}" colspan="4">	
+                		<field name="product_line_ids" 
+				       attrs="{'readonly':[('state_order','in',('done','cancel'))], 'invisible':[('breakdown','in',False)]}" 
+				       nolabel="1" 
+				       domain="[('state', 'not in', ('cancel'))]"/>
+				<field name="state_order" invisible="1" />
+			    </page>
+			    <page string="External Workshop Info" attrs="{'invisible':[('external_workshop','in',False)]}">
+				<group col="4">
+				    <field name="supplier_invoiced" />
+				    <field name="invoice_id" />
+				    <field name="supplier_invoice_name" />
+				    <field name="supplier_invoice_paid" />
+				</group>
+			    </page>
+			</notebook>
+		    </sheet>
+		    <div class="oe_chatter">
+                    	<field name="message_follower_ids" widget="mail_followers"/>
+                    	<field name="message_ids" widget="mail_thread"/> 
+                    </div>
+		</form>
+	    </field>
+    </record>
+
+############################################################################################################################
+                            ### TREE ###
+    <record model="ir.ui.view" id="tms_maintenance_order_activity_tree">
+        <field name="name">tms.maintenance.order.activity.tree</field>
+        <field name="model">tms.maintenance.order.activity</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Order of Maintenance Activity" create="false">
+                <field name="maintenance_order_id" />
+                <field name="product_id" /><!-- Actividad -->
+                <field name="unit_id" />
+                <field name="hours_estimated"  widget="float_time" sum="Sched. Time"/>
+                <field name="hours_real" widget="float_time" sum="Real Time"/>
+                <field name="cost_service" sum="Spare Parts"/>
+                <field name="parts_cost" sum="Work Hand"/>
+                <field name="cost_service_external" sum="Spare Parts External"/>
+                <field name="parts_cost_external" sum="Work Hand External"/>
+                <field name="mechanic_ids" />
+                <field name="external_workshop" />
+                <field name="supplier_id" />
+                <field name="supplier_invoiced" />
+				<field name="invoice_id" />
+				<field name="supplier_invoice_name" />
+				<field name="supplier_invoice_paid" />
+                <field name="office_id" invisible="1" />
+                <field name="state" />
+            </tree>
+	    </field>
+    </record>
+
+############################################################################################################################
+                            ### CALENDAR ###
+        <record id="view_maintenance_order_activity_calendar" model="ir.ui.view">
+            <field name="name">tms.maintenance.order.activity.calendar</field>
+            <field name="model">tms.maintenance.order.activity</field>
+            <field name="arch" type="xml">
+              <calendar string="Activities" color="state" date_start="date_start" date_stop="date_end">
+                <field name="unit_id" />
+                <field name="product_id" />
+              </calendar>
+            </field>
+        </record>
+
+############################################################################################################################
+                            ### SEARCH ###
+    <record id="view_tms_maintenance_order_activity_filter" model="ir.ui.view">
+      <field name="name">tms.maintenance.order.activity.search</field>
+      <field name="model">tms.maintenance.order.activity</field>
+      <field name="type">search</field>
+      <field name="arch" type="xml">
+        <search string="Search Service Order Activities">
+	    <field name="product_id" select="1"/>
+            <field name="maintenance_order_id" select="1"/>
+	    <field name="unit_id" select="1"/>
+	    <field name="supplier_id" select="1"/>
+          
+            <separator/>
+            <filter icon="terp-gtk-media-pause" string="Pending" domain="[('state','=','pending')]" name="state_pending"/>
+            <filter icon="terp-gtk-media-pause" string="Process" domain="[('state','=','process')]" name="state_process"/>
+            <filter icon="terp-gtk-media-pause" string="Done" domain="[('state','=','done')]"/>
+            <filter icon="terp-gtk-media-pause" string="Cancel" domain="[('state','=','cancel')]"/>
+            <separator/>
+            <filter string="This month" icon="terp-check" domain="[('date_start','&gt;=', time.strftime('%%Y-%%m-01'))]" name="this_month" />
+	    <filter icon="terp-gtk-media-pause" string="Internal Repair" domain="[('external_workshop','=',0)]"/>
+            <filter icon="terp-gtk-media-pause" string="Without Workhand Assigned" domain="[('external_workshop','=',0),('mechanic_ids','=',False)]"/>
+	    <separator />
+            <filter icon="terp-gtk-media-pause" string="External Workshop" domain="[('external_workshop','=',1)]"/>
+            <filter icon="terp-gtk-media-pause" string="Not Invoiced by Supplier" domain="[('supplier_invoiced','=',0)]"/>
+            <filter icon="terp-gtk-media-pause" string="Invoiced by Supplier" domain="[('supplier_invoiced','=',1)]"/>
+	    <separator />
+          <group expand="0" string="Group By..." >
+            <filter string="Activity" icon="terp-personal" domain="[]" context="{'group_by':'product_id'}"/>
+            <filter string="Service Order" icon="terp-personal" domain="[]" context="{'group_by':'maintenance_order_id'}"/>
+            <filter string="Vehicle" icon="terp-personal" domain="[]" context="{'group_by':'unit_id'}"/>
+            <filter string="Supplier" icon="terp-personal" domain="[]" context="{'group_by':'supplier_id'}"/>
+            <filter string="Workshop" icon="terp-personal" domain="[]" context="{'group_by':'office_id'}"/>
+            <separator orientation="vertical"/>
+            <filter string="State" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}" name="groupby_state"/>
+            <filter string="Period" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'date_start'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
+
+############################################################################################################################
+                            ### ACTION ###
+    <record model="ir.actions.act_window" id="tms_maintenance_order_activity_action">
+        <field name="name">Service Order Tasks</field>
+        <field name="res_model">tms.maintenance.order.activity</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="context">{'search_default_this_month': 1,'search_default_state_pending': 1,'search_default_state_process': 1,'search_default_groupby_state': 1}</field>
+    </record>    
+############################################################################################################################
+                            ### MENUS ###	
+	<menuitem action="tms_maintenance_order_activity_action" id="menu_tms_maintenance_order_activity" name="Service Order Activities"
+              parent="menu_tms_maintenance_orders" sequence="2" groups="tms_maintenance_admin"/>
+############################################################################################################################
+
+    </data>
+</openerp>

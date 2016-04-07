@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>	
+
+############################################################################################################################
+                            ### FORM ###
+    <record model="ir.ui.view" id="tms_product_line_form">
+            <field name="name">tms.product.line.form</field>
+            <field name="model">tms.product.line</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Tms Product Line" version="7.0">
+		    <header>
+			<button string="Pending"   name="action_pending" 
+                    states="draft" icon="gtk-go-forward" type="object" /> 
+                        <button string="Cancel"  name="action_cancel"  states="draft,pending" icon="gtk-cancel" type="object" />
+
+			<!--<button string="Pending"   name="action_pending" states="draft" icon="gtk-go-forward" type="object" /> 
+                        <button string="Delivered" name="action_delivered" states="pending"  icon="gtk-apply"      type="object" />
+                        <button string="Cancel"    name="action_cancel"    states="draft,pending"    icon="gtk-cancel"  type="object" />--> 
+
+                        <field  name="state" widget="statusbar" statusbar_visible="draft,pending,delivered,cancel"/> 
+                    </header>
+		    <sheet>
+			<group col="2">
+                            <field name="activity_id" />
+                        	<field name="product_id" 
+                                   on_change="on_change_product_id(product_id)"
+                                   attrs="{'readonly':[('state','in',('pending','delivered','cancel'))]}" />
+                        	<field name="quantity"   attrs="{'readonly':[('state','in',('pending','delivered','cancel'))]}" />
+                            <field name="product_uom_id" readonly="1"/>
+                        	<field name="office_id" invisible="1"/>
+				<!--Actividad a la que pertenece Product Line-->
+                        	
+                        	<field name="state_activity" invisible="1" />
+                        	<field name="list_price" attrs="{'readonly':[('state','in',('delivered','cancel'))]}" />
+                            <field name="cost_amount" />
+                            <field name="stock_move_id" readonly="1"/>
+				
+		    	</group>
+		    </sheet>
+		</form>
+	    </field>
+    </record>
+
+############################################################################################################################
+                            ### TREE ###
+    <record model="ir.ui.view" id="tms_product_line_tree">
+            <field name="name">tms.product.line.tree</field>
+            <field name="model">tms.product.line</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tms Product Line">
+                        <button string="Request Materials"   name="action_pending" 
+                                states="draft" icon="gtk-go-forward" type="object" />
+                <!--<button string="Delivered" name="action_delivered" states="pending"          icon="gtk-apply"      type="object" />--> 
+                        <button string="Cancel"    name="action_cancel"    states="draft,pending"    icon="gtk-cancel"     type="object" />
+                        	<field name="stock_move_id" invisible="1" />
+                        	<field name="product_id" />
+                        	<field name="quantity" sum="Qty"/>
+                            <field name="product_uom_id"/>
+                            <field name="list_price"/>
+                            <field name="cost_amount" sum="Amount"/>
+                        	<field name="state" />
+                            <field name="state_activity" invisible="1"/>
+		</tree>
+	    </field>
+    </record>
+
+<!--
+############################################################################################################################
+                            ### ACTION ###
+    <record model="ir.actions.act_window" id="tms_maintenance_order_action">
+        <field name="name">Order Maintenace TMS</field>
+        <field name="res_model">tms.maintenance.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>    
+############################################################################################################################
+                            ### MENUS ###
+        <menuitem id="menu_tms_maintenance" name="Tms Maintenance" />
+	<menuitem id="menu_tms_maintenance_orders" name="Orders" parent="menu_tms_maintenance" />
+	
+	<menuitem action="tms_maintenance_order_action" id="menu_tms_maintenance_order_line" name="TMS Maintenance Order"
+ parent="menu_tms_maintenance_orders" sequence="1" />
+############################################################################################################################
+-->
+    </data>
+</openerp>

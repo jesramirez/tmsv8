@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+<!-- ################################ SECUENCIAS PARA LAS COTIZACIONES ################################     -->
+       <record id="seq_type_tms_quotation" model="ir.sequence.type">
+            <field name="name">TMS QUOTATION</field>
+            <field name="code">tms.quotation</field>
+        </record>
+
+        <record id="seq_tms_sequence" model="ir.sequence">
+            <field name="name">TMS QUOTATION</field>
+            <field name="code">tms.quotation</field>
+            <field name="prefix">COT-</field>
+            <field name="padding">3</field>
+            <field name="implementation">no_gap</field>
+        </record>
+
+<!-- ################################ WIZARD PARA PASAR DE LA COTIZACION HACIA EL ACUERDO ################################     -->
+
+    <act_window name="Create Agreement"           
+        res_model="tms.quotation.agreement.wizard"
+        src_model="tms.quotation"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"    
+        id="action_view_create_agreement"/>
+
+    <record id="create_agreement_form" model="ir.ui.view">
+        <field name="name">Create Agreement</field>
+        <field name="model">tms.quotation.agreement.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Create Agreement" version="7.0">
+
+                <sheet>
+                <separator colspan="4" string="Fill in the data for the Agreement" />
+                <group colspan="4">
+                    <field name="shop_id"/>
+                </group>
+
+        <!--         <h2>
+                <separator colspan="4" string="Define Travel For Waybill" /> <newline/>
+                <center>
+                </center>
+                </h2> -->
+
+                <group colspan="4" col="4">
+                    <field name="partner_id" on_change="onchange_partner_id(partner_id)" domain="[('customer','=',True)]" context="{'search_default_customer':1}" required="1" colspan="2"/>
+
+                    <field name="currency_id" colspan="2" invisible="1"/>
+                    <!-- <field name="partner_order_id" domain="[('partner_id','=',partner_id)]" colspan="2"/>
+                    <field name="partner_invoice_id" domain="[('partner_id','=',partner_id)]" colspan="2"/> -->
+                    <field name="partner_order_id" colspan="2" context="{'default_type':'delivery','search_default_partner_id': [partner_id]}" />
+                    <field name="partner_invoice_id" colspan="2" context="{'default_type':'invoice','search_default_partner_id': [partner_id]}" />
+                    <field name="departure_address_id" colspan="2"/>
+                    <field name="arrival_address_id" colspan="2"/>
+                    <field name="upload_point" colspan="2"/> 
+                    <field name="download_point" colspan="2"/>
+
+                    <newline/>
+                </group>
+                <group colspan="4">
+                    <field name="payment_term" />
+                </group>
+                <separator string="Expiration" colspan="4"/>              
+                <group col="4">
+                    <field name="date_start" colspan="2"/> 
+                    <field name="date_end" colspan="2"/>
+                    <newline/>
+                </group>
+                <separator string="Selecciona la Ruta de Partida" colspan="4"/>              
+                <group colspan="4">
+                    <field name="route_seleccion" nolabel="1" required="1"/> 
+                    <newline/>
+                </group>
+                <separator string="Selecciona la Ruta de Retorno" colspan="4"/>              
+                <group colspan="4">
+                    <field name="route_seleccion_return" nolabel="1" required="1"/> 
+                    <newline/>
+                </group>
+
+                <group col="2" colspan="4">
+                    <button special="cancel" string="_Cancel" type="object" icon="gtk-cancel"/>
+                    <button name="button_generate_agreement" string="_Generate Agreement" colspan="1" type="object" icon="gtk-ok" />
+                </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+<!-- ############################### VISTA FORMULARIO PARA LOS PARAMETROS ###############################    -->
+
+       <record model="ir.ui.view" id="tms_quotations_config_form">
+            <field name="name">tms.quotation.config.form</field>
+            <field name="model">tms.quotation.config</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Quotation's Parameters" version="7.0">
+
+                <header>
+
+                </header>
+
+                <sheet>
+                    <h1>
+                      <label string="Parameters"/>
+                    </h1>
+                    <group col="4">
+
+                        <field name="month_days" />
+                        <field name="diesel_cost" />
+                        <field name="units_number" />
+                        <field name="number_trailers" />
+                        <field name="operators" />
+                        <field name="movers" />
+                        <field name="tires" />
+                        <field name="charged_performance" />
+                        <field name="uncharged_performance" />
+                        <field name="salary_diary_movers" />
+                        <field name="integrated_wage_factor" />
+                        <field name="insurance_satellite_equipment" />
+                        <field name="tractor_insurance" />
+                        <field name="trailer_insurance" />
+                        <field name="dolly_insurance" />
+                        <field name="ambiental_insurance" />
+                        <field name="factor_administrative_expenses" />
+                        <field name="factor_mtto" />
+                        <field name="factor_tires" />
+                        <field name="active" />
+                    </group>
+                    <group>
+                        <field name="name" />
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+    <record model="ir.actions.act_window" id="quotation_config_action">
+        <field name="name">Quotations Parameters</field>
+        <field name="res_model">tms.quotation.config</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>    
+
+        
+<!-- ####################################################################################################    -->
+
+
+<!-- ############################### VISTA KANBAN ############################### -->
+        <record model="ir.ui.view" id="tms_quotation_kanban">
+            <field name="name">tms.quotation.kanban</field>
+            <field name="model">tms.quotation</field>
+            <field name="type">kanban</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name" />
+                    <field name="sequence" />
+                    <field name="image" />
+                    <field name="partner_id" />
+                    <field name="unit_ids" />
+                    <field name="summary_income_travel_days" />
+                    <field name="summary_expenditures_travel_days" />
+                    <field name="summary_utility_travel_days" />
+
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_vignette oe_semantic_html_override">
+                                <a type="open" href="#" class="oe_kanban_action oe_kanban_action_a">
+                                    <img t-att-src="kanban_image('tms.quotation', 'image_small', record.id.value)" class="oe_kanban_image"/>
+                                </a>
+                                <div class="oe_kanban_details">
+                                    <h4 class="oe_partner_heading">
+                                        <a type="open">
+                                            <field name="partner_id" />
+                                        </a><br/>
+                                        <a type="open">
+                                            <field name="sequence"/>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                    <li t-if="record.unit_ids.raw_value">Unit Category: <field name="unit_ids"/></li>
+                                    <li t-if="record.name.raw_value">Description: <field name="name"/></li>
+                                    <!-- <li t-if="record.sequence.raw_value" >Sequence: <field name="sequence"/></li> -->
+<!--                                     <li t-if="record.route_id.raw_value">Route: <field name="route_id"/></li>
+ -->                                    
+                                    <li t-if="record.total_kms.raw_value">Kms: <field name="total_kms"/></li>
+                                    <li t-if="record.total_tons.raw_value">Tons: <field name="total_tons"/></li>
+                                    <!-- <li t-if="record.summary_income_travel_days.raw_value">Income: $ <field name="summary_income_travel_days"/></li>
+                                    <li t-if="record.summary_expenditures_travel_days.raw_value">Expenditures: $ <field name="summary_expenditures_travel_days"/></li> -->
+                                    <li t-if="record.summary_utility_travel_days.raw_value">Utility: $ <field name="summary_utility_travel_days"/></li>
+                                    <!-- <li t-if="record.state.raw_value">State: <field name="state"/></li> -->
+                                    <li t-if="record.state.raw_value">State: <field name="state"/></li>
+                                    <button string="Confirmed" name="action_confirmed" states="draft" icon="gtk-go-forward" type="object" class="oe_highlight"/>
+                                    <button string="Cancelled" name="action_cancel" states="confirmed" icon="gtk-cancel" type="object" class="oe_highlight"/> 
+                                    <button string="Done" name="action_done" states="confirmed" icon="gtk-apply" type="object" class="oe_highlight"/> 
+                                    <button string="Reset to Draft" name="action_draft" states="cancel" icon="gtk-convert" type="object" class="oe_highlight"/>
+                                    <!-- <button string="Create Travel" name="unlink_lines_fleet_driver_supplier" states="confirmed" icon="gtk-execute" type="object" /> -->
+                                    <button name="%(action_view_create_agreement)d" string="Create Agreement" icon="gtk-execute" states="confirmed, done" type="action" class="oe_highlight"/>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <script>
+                            $('.oe_picture').load(function() { if($(this).width() > $(this).height()) { $(this).addClass('oe_employee_picture_wide') } });
+                        </script>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="tms_quotation_tree">
+            <field name="name">tms.quotation.tree</field>
+            <field name="model">tms.quotation</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Quotation's" colors="gray:state=='draft';green:state=='confirmed';blue:state=='done';red:state=='cancel';">
+                        <field name="state" invisible="1" />
+                        <field name="sequence" />
+                        <field name="name" />
+                        <field name="partner_id" />
+                        <field name="type_armed" />
+                        <field name="days" />
+                        <field name="month_travel" />
+                        <field name="total_kms" string="Kms"/>
+                        <field name="total_tons" string="Tons"/>
+                        <field name="total_security" string="Insurance" />
+                        <!-- <field name="total_ingr" /> -->
+                        <field name="summary_income_travel_days" string="Income" sum="Income Sum" />
+                        <field name="summary_expenditures_travel_days" string="Expenditures" sum="Expenditures Sum" />
+                        <field name="summary_utility_travel_days" string="Utility" sum="Utility Sum" />
+                </tree>
+            </field>
+    </record>
+
+    
+
+       <record model="ir.ui.view" id="tms_quotations_form">
+            <field name="name">tms.quotation.form</field>
+            <field name="model">tms.quotation</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Quotation's" version="7.0">
+
+                <header>
+                    <button string="Confirmed" name="action_confirmed" states="draft" icon="gtk-go-forward" type="object" class="oe_highlight"/> 
+                    <button string="Cancelled" name="action_cancel" states="confirmed" icon="gtk-cancel" type="object" class="oe_highlight" /> 
+                    <button string="Done" name="action_done" states="confirmed" icon="gtk-apply" type="object" class="oe_highlight" />
+                    <button string="Reset to Draft" name="action_draft" states="cancel" icon="gtk-convert" type="object" class="oe_highlight"/>
+                    <button icon='terp-stock_format-default' type="object" states="draft" string="Re-Calcular" name="action_calculate"/> 
+                    <button name="%(action_view_create_agreement)d" string="Create Agreement" icon="gtk-execute" states="confirmed, done" type="action" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done,cancel"/> 
+                </header>
+
+                <sheet>
+                    <h1>
+                      <label string="Quotation Travel"/>
+                      <field name="sequence" class="oe_inline" readonly="1"/>
+                    </h1>
+                    <group col="4" >
+                        <field name="partner_id" domain="[('customer','=',True)]" context="{'search_default_customer':1}" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                        <field name="agreement_id" />
+                    </group>
+                    <group colspan="4">
+                        <field name="name" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                    </group>
+                    <group col="4">
+                        <field name="type_armed" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                        <field name="days" on_change="onchange_quotation(parameter_id,days)" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                        <field name="month_travel" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                        <field name="total_kms" readonly="1" />
+                        <field name="total_tons" readonly="1" />
+                        <field name="total_security" readonly="1" />
+                        <field name="total_ingr" readonly="1" />
+                    </group>
+
+                    <group>
+                        <field name="unit_ids" colspan="2" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                        <field name="parameter_id" on_change="onchange_quotation(parameter_id,days)" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" widget="selection"/>
+
+                    </group>
+
+                    <notebook colspan="4">
+                    <page string="Route's">
+                        <separator string="Route's for Quotation" colspan="4"/>
+                           <field name="route_ids" nolabel="1" colspan="8" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" > 
+                                <!-- <tree string="Route's" editable="bottom"> -->
+                                <tree string="Route's">
+                                    <field name="route_id" on_change="onchange_route(route_id)"/>
+                                    <field name="factor_type" />
+                                    <field name="kms"/>
+                                    <field name="product_id" context="{'default_purchase_ok':0, 'default_sale_ok':0,'default_tms_category': 'transportable','default_type': 'service', 'default_procure_method':'make_to_stock', 'default_supply_method': 'buy'}" attrs="{'readonly':[('uncharged','!=',False)],'required':[('uncharged','!=',True)]}"
+                                        on_change="onchange_product_id(product_id)" />
+                                    <field name="product_weight" on_change="onchange_quotation(factor_type,kms,product_weight,rate,insurance,mixed,fixed_amount)" sum="Weight" attrs="{'readonly':[('uncharged','!=',False)],'required':[('uncharged','!=',True)]}"/>
+                                    <field name="product_uom" sum="Weight" attrs="{'readonly':[('uncharged','!=',False)],'required':[('uncharged','!=',True)]}"/>
+                                    <field name="rate" on_change="onchange_quotation(factor_type,kms,product_weight,rate,insurance,mixed,fixed_amount)" sum="Rate" attrs="{'readonly':[('uncharged','!=',False)],'required':[('uncharged','!=',True)]}"/>
+                                    <field name="insurance" on_change="onchange_quotation(factor_type,kms,product_weight,rate,insurance,mixed,fixed_amount)" sum="Insurance"/>
+                                    <field name="income" sum="Total Income"/>
+                                    <field name="uncharged" />
+                                    <field name="mark" />
+                                </tree>
+                                <form string="Route's" version="7.0">
+
+                                        <group colspan="4" >
+                                            <field name="route_id" on_change="onchange_route(route_id)"/>
+                                        </group>
+                                        <group col="4" >
+                                            <field name="uncharged" on_change="onchange_unchanged(uncharged)"/>
+                                            <field name="mark" />
+                                        </group>
+                                        <group col="4">
+                                            <newline/>
+                                            <field name="kms" on_change="onchange_quotation(factor_type,kms,product_weight,rate,insurance,mixed,fixed_amount)"/>
+                                            <field name="product_id" context="{'default_purchase_ok':0, 'default_sale_ok':0,'default_tms_category': 'transportable','default_type': 'service', 'default_procure_method':'make_to_stock', 'default_supply_method': 'buy'}" attrs="{'readonly':[('uncharged','!=',False)],'required':[('uncharged','!=',True)]}"
+                                                on_change="onchange_product_id(product_id)" domain="[('tms_category','=','transportable')]" />
+                                            <field name="product_weight" on_change="onchange_quotation(factor_type,kms,product_weight,rate,insurance,mixed,fixed_amount)" sum="Weight" attrs="{'readonly':[('uncharged','!=',False)],'required':[('uncharged','!=',True)]}"/>
+                                            <field name="product_uom" sum="Weight" attrs="{'readonly':[('uncharged','!=',False)],'required':[('uncharged','!=',True)]}"/>
+                                            <field name="rate" on_change="onchange_quotation(factor_type,kms,product_weight,rate,insurance,mixed,fixed_amount)" sum="Rate" attrs="{'readonly':[('uncharged','!=',False)],'required':[('uncharged','!=',True)]}"/>
+                                            <field name="insurance" on_change="onchange_quotation(factor_type,kms,product_weight,rate,insurance,mixed,fixed_amount)" sum="Insurance"/>
+                                            
+
+                                        </group>
+                                        <group colspan="4">
+
+                                            <field name="factor_type" attrs="{'readonly':[('uncharged','!=',False)],'required':[('uncharged','!=',True)]}" on_change="onchange_quotation(factor_type,kms,product_weight,rate,insurance,mixed,fixed_amount)"/>
+                                            <field name="framework" attrs="{'invisible' :[('factor_type','not in',('distance','distance_real'))]}"/>
+                                            <!-- <field name="factor" 
+                                                   attrs="{'invisible'  :[('factor_type','in',('special','travel'))],
+                                                          'required'    :[('factor_type','in',('distance','weight','qty','volume','percent'))],'readonly':[('uncharged','!=',False)]}" /> -->
+                                            <!-- El factor es el Rate -->
+
+                                            <newline />
+                                            <field name="mixed" attrs="{'invisible' :[('factor_type','=','travel')],'readonly':[('uncharged','!=',False)]}" on_change="onchange_quotation(factor_type,kms,product_weight,rate,insurance,mixed,fixed_amount)"/>
+                                            <newline/>
+                                            <field name="fixed_amount" attrs="{'readonly':[('uncharged','!=',False)],'required':[('uncharged','!=',True)]}" on_change="onchange_quotation(factor_type,kms,product_weight,rate,insurance,mixed,fixed_amount)"/>
+                                            <newline />
+                                            <field name="income" sum="Total Income"/>
+                                            <newline/>
+                                            <field name="sequence" />
+                                        </group>
+                                        <notebook colspan="4">
+                                            <page string="Notas">
+                                                    <field name="notes" colspan="4"  widget="html"/>
+                                            </page>
+                                        </notebook>
+                                </form>
+                            </field>
+                            <newline/>
+<!--                         <separator string="Factors Quote" colspan="4"/>
+                            <field name="factor_ids" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+-->
+                        </page>
+
+                        <page string="Operating Variable Costs">
+                            <separator string="Operating Variable Costs" colspan="4"/>
+                            <group col="8">
+                                <field name="diesel_cost" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                                <p ><b>
+                                    Daily Average
+                                </b></p>
+                                <p ><b>
+                                    Travel Days
+                                </b></p>
+                                <!-- <p ><b>
+                                    Percentage
+                                </b></p> -->
+
+                                <!-- <field name="diesel_mtto_monthly"/>
+                                <field name="diesel_mtto_travel_days"/>
+                                <field name="diesel_mtto_percent"/>-->
+                            </group>
+                            <newline/>
+                            <group col="8">
+                                <field name="factor_mtto" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                                <field name="factor_mtto_monthly" nolabel="1" readonly="1" />
+                                <field name="factor_mtto_travel_days" nolabel="1" readonly="1" />
+                                <field name="factor_mtto_percent" nolabel="1" readonly="1" invisible="1"/>
+                            </group>
+                            <newline/>
+                            <group col="8">
+                                <field name="factor_tires" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                                <field name="factor_tires_monthly" nolabel="1" readonly="1" />
+                                <field name="factor_tires_travel_days" nolabel="1" readonly="1" />
+                                <field name="factor_tires_percent" nolabel="1" readonly="1" invisible="1"/>
+                            </group>
+                            <group col="8">
+                                <field name="performance_loaded" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                            </group>
+                            <group col="8">
+                                <field name="uncharged_performance" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                            </group>
+                            <group col="8">
+                                <field name="liters_diesel" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                            </group>
+
+                            <group col="8">
+                                <field name="money_diesel" readonly="1" />
+                                <!-- <field name="amount_total_diesel" nolabel="1"/> -->
+                                <field name="diesel_monthly" nolabel="1" readonly="1"/>
+                                <field name="diesel_travel_days" nolabel="1" readonly="1"/>
+                                <field name="diesel_percent" nolabel="1" readonly="1" invisible="1"/>
+                            </group>
+                            <group col="8">
+                                <field name="total_highway_toll" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                                <field name="toll_monthly" nolabel="1" readonly="1"/>
+                                <field name="toll_travel_days" nolabel="1" readonly="1"/>
+                                <field name="toll_percent" nolabel="1" readonly="1" invisible="1"/>
+                            </group>
+                            <group col="8">
+                                <field name="operator_salary" />
+                                <field name="salary_monthly" nolabel="1" readonly="1"/>
+                                <field name="salary_travel_days" nolabel="1" readonly="1"/>
+                                <field name="salary_percent" nolabel="1" readonly="1" invisible="1"/>
+                            </group>
+                            <group col="8">
+                                <field name="move_amount" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" />
+                                <field name="move_monthly" nolabel="1" readonly="1"/>
+                                <field name="move_travel_days" nolabel="1" readonly="1"/>
+                                <field name="move_percent" nolabel="1" readonly="1" invisible="1"/>
+                            </group>
+                            <group col="4">
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="variable_totals">
+                                <field name="amount_travel_days_variable"  widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1"/>
+                                <field name="amount_daily_variable"  widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1"/>
+                                <field name="amount_percentage_variable"  widget='monetary' options="{'currency_field': 'currency_id'}" readonly="1" invisible="1"/>
+
+                            </group>
+                            </group>
+                        </page>
+
+                        <page string="Fixed Operating Costs">
+
+                        <separator string="Fixed Operating Costs" colspan="4"/>
+                            <field name="load_operating_cost" on_change="onchange_operating_cost_products(load_operating_cost)" invisible="1"/>
+                            <!-- <field name="operating_cost_ids" nolabel="1" readonly="1"> -->
+                            <field name="operating_cost_ids" nolabel="1" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" readonly="1">
+                            <tree string="Fixed Operating Costs" editable="bottom">
+                                    <field name="product_id" invisible="1" />
+                                    <field name="name" />
+                                    <field name="acumulated_moth" sum="Acumulated Monthly"/>
+                                    <field name="average_moth" sum="Average Month"/>
+                                    <field name="daily_average" sum="Daily Average"/>
+                                    <field name="travel_days" sum="Travel Days"/>
+                                    <field name="percent" sum="Percentage" invisible="1"/>
+
+                                </tree>
+                           </field>
+                        </page>
+
+                        <page string="Administrative Expenses">
+                        <separator string="Administrative Expenses" colspan="4"/>
+                            <field name="load_administrative_expenses" on_change="onchange_administrative_expenses(load_administrative_expenses)" invisible="1"/>
+                           <!-- <field name="administrative_expenses_ids" nolabel="1" readonly="1"> -->
+                            <field name="administrative_expenses_ids" nolabel="1" attrs="{'readonly':[('state','in',('confirmed','done','cancel'))]}" readonly="1">
+                            <tree string="Administrative Expenses" editable="bottom" >
+                                    <field name="product_id" invisible="1"/>
+                                    <field name="name" />
+                                    <field name="acumulated_moth" sum="Acumulated Monthly"/>
+                                    <field name="average_moth" sum="Average Month"/>
+                                    <field name="daily_average" sum="Daily Average"/>
+                                    <field name="travel_days" sum="Travel Days"/>
+                                    <field name="percent" sum="Percentage" invisible="1"/>
+
+                                </tree>
+                           </field>
+                        </page>
+
+                        <page string="Notes">
+                            <field name="notes" nolabel="1" widget="html"/>
+                        </page>
+                    </notebook>
+                        <newline/>
+                        <p />                   
+                           <p align="center">
+                            <separator string="Summary" colspan="4"/>
+                            </p>
+
+                            <newline/>
+
+                            <group col="8">
+                                <p>
+                                </p>
+                                <p ><b>
+                                    Daily Average
+                                </b></p>
+                                <p ><b>
+                                    Total Travel Days
+                                </b></p>
+                                <p ><b>
+                                    Percentage
+                                </b></p>
+                            </group>
+
+
+                            <group col="8">
+                                <p><b>
+                                    Total Income
+                                </b></p>
+                                <field name="summary_income_monthly" nolabel="1" readonly="1"/>
+                                <field name="summary_income_travel_days" nolabel="1" readonly="1"/>
+                                <field name="summary_income_percent" nolabel="1" readonly="1"/>
+                            </group>
+
+                            <group col="8">
+                                <p><b>
+                                    Total Expenditures
+                                </b></p>
+                                <field name="summary_expenditures_monthly" nolabel="1" readonly="1"/>
+                                <field name="summary_expenditures_travel_days" nolabel="1" readonly="1"/>
+                                <field name="summary_expenditures_percent" nolabel="1" readonly="1"/>
+
+                            </group>
+
+                            <group col="8">
+                                <p><b>
+                                    Utility
+                                </b></p>
+                                <field name="summary_utility_monthly" nolabel="1" readonly="1"/>
+                                <field name="summary_utility_travel_days" nolabel="1" readonly="1"/>
+                                <field name="summary_utility_percent" nolabel="1" readonly="1"/>
+
+                            </group>
+
+                            <group col="8">
+                                <p><b>
+                                    Join x Km Productive
+                                </b></p>
+                                <field name="summary_km_productive_monthly" nolabel="1" readonly="1"/>
+                                <field name="summary_km_productive_travel_days" nolabel="1" readonly="1"/>
+                                <field name="summary_km_productive_percent" nolabel="1" readonly="1"/>
+
+                            </group>
+
+                            <group col="8">
+                                <p><b>
+                                    Join x Km Shot
+                                </b></p>
+                                <field name="summary_mk_shot_monthly" nolabel="1" readonly="1"/>
+                                <field name="summary_mk_shot_travel_days" nolabel="1" readonly="1"/>
+                                <field name="summary_mk_shot_percent" nolabel="1" readonly="1"/>
+
+                            </group>
+
+                            <group col="8">
+                                <p><b>
+                                    Operating Cost x Km
+                                </b></p>
+                                <field name="summary_cost_km_monthly" nolabel="1" readonly="1"/>
+                                <field name="summary_cost_km_travel_days" nolabel="1" readonly="1"/>
+                                <field name="summary_cost_km_percent" nolabel="1" readonly="1"/>
+
+                            </group>
+
+                            <group col="8">
+                                <p><b>
+                                    Join Utility x Km
+                                </b></p>
+                                <field name="summary_utility_km_monthly" nolabel="1" readonly="1"/>
+                                <field name="summary_utility_km_travel_days" nolabel="1" readonly="1"/>
+                                <field name="summary_utility_km_percent" nolabel="1" readonly="1"/>
+
+                            </group>
+
+                            <group col="8">
+                                <p><b>
+                                    Operative Margin
+                                </b></p>
+                                <field name="summary_margin_monthly" nolabel="1" readonly="1"/>
+                                <field name="summary_margin_travel_days" nolabel="1" readonly="1"/>
+                                <field name="summary_margin_percent" nolabel="1" readonly="1"/>
+
+                            </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/> 
+                </div>   
+                </form>
+            </field>
+        </record>    
+
+        <record id="tms_quotation_filter" model="ir.ui.view">
+          <field name="name">tms.quotation.filter</field>
+          <field name="model">tms.quotation</field>
+          <field name="type">search</field>
+          <field name="priority" eval="5"/>
+          <field name="arch" type="xml">
+            <search string="TMS Quotation">
+                <separator string="search inside the greement " colspan="3"/>
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="type_armed" />
+                <field name="days" />
+                <field name="month_travel" />
+                <field name="total_kms" />
+                <field name="total_tons" />
+                <field name="total_security" />
+                <field name="total_ingr" />
+
+                <filter string="Draft" name="Draft" domain="[('state','=','draft')]" icon="gtk-convert"/>
+                <filter string="Confirmed" name="Confirmed" domain="[('state','=','confirmed')]" icon="gtk-go-forward"/>
+                <filter string="Cancelled" name="Cancelled" domain="[('state','=','cancel')]" icon="gtk-cancel"/>
+                <filter string="Done" name="Done" domain="[('state','=','done')]" icon="gtk-apply"/>
+
+                <group expand="0" string="Group By...">
+                    <filter string="Customer" icon="terp-go-home" context="{'group_by':'partner_id'}"/>
+                    <filter string="Type Armed" icon="terp-personal" name="type_armed" context="{'group_by':'type_armed'}"/>
+                     <filter string="Name" icon="terp-stock_zoom" domain="[]" context="{'group_by':'name'}"/>
+                </group> 
+            </search>
+          </field>
+        </record>
+
+    <record model="ir.actions.act_window" id="quotation_tms_action">
+        <field name="name">Quotations</field>
+        <field name="res_model">tms.quotation</field>
+        <field name="search_view_id" ref="tms_quotation_filter"/>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>    
+
+    
+<!-- 
+##############################
+FACTOR.QUOTATION
+##############################
+ -->
+
+        <record id="view_factor_quotation_tree" model="ir.ui.view">
+          <field name="name">factor.quotationtree</field>
+          <field name="model">factor.quotation</field>
+          <field name="type">tree</field>
+          <field name="priority">2</field>
+          <field name="arch" type="xml">
+            <tree string="Billing Factors">
+              <field name="category" invisible="1" /> 
+              <field name="name" />
+              <field name="factor_type" />
+              <field name="factor"  attrs="{'invisible'  :[('factor_type','in',('special','travel'))]}" />
+              <field name="range_start" attrs="{'invisible'  :[('factor_type','in',('special','travel','percent'))]}"/>
+              <field name="range_end" attrs="{'invisible'  :[('factor_type','in',('special','travel','percent'))]}"/>
+              <field name="fixed_amount" />
+              <field name="mixed"  attrs="{'invisible' :[('factor_type','=','travel')]}" />
+              <field name="framework" attrs="{'invisible' :[('factor_type','not in',('distance','distance_real'))]}"/>
+              <field name="sequence" />
+            </tree>
+          </field>
+        </record>
+    
+        <record id="view_factor_quotation_form" model="ir.ui.view">
+          <field name="name">tms.factor.form</field>
+          <field name="model">factor.quotation</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+            <form string="Factors" >
+              <group colspan="4" col="4">
+
+                <field name="category" invisible="1" />
+                <field name="factor_type" on_change="on_change_factor_type(factor_type)"/>
+                <field name="name" />
+                <field name="framework" attrs="{'invisible' :[('factor_type','not in',('distance','distance_real'))]}"/>
+                <field name="factor" 
+                       attrs="{'invisible'  :[('factor_type','in',('special','travel'))],
+                              'required'    :[('factor_type','in',('distance','weight','qty','volume','percent'))]}" />
+                <newline />
+                <field name="range_start" 
+                       attrs="{'invisible'  :[('factor_type','in',('special','travel','percent'))],
+                              'required'    :[('factor_type','in',('distance','weight','qty','volume'))]}"/>
+                <field name="range_end" 
+                       attrs="{'invisible'  :[('factor_type','in',('special','travel','percent'))],
+                              'required'    :[('factor_type','in',('distance','weight','qty','volume'))]}"/>
+                <field name="mixed" attrs="{'invisible' :[('factor_type','=','travel')]}" />
+                <newline/>
+                <field name="fixed_amount"/>
+                <newline />
+                <field name="factor_special_id"  colspan="4"
+                       attrs="{'invisible':[('factor_type','!=','special')],'required':[('factor_type','=','special')]}"/>
+                <field name="sequence" />
+                <field name="notes" colspan="4" />
+              </group>
+            </form>
+          </field>
+        </record>
+    
+    <record model="ir.actions.act_window" id="factor_quotation_action">
+        <field name="name">Quotations Factors</field>
+        <field name="res_model">factor.quotation</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>  
+
+
+    <!-- MENU -->
+    <menuitem id="menu_tms_config_quotation" name="Quotation's" parent="tms.menu_tms_config" sequence="40"/>
+    <menuitem action="quotation_config_action" id="menu_tms_config_parameter" name="Parameter's" parent="menu_tms_config_quotation" sequence="1"/>
+    <menuitem action="quotation_tms_action" id="menu_tms_quotation" name="Quotation's" parent="tms.menu_tms_travels" sequence="1" />
+    
+    </data>
+</openerp>

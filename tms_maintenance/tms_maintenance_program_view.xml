@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>	
+
+############################################################################################################################
+                            ### FORM ###
+        <record model="ir.ui.view" id="tms_maintenance_order_form">
+          <field name="name">tms.maintenance.order.form</field>
+          <field name="model">tms.maintenance.order</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+            <form string="Order of Maintenance" version="7.0">
+		      <header>
+                <button string="Open"              name="action_open"     states="draft"    icon="gtk-go-forward" type="object" /> 
+                <button string="Released"          name="action_released" states="open"     icon="gtk-apply" type="object" /> 
+                <button string="Done"              name="action_done"     states="released" icon="gtk-apply" type="object" /> 
+                <button string="Cancel"            name="action_cancel"   states="draft"    icon="gtk-cancel" type="object" />
+                <field  name="state" widget="statusbar" statusbar_visible="draft,open,released,done,cancel"/> 
+              </header>
+		      <sheet>
+			    <group col="4">
+                  <field name="internal_repair" />
+                  <field name="partner_id" attrs="{'invisible':[('internal_repair','=',True)], 'required':[('internal_repair','=',False)]}" />/>
+                  <field name="name" />
+                  <field name="office_id" />
+                  
+                  <field name="product_id" on_change="on_change_product_id(product_id)" />
+				  <field name="date" />
+				  
+				  <field name="unit_id" />
+				  <field name="driver_id" context="{'default_tms_category':'driver'}" domain="[('tms_category', '=', 'driver')]"/>
+				  <field name="supervisor_id"  context="{'default_tms_category':'mechanic'}" domain="[('tms_category', '=', 'mechanic')]"/>
+				  <field name="stock_origin_id" context="{'default_usage':'internal'}" domain="[('usage', '=', 'internal')]"/>
+				  
+				  <field name="cost_service" />
+				  <field name="parts_cost" /> 
+		    	</group>
+			    <newline />		    
+
+			    <notebook>
+				  <page string="Tasks">                      
+					<group col="4">
+					  <field name="activities_ids" nolabel="1" />
+					</group>
+				  </page>
+                  
+				  <page string="Scheduled Date">                   
+					<group col="4">
+					  <field name="date_start" />
+					  <field name="date_start_real" />
+					  <field name="date_end" />
+					  <field name="date_end_real" />
+					  
+					</group>
+				  </page>
+				  <page string="Notes">                      
+					<group col="4">
+					  <field name="notes" />
+					</group>
+				  </page>
+			    </notebook> 
+
+		      </sheet>
+		      <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="message_ids" widget="mail_thread"/> 
+              </div>
+		    </form><!--### Fin Etiqueta Form ###-->
+	      </field>
+        </record>
+
+############################################################################################################################
+                            ### TREE ###
+    <record model="ir.ui.view" id="tms_maintenance_order_tree">
+            <field name="name">tms.maintenance.order.tree</field>
+            <field name="model">tms.maintenance.order</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Order of Maintenance">
+                  <field name="name" />
+                  <field name="date" />
+                  <field name="unit_id" />
+                  <field name="internal_repair" />
+                  <field name="partner_id" />
+                  <field name="product_id" />
+                  <field name="state" />
+                  <field name="date_start" />
+                  <field name="date_end" />
+		</tree>
+	    </field>
+    </record>
+
+
+############################################################################################################################
+                            ### Calendar View ###
+        <record id="view_tms_order_calendar" model="ir.ui.view">
+            <field name="name">tms.maintenance.order.calendar</field>
+            <field name="model">tms.maintenance.order</field>
+            <field name="arch" type="xml">
+                <calendar string="Order Calendar" color="state" date_start="date_start">
+                    <field name="name"/>
+                    <field name="state"/>
+                </calendar>
+            </field>
+        </record>
+
+############################################################################################################################
+                            ### ACTION ###
+    <record model="ir.actions.act_window" id="tms_maintenance_order_action">
+        <field name="name">Service Order</field>
+        <field name="res_model">tms.maintenance.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar</field>
+    </record>    
+############################################################################################################################
+                            ### MENUS ###
+        <menuitem id="menu_tms_maintenance" name="Fleet Maintenance" />
+	<menuitem id="menu_tms_maintenance_orders" name="Repair Orders" parent="menu_tms_maintenance" />
+	
+	<menuitem action="tms_maintenance_order_action" id="menu_tms_maintenance_order_line" name="Service Order"
+              parent="menu_tms_maintenance_orders" sequence="1" groups="tms_maintenance_admin"/>
+############################################################################################################################
+    </data>
+</openerp>
